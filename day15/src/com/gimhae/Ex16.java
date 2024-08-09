@@ -16,11 +16,11 @@ public class Ex16 {
 				InputStream is=new FileInputStream(f);
 				DataInputStream dis=new DataInputStream(is);
 				){
-			boolean boo=dis.readBoolean();
 			int su=dis.read();
 			int su2=dis.readInt();
 			double su3=dis.readDouble();
 			char su4=dis.readChar();
+			boolean boo=dis.readBoolean();
 			String msg=dis.readUTF();
 			
 			System.out.println(su);
