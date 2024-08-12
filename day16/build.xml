@@ -1,0 +1,38 @@
+<project name="WebProject" default="build" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+
+    <!-- 속성 정의 -->
+    <property name="web.dir" value="WebContent"/>
+    <property name="build.dir" value="build"/>
+    <property name="lib.dir" value="WebContent/WEB-INF/lib"/>
+
+    <!-- 클래스패스 설정 -->
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="*.jar"/>
+    </path>
+
+    <!-- 빌드 작업 정의 -->
+    <target name="init">
+        <!-- 빌드 디렉토리 생성 -->
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <!-- 컴파일 작업 -->
+        <!-- 웹 프로젝트의 경우는 별도의 컴파일 작업이 필요할 수 있음 -->
+        <!-- 예: JSP 컴파일, 자바 컴파일 등 -->
+    </target>
+
+    <target name="build" depends="compile">
+        <!-- War 파일 생성 작업 -->
+        <war destfile="${build.dir}/mywebapp.war" webxml="${web.dir}/WEB-INF/web.xml">
+            <fileset dir="${web.dir}" includes="**/*"/>
+            <lib dir="${lib.dir}"/>
+        </war>
+    </target>
+
+    <target name="clean">
+        <!-- 빌드 생성물 삭제 -->
+        <delete dir="${build.dir}"/>
+    </target>
+
+</project>
