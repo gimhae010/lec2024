@@ -23,7 +23,7 @@
 		<td width="100" bgcolor="gray" align="center">[<a href="/day17/index.jsp">HOME</a>]</td>
 		<td width="100" bgcolor="gray" align="center">[<a href="/day17/intro.jsp">INTRO</a>]</td>
 		<td width="100" bgcolor="gray" align="center">[<a href="/day17/bbs.jsp">B B S</a>]</td>
-		<td width="100" bgcolor="gray" align="center">[<a href="#">GUEST</a>]</td>
+		<td width="100" bgcolor="gray" align="center">[<a href="/day17/guest.jsp">GUEST</a>]</td>
 		<td width="200" bgcolor="gray">&nbsp;</td>
 	</tr>
 	<tr>

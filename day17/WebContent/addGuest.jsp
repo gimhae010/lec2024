@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="refresh" content="1; url=guest.jsp">
 <title>Insert title here</title>
 </head>
 <body>
@@ -27,28 +28,24 @@
 		<td width="200" bgcolor="gray">&nbsp;</td>
 	</tr>
 	<tr>
-		<td colspan="6" align="center" height="400" valign="top" >
+		<td colspan="6" align="center" height="400">
 		<!-- content begin -->
-		<h1>새글 작성</h1>
-		<form action="insert.jsp">
-		<table width="500">
-			<tr>
-				<td width="100">제목</td>
-				<td><input type="text" name="sub" size="60"></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<textarea name="content" rows="10" cols="80"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="입력">
-					<input type="reset" value="취소">
-				</td>
-			</tr>
-		</table>
-		</form>
+<%@ page import="java.util.*" %>
+<%
+String id=request.getParameter("id");
+String content=request.getParameter("content");
+
+String[] row=new String[]{id,content};
+
+Object obj=application.getAttribute("guest");
+List<String[]> list=null;
+if(obj==null)
+	list=new ArrayList<>();
+else list=(List)obj;
+list.add(row);
+application.setAttribute("guest", list);
+%>
+<h1>입력성공</h1>
 		<!-- content end -->
 		</td>
 	</tr>

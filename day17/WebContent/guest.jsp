@@ -27,28 +27,47 @@
 		<td width="200" bgcolor="gray">&nbsp;</td>
 	</tr>
 	<tr>
-		<td colspan="6" align="center" height="400" valign="top" >
+		<td colspan="6" align="center" height="400" valign="top">
 		<!-- content begin -->
-		<h1>새글 작성</h1>
-		<form action="insert.jsp">
-		<table width="500">
-			<tr>
-				<td width="100">제목</td>
-				<td><input type="text" name="sub" size="60"></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<textarea name="content" rows="10" cols="80"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="입력">
-					<input type="reset" value="취소">
-				</td>
-			</tr>
-		</table>
-		</form>
+			<h1>방명록</h1>
+			<form action="addGuest.jsp">
+			<table width="500">
+				<tr>
+					<td width="120">글쓴이</td>
+					<td><input type="text" name="id"></td>
+					<td width="100" rowspan="2">
+						<input type="submit" style="height:100%;width:100%;">
+					</td>
+				</tr>
+				<tr>
+					<td>남길글</td>
+					<td><textarea name="content" rows="3" cols="40"></textarea></td>
+				</tr>
+			</table>
+			</form>
+			<%@page import="java.util.List" %>
+			<%
+			Object obj=application.getAttribute("guest");
+			
+			List<String[]> list=null;
+			if(obj!=null) list=(List)obj;
+			%>
+			<table width="500" border="1" cellspacing="0">
+			<%
+			if(list!=null){
+				for(int i=0; i<list.size(); i++){
+			%>
+				<tr>
+					<td width="80"><%=list.get(i)[0] %></td>
+					<td><%=list.get(i)[1] %></td>
+					<td width="100"><a href="delGuest.jsp?idx=<%=i%>">[삭제]</a></td>
+				</tr>
+			<%
+				}
+			}
+			%>
+			</table>
+
 		<!-- content end -->
 		</td>
 	</tr>
