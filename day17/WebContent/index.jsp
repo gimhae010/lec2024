@@ -14,8 +14,19 @@
 		</td>
 		<td colspan="2">&nbsp;</td>
 		<td colspan="2" align="right">
-			[<a href="#">login</a>]
-			[<a href="#">join</a>]
+			<%
+			Object obj=session.getAttribute("result");
+			if(obj==null){ %>
+			[<a href="loginform.jsp">LOGIN</a>]
+			[<a href="joinform.jsp">JOIN</a>]
+			<%
+			}else{
+				out.print(obj.toString()+"´Ô ·Î±×ÀÎ Áß...");	
+			%>
+			<a href="logout.jsp">[LOGOUT]</a>
+			<%	
+			}
+			%>
 		</td>
 	</tr>
 	<tr>
