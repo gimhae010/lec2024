@@ -29,30 +29,13 @@
 	<tr>
 		<td colspan="6" align="center" height="400">
 		<!-- content begin -->
-		<h1>상세보기</h1>
-		<%@ page import="java.util.List,java.util.Map" %>
-		<%
-		List<Map<String,String>> list;
-		list=(List<Map<String,String>>)application.getAttribute("bbs");
-		
-		int idx=Integer.parseInt(request.getParameter("idx"));
-		Map<String,String> map=list.get(idx);
-		%>
-		<table width="500" align="center">
-			<tr>
-				<td  bgcolor="#cccccc" width="100">제목</td>
-				<td bgcolor="#cccccc"><%out.print(map.get("sub")); %></td>
-			</tr>
-			<tr>
-				<td bgcolor="#cccccc" height="400" colspan="2"><%out.print(map.get("content")); %></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center" bgcolor="gray">
-					<a href="edit.jsp?idx=<%=idx%>">수정</a>
-					<a href="delete.jsp?idx=<%=idx%>">삭제</a>
-				</td>
-			</tr>
-		</table>
+<%@ page import="java.util.*" %>
+<%
+int idx=Integer.parseInt(request.getParameter("idx"));
+List list=(List)application.getAttribute("bbs");
+list.remove(idx);
+%>
+<a href="bbs.jsp">목록으로 이동</a>
 		<!-- content end -->
 		</td>
 	</tr>

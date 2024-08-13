@@ -1,3 +1,4 @@
+<%@page import="com.sun.glass.ui.Application"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,30 +30,20 @@
 	<tr>
 		<td colspan="6" align="center" height="400">
 		<!-- content begin -->
-		<h1>상세보기</h1>
-		<%@ page import="java.util.List,java.util.Map" %>
-		<%
-		List<Map<String,String>> list;
-		list=(List<Map<String,String>>)application.getAttribute("bbs");
-		
-		int idx=Integer.parseInt(request.getParameter("idx"));
-		Map<String,String> map=list.get(idx);
-		%>
-		<table width="500" align="center">
-			<tr>
-				<td  bgcolor="#cccccc" width="100">제목</td>
-				<td bgcolor="#cccccc"><%out.print(map.get("sub")); %></td>
-			</tr>
-			<tr>
-				<td bgcolor="#cccccc" height="400" colspan="2"><%out.print(map.get("content")); %></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center" bgcolor="gray">
-					<a href="edit.jsp?idx=<%=idx%>">수정</a>
-					<a href="delete.jsp?idx=<%=idx%>">삭제</a>
-				</td>
-			</tr>
-		</table>
+<%@ page import="java.util.*" %>
+<%
+int idx=Integer.parseInt(request.getParameter("idx"));
+String sub=request.getParameter("sub");
+String content=request.getParameter("content");
+
+Map<String,String> map=new HashMap<>();
+map.put("sub", sub);
+map.put("content",content);
+
+List list=(List)application.getAttribute("bbs");
+list.set(idx, map);
+%>
+<a href="bbs.jsp">목록으로 이동</a>
 		<!-- content end -->
 		</td>
 	</tr>

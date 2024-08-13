@@ -27,32 +27,35 @@
 		<td width="200" bgcolor="gray">&nbsp;</td>
 	</tr>
 	<tr>
-		<td colspan="6" align="center" height="400">
+		<td colspan="6" align="center" height="400" valign="top" >
 		<!-- content begin -->
-		<h1>상세보기</h1>
-		<%@ page import="java.util.List,java.util.Map" %>
+		<h1>글 수정</h1>
+		<%@ page import="java.util.*" %>
 		<%
-		List<Map<String,String>> list;
-		list=(List<Map<String,String>>)application.getAttribute("bbs");
-		
 		int idx=Integer.parseInt(request.getParameter("idx"));
+		List<Map<String,String>>list=(List)application.getAttribute("bbs");
 		Map<String,String> map=list.get(idx);
 		%>
-		<table width="500" align="center">
+		<form action="update.jsp">
+			<input type="hidden" name="idx" value="<%=idx%>">
+		<table width="500">
 			<tr>
-				<td  bgcolor="#cccccc" width="100">제목</td>
-				<td bgcolor="#cccccc"><%out.print(map.get("sub")); %></td>
+				<td width="100">제목</td>
+				<td><input value="<%=map.get("sub") %>" type="text" name="sub" size="60"></td>
 			</tr>
 			<tr>
-				<td bgcolor="#cccccc" height="400" colspan="2"><%out.print(map.get("content")); %></td>
+				<td colspan="2">
+					<textarea name="content" rows="10" cols="80"><%=map.get("content") %></textarea>
+				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center" bgcolor="gray">
-					<a href="edit.jsp?idx=<%=idx%>">수정</a>
-					<a href="delete.jsp?idx=<%=idx%>">삭제</a>
+				<td colspan="2" align="center">
+					<input type="submit" value="수정">
+					<input type="reset" value="취소">
 				</td>
 			</tr>
 		</table>
+		</form>
 		<!-- content end -->
 		</td>
 	</tr>
