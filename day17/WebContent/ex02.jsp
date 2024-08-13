@@ -4,13 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<meta http-equiv="refresh" content="0; url=index.jsp">
 <title>Insert title here</title>
 </head>
 <body>
 <%
-	//session.setAttribute("result", null);
-	session.invalidate();
+
+//session.setMaxInactiveInterval(15*60);
+//System.out.println(session.getId());
+//System.out.println(session.getId());
+session.invalidate();
+System.out.println(session.getId());
+//System.out.println(session.getMaxInactiveInterval()/60);
+//System.out.println(session.getLastAccessedTime());
 %>
 </body>
 </html>

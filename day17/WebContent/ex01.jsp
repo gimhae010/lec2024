@@ -4,13 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<meta http-equiv="refresh" content="0; url=index.jsp">
 <title>Insert title here</title>
 </head>
 <body>
 <%
-	//session.setAttribute("result", null);
-	session.invalidate();
+String name=application.getContextPath();
+System.out.println(name);
+System.out.println(application.getInitParameter("con1"));
+// jsp, servlet
+// servlet - 3.1
+// jsp - 2.3
+
 %>
 </body>
 </html>
