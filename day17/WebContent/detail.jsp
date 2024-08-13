@@ -27,38 +27,32 @@
 		<td width="200" bgcolor="gray">&nbsp;</td>
 	</tr>
 	<tr>
-		<td colspan="6" align="center" height="400" valign="top" >
+		<td colspan="6" align="center" height="400">
 		<!-- content begin -->
-		<h1>게시판</h1>
+		<h1>상세보기</h1>
 		<%@ page import="java.util.List,java.util.Map" %>
 		<%
-		Object obj=application.getAttribute("bbs");
-		List<Map<String,String>> list=null;
-		if(obj!=null){
-			list=(List<Map<String,String>>)obj;
-		}
-		%>
-		<table width="500" align="center" border="1" cellspacing="0">
-			<tr>
-				<th width="80">글번호</th>
-				<th>제목</th>
-			</tr>
-			<%
-			if(list!=null){ 
-				for(int i=0; i<list.size(); i++){
-					Map<String,String> map=list.get(i);
-			%>
-			<tr>
-				<td><%out.print(i+1); %></td>
-				<td><a href="detail.jsp?idx=<%out.print(i);%>"><%out.print(map.get("sub")); %></a></td>
-			</tr>
-			<%
-				}
-			} 
-			%>
-		</table>
+		List<Map<String,String>> list;
+		list=(List<Map<String,String>>)application.getAttribute("bbs");
 		
-		<p><a href="add.jsp">[입력]</a></p>
+		int idx=Integer.parseInt(request.getParameter("idx"));
+		Map<String,String> map=list.get(idx);
+		%>
+		<table width="500" align="center">
+			<tr>
+				<td  bgcolor="#cccccc" width="100">제목</td>
+				<td bgcolor="#cccccc"><%out.print(map.get("sub")); %></td>
+			</tr>
+			<tr>
+				<td bgcolor="#cccccc" height="400" colspan="2"><%out.print(map.get("content")); %></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center" bgcolor="gray">
+					<a href="#">수정</a>
+					<a href="#">삭제</a>
+				</td>
+			</tr>
+		</table>
 		<!-- content end -->
 		</td>
 	</tr>

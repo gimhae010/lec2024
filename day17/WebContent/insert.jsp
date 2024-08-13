@@ -27,38 +27,29 @@
 		<td width="200" bgcolor="gray">&nbsp;</td>
 	</tr>
 	<tr>
-		<td colspan="6" align="center" height="400" valign="top" >
+		<td colspan="6" align="center" height="400">
 		<!-- content begin -->
-		<h1>게시판</h1>
-		<%@ page import="java.util.List,java.util.Map" %>
-		<%
-		Object obj=application.getAttribute("bbs");
-		List<Map<String,String>> list=null;
-		if(obj!=null){
-			list=(List<Map<String,String>>)obj;
-		}
-		%>
-		<table width="500" align="center" border="1" cellspacing="0">
-			<tr>
-				<th width="80">글번호</th>
-				<th>제목</th>
-			</tr>
-			<%
-			if(list!=null){ 
-				for(int i=0; i<list.size(); i++){
-					Map<String,String> map=list.get(i);
-			%>
-			<tr>
-				<td><%out.print(i+1); %></td>
-				<td><a href="detail.jsp?idx=<%out.print(i);%>"><%out.print(map.get("sub")); %></a></td>
-			</tr>
-			<%
-				}
-			} 
-			%>
-		</table>
-		
-		<p><a href="add.jsp">[입력]</a></p>
+<%@ page import="java.util.List,java.util.ArrayList" %>
+<%@ page import="java.util.Map,java.util.HashMap" %>
+<%
+List<Map<String,String>> list=null;
+Object obj=application.getAttribute("bbs");
+if(obj==null)
+	list=new ArrayList<>();
+else
+	list=(List<Map<String,String>>)obj;
+
+application.setAttribute("bbs", list);
+
+Map<String,String> map=new HashMap<>();
+String sub=request.getParameter("sub");
+String content=request.getParameter("content");
+map.put("sub", sub);
+map.put("content",content);
+
+list.add(map);
+%>
+<a href="bbs.jsp">목록으로 돌아가기</a>
 		<!-- content end -->
 		</td>
 	</tr>
@@ -76,3 +67,4 @@
 </table>
 </body>
 </html>
+
