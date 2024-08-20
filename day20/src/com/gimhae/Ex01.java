@@ -116,7 +116,18 @@ public class Ex01 extends Frame implements ActionListener{
 		int end=sec;
 		for(int j=0; j<end; j++) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			for(int i=0; i<1000; i++) {
+				int su=ran.nextInt(16);
+				center.add(btns[su]);
+			}
+			time.setText(--sec+"ÃÊ");
+			this.validate();
+			try {
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
