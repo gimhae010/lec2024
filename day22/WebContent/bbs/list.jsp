@@ -54,7 +54,7 @@
 				%>
 				<tr>
 					<td><%=rs.getString(1) %></td>
-					<td><%=rs.getString(2) %></td>
+					<td><a href="detail.jsp?idx=<%=rs.getString(1)%>"><%=rs.getString(2) %></a></td>
 					<td><%=rs.getString(3) %></td>
 					<td><%=rs.getDate(4) %></td>
 				</tr>
