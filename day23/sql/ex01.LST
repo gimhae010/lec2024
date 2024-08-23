@@ -1,0 +1,18 @@
+sqlplus system/oracle
+Oracle Database 10g Express Edition Release 10.2.0.1.0 - Production
+
+SQL> CREATE USER scott IDENTIFIED BY tiger DEFAULT TABLESPACE users QUOTA 2m ON users;
+
+User created.
+
+SQL> grant create session to scott;
+
+Grant succeeded.
+
+SQL> grant create table to scott;
+
+Grant succeeded.
+
+SQL> conn scott/tiger
+Connected.
+SQL>

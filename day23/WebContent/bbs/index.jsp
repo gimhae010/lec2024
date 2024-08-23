@@ -38,7 +38,7 @@
 				int begin=(Integer.parseInt(p)-1)*10+1;
 				String sql="select * from (select rownum as rn,num,sub,id,nalja ";
 				sql+=",(select count(*) from bbs02) from (select * from bbs02 order by num desc))";
-				sql+=" where num between "+begin+" and "+(begin+9)+" order by num desc";
+				sql+=" where rn between "+begin+" and "+(begin+9);
 				Connection conn=null;
 				Statement stmt=null;
 				ResultSet rs=null;
