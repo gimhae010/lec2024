@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style rel="stylesheet" type="text/css">
+        div{
+            width: 400px;
+            height: 120px;
+            overflow: hidden;
+            background-color: aqua;
+            position: relative;
+        }
+        ul{
+            list-style: none;
+            padding: 0px;
+            position: absolute;
+            left:0px;
+            top:-16px;
+        }
+        ul>li{
+            height: 120px;
+        }
+        ul>li>img{
+            width: 400px;
+            height: 120px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li><img src="imgs/main1.jpg" alt=""></li>
+            <li><img src="imgs/main2.jpg" alt=""></li>
+            <li><img src="imgs/main3.jpg" alt=""></li>
+            <li><img src="imgs/main4.jpg" alt=""></li>
+            <li><img src="imgs/main5.jpg" alt=""></li>
+            <li><img src="imgs/main6.jpg" alt=""></li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var ul=document.getElementsByTagName('ul')[0];
+        var cnt=0;
+        function loop(){
+            if(cnt<15)cnt++;
+            else cnt=0;
+            ul.style.top='-'+(4*cnt+1)+'6px';
+           time=setTimeout(loop,200);
+        }
+
+        var time=setTimeout(loop,200);
+    </script>
+</body>
+</html>

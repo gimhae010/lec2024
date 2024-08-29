@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style rel="stylesheet" type="text/css">
+        div{width: 300px;height: 300px;background-color:bisque;}
+        div>div{width: 200px;height: 200px;background-color: blue;}
+        div>div>div{width: 100px;height: 100px;background-color: aqua;}
+    </style>
+    <script type="text/javascript">
+        var btn,div1,div2,div3;
+        window.onload=function(){
+            btn=document.querySelector('button');
+            div1=document.querySelector('div');
+            div2=document.querySelector('div>div');
+            div3=document.querySelector('div>div>div');
+            // div.onclick=function(e){console.log('click',e);};
+            // btn.ondblclick=function(e){console.log('dbclick');};
+            // btn.onmousedown=function(e){console.log('onmousedown');};
+            // btn.onmouseup=function(e){console.log('onmouseup');};
+            ////////////////////////
+            // div1.onmouseover=function(e){console.log('div1','마우스가 위로 올라옴');}
+            // div1.onmouseout=function(e){console.log('div1','마우스가 위에서 떠남');}
+            // div2.onmouseover=function(e){console.log('div2','마우스가 위로 올라옴');}
+            // div2.onmouseout=function(e){console.log('div2','마우스가 위에서 떠남');}
+            // div3.onmouseover=function(e){console.log('div3','마우스가 위로 올라옴');}
+            // div3.onmouseout=function(e){console.log('div3','마우스가 위에서 떠남');}
+            div1.onmouseenter=function(e){console.log('div1','마우스가 위로올라옴');};
+            div1.onmouseleave=function(e){console.log('div1','마우스가 위에서 떠남');};
+            div2.onmouseenter=function(e){console.log('div2','마우스가 위로올라옴');};
+            div2.onmouseleave=function(e){console.log('div2','마우스가 위에서 떠남');};
+            div3.onmouseenter=function(e){console.log('div3','마우스가 위로올라옴');};
+            div3.onmouseleave=function(e){console.log('div3','마우스가 위에서 떠남');};
+        };
+    </script>
+</head>
+<body>
+    <button>btn</button>
+    <div>
+        <div>
+            <div></div>
+        </div>
+    </div>
+</body>
+</html>
