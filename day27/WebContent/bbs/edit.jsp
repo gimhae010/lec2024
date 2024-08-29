@@ -55,24 +55,25 @@
 		<!-- content begin -->
 		<%@ page import="java.sql.*, com.inje.OracleDB" %>
 		<%
+		String num=request.getParameter("num");
 		String sub=request.getParameter("sub");
 		String id=request.getParameter("id");
 		String content=request.getParameter("content");
-		if(sub==null || id==null){
-			response.sendRedirect("add.jsp");
+		if(num==null ||sub==null || id==null){
+			response.sendRedirect("./");
 			return;
 		}
 		if(sub.trim().isEmpty()){
-			response.sendRedirect("add.jsp");
+			response.sendRedirect("detail.jsp?num="+num);
 			return;
 		}
 		if(id.trim().isEmpty()){
-			response.sendRedirect("add.jsp");
+			response.sendRedirect("detail.jsp?num="+num);
 			return;
 		}
 		
-		String sql="insert into bbs02 (num,sub,id,content,nalja) values(";
-		sql+="bbs02_seq.nextval,'"+sub+"','"+id+"','"+content+"',sysdate)";
+		String sql="update bbs02 set sub='"+sub.trim()+"',id='"+id.trim()
+			+"',nalja=sysdate, content='"+content+"' where num="+num;
 		try(
 				Connection conn=OracleDB.getConnection();
 				Statement stmt=conn.createStatement();
@@ -83,7 +84,7 @@
 		<h1>입력 결과</h1>
 		
 		<div>
-			입력 성공
+			수정 성공
 		</div>
 		<!-- content end -->
 	</div>

@@ -104,10 +104,10 @@
 				while(rs.next()){
 			%>
 				<tr>
-					<td><a href="#"><%=rs.getInt(1) %></a></td>
-					<td><a href="#"><%=rs.getString(2) %></a></td>
-					<td><a href="#"><%=rs.getString(3) %></a></td>
-					<td><a href="#"><%=rs.getDate(4) %></a></td>
+					<td><a href="detail.jsp?num=<%=rs.getInt(1) %>"><%=rs.getInt(1) %></a></td>
+					<td><a href="detail.jsp?num=<%=rs.getInt(1) %>"><%=rs.getString(2) %></a></td>
+					<td><a href="detail.jsp?num=<%=rs.getInt(1) %>"><%=rs.getString(3) %></a></td>
+					<td><a href="detail.jsp?num=<%=rs.getInt(1) %>"><%=rs.getDate(4) %></a></td>
 				</tr>
 			<%
 				}

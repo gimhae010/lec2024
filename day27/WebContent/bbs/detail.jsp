@@ -47,6 +47,9 @@
 	border-radius: 10px;
 	text-decoration: none;
 }
+#content>form>div>button:nth-child(2){
+	background-color: red;
+}
 #content form span{
 	display: block;
 	color:red;
@@ -55,35 +58,34 @@
 }
 </style>
 <script type="text/javascript">
-var form,input1,input2,err,div1,div2;
-var add=function(){
-	if(div1.querySelector('span')){
-		div1.removeChild(err);
-	}
-	if(div2.querySelector('span')){
-		div2.removeChild(err);		
-	}
-	err=document.createElement('span');
-	if(input1.value.trim()==''){
-		err.appendChild(document.createTextNode('* 제목은 필수입력'));
-		div1.prepend(err);
-		return false;
-	}
-	if(input2.value.trim()==''){
-		err.appendChild(document.createTextNode('* 글쓴이는 필수입력'));
-		div2.prepend(err);
-		return false;
-	}
+var h1,form,input1,input2,textarea,delBtn;
+var edit=function(e){
+	//valid
 };
 window.onload=function(){
+	h1=document.querySelector('#content>h1');
 	form=document.querySelector('#content form');
-	input1=form.querySelectorAll('input')[0];
-	input2=form.querySelectorAll('input')[1];
-	div1=form.querySelectorAll('div')[0];
-	div2=form.querySelectorAll('div')[1];
-	form.onsubmit=add;
-	input1.onfocus=function(e){this.value='';};
-	input1.onblur=function(e){if(this.value=='')this.value='제목없음';};
+	input1=form.querySelectorAll('input')[1];
+	input2=form.querySelectorAll('input')[2];
+	delBtn=form.querySelectorAll('button')[1];
+	textarea=form.querySelector('textarea');
+	form.onsubmit=function(e){
+		input1.readOnly=false;
+		input2.readOnly=false;
+		textarea.readOnly=false;
+		h1.innerHTML=h1.innerText.replace('상세','수정');
+		form.onsubmit=edit;
+		return false;
+	};
+	delBtn.onclick=function(e){
+		if(confirm('삭제하시겠습니까?')){
+			form.action='delete.jsp';
+			form.method='post';
+			form.onsubmit=true;
+			form.submit();
+		}
+	}
+	
 };
 </script>
 </head>
@@ -110,22 +112,46 @@ window.onload=function(){
 	</div>
 	<div id="content">
 		<!-- content begin -->
-		<h1>입력페이지</h1>
-		<form action="insert.jsp">
+		<%@ page import="java.sql.*, com.inje.OracleDB" %>
+		<%
+		String num=request.getParameter("num");
+		String sql="select sub,id,nalja,content from bbs02 where num="+num;
+		String sub=null,id=null,nalja=null,content="";
+		try(
+				Connection conn=OracleDB.getConnection();
+				Statement stmt=conn.createStatement();
+				ResultSet rs=stmt.executeQuery(sql);
+				){
+			if(rs.next()){
+				sub=rs.getString(1);
+				id=rs.getString(2);
+				nalja=rs.getDate(3).toString();
+				content=rs.getString(4);
+			}
+			if(content==null)content="";
+		}
+		%>
+		<h1>상세페이지(<%=num %>)</h1>
+		<form action="edit.jsp">
+			<input type="hidden" name="num" value="<%=num%>">
 			<div>
 			<label for="sub">제목</label>
-			<input name="sub" id="sub" value="제목없음"/>
+			<input name="sub" id="sub" value="<%=sub%>" readonly="readonly"/>
 			</div>
 			<div>
 			<label for="id">글쓴이</label>
-			<input name="id" id="id"/>
+			<input name="id" id="id"  value="<%=id%>" readonly="readonly"/>
 			</div>
 			<div>
-			<textarea name="content"></textarea>
+			<label for="nalja">날짜</label>
+			<input id="nalja"  value="<%=nalja%>" disabled="disabled"/>
 			</div>
 			<div>
-			<button type="submit">입력</button>
-			<button type="reset">취소</button>
+			<textarea name="content" readonly="readonly"><%=content %></textarea>
+			</div>
+			<div>
+			<button type="submit">수정</button>
+			<button type="button">삭제</button>
 			<button type="button" onclick="history.back();">뒤로</button>
 			</div>
 		</form>
