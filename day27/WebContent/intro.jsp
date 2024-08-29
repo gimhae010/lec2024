@@ -32,6 +32,7 @@
 	</div>
 	<div id="content">
 		<!-- content begin -->
+		<img alt="" src="https://www.inje.ac.kr/kor/assets/images/sub/gimhae-campus-1.jpg">
 		<!-- content end -->
 	</div>
 	<div id="footer">

@@ -6,7 +6,55 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../css/frame.css">
-<style type="text/css"></style>
+<style type="text/css">
+#content{}
+#content>h1{
+	margin-top:50px;
+	text-align: center;
+}
+#content>table{
+	width: 80%;
+	margin: 50px auto;
+}
+#content>table,th,td{
+	border-collapse: collapse;
+	border: 1px solid gray;
+}
+#content>table th:first-child {
+	width: 80px;
+}
+#content>table th:first-child+th+th,
+#content>table th:last-child {
+	width: 100px;
+}
+#content>table td:first-child,
+#content>table td:first-child+td+td,
+#content>table td:last-child {
+	text-align: center;
+}
+#content>table td>a{
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	text-decoration: none;
+	color:#333333;
+}
+#content>table td:first-child+td{
+	padding-left: 20px;
+}
+#content>table+p>a{
+	display: block;
+	background-color: green;
+	color:white;
+	width: 80%;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	margin: 10px auto;
+	border-radius: 10px;
+	text-decoration: none;
+}
+</style>
 <script type="text/javascript"></script>
 </head>
 <body>
@@ -32,6 +80,42 @@
 	</div>
 	<div id="content">
 		<!-- content begin -->
+		<h1>게시판</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>글쓴이</th>
+					<th>날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+			<%@ page import="java.sql.*,com.inje.OracleDB" %>
+			<%
+			String sql="select num,sub,id,nalja from (select rownum as rn,"
+						+" num,sub,id,nalja from (select num,sub,id,nalja from bbs02 "
+						+"order by num desc)) where rn between 1 and 10";
+			try(
+					Connection conn=OracleDB.getConnection();
+					Statement stmt=conn.createStatement();
+					ResultSet rs=stmt.executeQuery(sql);
+					){
+				while(rs.next()){
+			%>
+				<tr>
+					<td><a href="#"><%=rs.getInt(1) %></a></td>
+					<td><a href="#"><%=rs.getString(2) %></a></td>
+					<td><a href="#"><%=rs.getString(3) %></a></td>
+					<td><a href="#"><%=rs.getDate(4) %></a></td>
+				</tr>
+			<%
+				}
+			}
+			%>
+			</tbody>
+		</table>
+		<p><a href="add.jsp">입력</a></p>
 		<!-- content end -->
 	</div>
 	<div id="footer">
@@ -41,3 +125,12 @@
 </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
