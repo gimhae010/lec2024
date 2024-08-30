@@ -146,13 +146,13 @@ body>div:first-child{
 	text-decoration: none;
 }
 
-#popup{
+.popup{
 	width: 100%;
 	height: 100%;
 	position: fixed;
 	background-color: rgba(0,0,0,0.2);
 }
-#popup>div{
+.popup>div{
 	width: 400px;
 	height: 300px;
 	margin: 100px auto;
@@ -160,33 +160,36 @@ body>div:first-child{
 	background-color: white;
 	border-radius: 20px;
 }
-#popup>div>h1{
+.popup>div>h1{
 	text-align: center;
 }
-#popup>div>form{}
-#popup>div>form>div{
+.popup>div>form{}
+.popup>div>form>div{
 	text-align: center;
 }
-#popup>div>form>div>label{
+.popup>div>form>div>label{
 	display:inline-block;
 	width: 50px;
 }
-#popup>div>form>div>input{
+.popup>div>form>div>input{
 	width: 80%;
 }
 }
 
-#popup>div>form>div>textarea{
+.popup>div>form>div>textarea{
 	width: 100%;
 }
-#popup>div>form>div>button{
+.popup>div>form>div>button{
 	display:inline-block;
 	width: 40%;
 	height: 35px;
 }
+#popup2>div>form>div>button{
+	width: 30%;
+}
 </style>
 <script type="text/javascript">
-var xhr,loop,loopUl,p1,p2,p3,p4,mn1,mn2,mn3,mn4,tbody,popup,addbtn,popupbtn2;
+var xhr,loop,loopUl,p1,p2,p3,p4,mn1,mn2,mn3,mn4,tbody,popup,popup2,addbtn,popupbtn2;
 
 var indexPage=function(e){
 	p1.style.display='block';
@@ -230,6 +233,13 @@ var callback01=function(e){
 			msg+='</tr>';
 		}
 		tbody.innerHTML=msg;
+		var trs=document.querySelectorAll('#p3 table tbody tr');
+		
+		for(var i=0; i<trs.length; i++){
+			trs[i].onclick=function(e){
+				bbs(this.querySelector('td').innerText);
+			};
+		}
 	}
 };
 
@@ -239,14 +249,87 @@ var bbsList=function(){
 	xhr.open('get','bbsList.jsp');
 	xhr.send();
 };
+var bbs=function(su){
+	xhr=new XMLHttpRequest();
+	xhr.onreadystatechange=function(e){
+		if(xhr.readyState==4 && xhr.status==200){
+			popup2.style.display='';
+			var msg=xhr.response;
+			var json=JSON.parse(msg);
+			var row=json.bbs[0];
+			var num=popup2.querySelectorAll('input')[0];
+			var sub=popup2.querySelectorAll('input')[1];
+			var id=popup2.querySelectorAll('input')[2];
+			var nalja=popup2.querySelectorAll('input')[3];
+			var content=popup2.querySelector('textarea');
+			num.value=row.num;
+			sub.value=row.sub;
+			id.value=row.id;
+			nalja.value=row.nalja;
+			content.value=row.content;
+		}
+	};
+	xhr.open('get','bbs.jsp?idx='+su);
+	xhr.send();
+};
+var bbsAdd=function(a,b,c){
+	xhr=new XMLHttpRequest();
+	xhr.onreadystatechange=function(e){
+		console.log('codeNum',xhr.status);
+		if(xhr.readyState==4 && xhr.status==200){
+			console.log(xhr.response);
+			clearPopup();
+			bbsList();
+		}
+	};
+	xhr.open('get','bbsAdd.jsp?sub='+a+'&id='+b+'&content='+c);
+	xhr.send();
+}
+var clearPopup=function(){
+	popup.querySelectorAll('input')[0].value='';
+	popup.querySelectorAll('input')[1].value='';
+	popup.querySelector('textarea').value='';
+	popup.style.display='none';	
+	popup2.style.display='none';	
+}
+
+var addBbs=function(e){
+	var sub=e.target.sub.value;
+	var id=e.target.id.value;
+	var content=e.target.content.value;
+	bbsAdd(sub,id,content);
+	//clearPopup();
+	return false;
+};
 
 window.onload=function(){
 	popup=document.querySelector("#popup");
 	popup.style.display='none';
 	popupbtn2=popup.querySelectorAll('button')[1];
-	popupbtn2.onclick=function(e){
-		popup.style.display='none';
+	popup.querySelector('div').onclick=function(e){
+		e.stopPropagation();
+	};
+	popup.onclick=function(e){
+		clearPopup();
 	}
+	popupbtn2.onclick=function(e){
+		clearPopup();
+	}
+
+	popup2=document.querySelector("#popup2");
+	popup2.style.display='none';
+	popupbtn3=popup2.querySelectorAll('button')[1];
+	popup2.querySelector('div').onclick=function(e){
+		e.stopPropagation();
+	};
+	popup2.onclick=function(e){
+		clearPopup();
+	}
+	popupbtn3.onclick=function(e){
+		clearPopup();
+	}
+	
+	popup.querySelector('form').onsubmit=addBbs;
 	
 	mn1=document.querySelectorAll('#menu a')[0];
 	mn2=document.querySelectorAll('#menu a')[1];
@@ -284,24 +367,52 @@ window.onload=function(){
 </script>
 </head>
 <body>
-<div id="popup">
+<div class="popup" id="popup">
 	<div>
 		<h1>입력 페이지</h1>
 		<form>
 			<div>
 				<label>제목</label>
-				<input>
+				<input name="sub">
 			</div>
 			<div>
 				<label>글쓴이</label>
-				<input>
+				<input name="id">
 			</div>
 			<div>
-				<textarea></textarea>
+				<textarea name="content"></textarea>
 			</div>
 			<div>
 				<button>입력</button>
 				<button type="button">취소</button>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="popup" id="popup2">
+	<div>
+		<h1>상세 페이지</h1>
+		<form>
+		<input type="hidden" name="num" readonly="readonly">
+			<div>
+				<label>제목</label>
+				<input name="sub" readonly="readonly">
+			</div>
+			<div>
+				<label>글쓴이</label>
+				<input name="id" readonly="readonly">
+			</div>
+			<div>
+				<label>날짜</label>
+				<input name="nalja" disabled="disabled">
+			</div>
+			<div>
+				<textarea name="content" readonly="readonly"></textarea>
+			</div>
+			<div>
+				<button>수정</button>
+				<button type="button">취소</button>
+				<button type="button">삭제</button>
 			</div>
 		</form>
 	</div>
