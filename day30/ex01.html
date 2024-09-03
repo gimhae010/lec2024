@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style rel="stylesheet" type="text/css">
+        div{
+            background-color: aqua;
+        }
+        span{
+            display: block;
+            width: 0%;
+            height: 5px;
+            background-color: red;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var w=$('div').width();
+            console.log(w);
+            $('button').eq(0).click(function(e){
+                // $('div').hide('fast');
+                // $('div').hide(3000,function(){
+                //     alert('숨김');
+                // });
+
+                // $('div').hide({
+                $('div').stop().slideUp({
+                // $('div').fadeOut({
+                    duration :3000,
+                    easing:'linear',
+                    complete:function(){$('span').width('0%');},
+                    progress:function(a,b,c){
+                        // c =남은 시간
+                        // b =0~1의 퍼센트
+                        if(parseInt(b*100)%10==0)
+                            $('span').width(b*100+"%");
+                    }
+                });
+            });
+            $('button').eq(1).click(function(e){
+                // $('div').show(3000,function(){
+                //     alert("로딩완료")
+                // });
+                // $('div').show({
+                $('div').stop().slideDown({
+                // $('div').fadeIn({
+                    duration :3000,
+                    easing:'linear',
+                    complete:function(){$('span').width('0%');},
+                    progress:function(a,b,c){
+                        // c =남은 시간
+                        // b =0~1의 퍼센트
+                        if(parseInt(b*100)%10==0)
+                            $('span').width(b*100+"%");
+                    }
+                });
+            });
+
+            $('button').eq(2).click(function(){
+                // $('div').toggle(3000,function(){});
+                // $('div').slideToggle(3000,function(){});
+                // $('div').fadeToggle(3000,function(){});
+                $('div').fadeTo(3000,0,function(){$('div').remove(0)});
+            });
+
+            $("button").eq(3).click(function(e){
+                $('div').fadeTo(3000,1);
+            });
+        });
+    </script>
+</head>
+<body>
+    <span></span>
+    <h1>animation1</h1>
+    <button>btn1</button>
+    <button>btn2</button>
+    <button>btn3</button>
+    <button>btn4</button>
+    <div>Lorem ipsum odor amet, consectetuer adipiscing elit. Himenaeos finibus felis sit vulputate luctus venenatis torquent. Imperdiet fermentum dictum tortor ridiculus sit et tincidunt. Eleifend natoque tempor habitasse fermentum maximus platea natoque enim. Amet amet class mauris dignissim ullamcorper nec natoque. Aptent iaculis nostra sit penatibus, ad libero morbi molestie. Hendrerit eu conubia hac ultrices mauris facilisis curae. Senectus ornare nulla proin integer lacus. Risus velit posuere diam eleifend habitasse ad eros ac.
+
+        Ridiculus faucibus volutpat interdum a; est mattis lorem. Dis laoreet penatibus maximus convallis nibh himenaeos tincidunt aliquam. Per ut scelerisque platea, iaculis lectus orci odio per maecenas. Interdum sem eget luctus dolor mattis volutpat parturient eu eget. Dolor ultrices vestibulum donec arcu class sit. Turpis odio ultrices leo massa suspendisse dis. Sapien viverra neque magnis commodo at. Laoreet potenti laoreet vivamus ultrices aliquet blandit dapibus turpis?
+        
+        Et hendrerit finibus euismod sollicitudin, vestibulum turpis. Dictumst duis primis vivamus, consectetur molestie aptent. Augue eros himenaeos placerat eleifend dapibus vestibulum phasellus. Tristique accumsan tincidunt massa tristique; donec condimentum nec id. Dolor netus ac; euismod nam sem posuere duis nascetur est. Proin egestas senectus vehicula justo at adipiscing per metus. Senectus mi metus rhoncus; sem sapien cursus mus. Amet libero elit mattis lacinia nisl phasellus primis. Phasellus nullam placerat urna habitasse adipiscing nullam ultricies finibus.
+    </div>
+    <p>abcd</p>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+    <style rel="stylesheet" type="text/css">
+        /* div{
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+        div+div{
+            background-color: red;
+        }
+        div+div+div{
+            background-color: blue;
+        } */
+    </style>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.color.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('div').eq(0).animate({'margin-left':'500px'},3000,'swing');
+            $('div').eq(1).animate({'margin-left':'500px'},3000,'linear');
+            $('div').eq(2).animate({'margin-left':'500px','background-color':'red'},3000,'easeOutBounce');
+            $('#dialog').dialog();
+        });
+    </script>
+</head>
+<body>
+    <div>box1</div>
+    <div>box2</div>
+    <div>box3</div>
+    <div id="dialog" title="Basic dialog">
+        <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+      </div>
+</body>
+</html>

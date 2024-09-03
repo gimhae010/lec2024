@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $.getJSON('stu.json',function(data){
+                console.log(typeof data);
+                data.students.forEach(function(ele,idx){
+                    $('<tr/>')
+                        .append($('<td/>').text(ele.num))
+                        .append($('<td/>').text(ele.name))
+                        .append($('<td/>').text(ele.kor))
+                        .append($('<td/>').text(ele.eng))
+                        .append($('<td/>').text(ele.math))
+                        .appendTo('tbody');
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>ajax통신(json)</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>학번</th>
+                <th>이름</th>
+                <th>국어</th>
+                <th>영어</th>
+                <th>수학</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</body>
+</html>
