@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	*{
+		margin: 0px;
+		padding: 0px;
+	}
+	.container{
+		margin: 0px auto;
+		width: 800px;
+	}
+	.header{
+		padding: 20px 0px;
+	}
+	.header>h1{
+		background-image: url("imgs/logo.png");
+		background-repeat: no-repeat;
+		height: 41px;
+		margin: 0px 10px;
+		text-indent: -999px;
+	}
+	#menu{
+		height: 35px;
+		background-color: gray;
+	}
+	#menu>ul{
+		list-style: none;
+		width: 400px;
+		margin: 0px auto;
+	}
+	#menu>ul>li{
+		float: left;
+		width: 100px;
+	}
+	#menu>ul>li>a{
+		color: white;
+		background-color: gray;
+		text-decoration: none;
+		text-transform:uppercase;
+		display: block;
+		height: 35px;
+		text-align: center;
+	}
+	#menu>ul>li>a:hover{
+		border-bottom: 5px solid yellow;
+		box-sizing: border-box;
+	}
+	#footer{
+		background-color: gray;
+		padding: 30px;
+		border-top: 5px solid white;
+	}	
+	#footer>p{
+		text-align: center;
+		font-size: 0.8em;
+	}	
+	.container img{
+		width: 100%;
+	}
+	#p1{}
+	#p1>.slider{}
+	#p1 .bx-wrapper{
+		position: relative;
+	}
+	#p1 .bx-controls-direction{
+		
+	}
+	#p1 .bx-controls-direction>a:first-child{
+		text-decoration: none;
+		color: white;
+		font-size: 72px;
+		font-weight: bold;
+		opacity: 0.2;
+		position: absolute;
+		top: 0px;
+		background-color: black;
+		display: inline-block;
+		height: 241px;
+		width: 150px;
+		text-align: center;
+		line-height: 200px;
+	}
+	#p1 .bx-controls-direction>a:nth-child(2){
+		opacity: 0.2;
+		color: white;
+		font-size: 72px;
+		font-weight: bold;
+		text-decoration: none;
+		position: absolute;
+		top: 0px;
+		background-color: black;
+		display: inline-block;
+		height: 241px;
+		width: 150px;
+		left: 650px;
+		text-align: center;
+		line-height: 200px;
+	}
+	
+	#p1 .bx-pager{
+		height: 100px;
+		width: 120px;
+		margin: 0px auto;
+	}
+	#p1 .bx-pager>div{
+		float: left;
+		width: 20px;
+	}
+	#p1 .bx-pager>div>a{
+		text-decoration: none;
+	}
+</style>
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.bxslider.js"></script>
+<script type="text/javascript">
+	
+	$(function(){
+		$('#p1 .slider').bxSlider({auto:true,prevText:'<',nextText:'>'});
+	});
+</script>
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<h1>인제대학교</h1>
+		</div>
+		<div id="menu">
+			<ul>
+				<li><a href="#">home</a></li>
+				<li><a href="#">intro</a></li>
+				<li><a href="#">bbs</a></li>
+				<li><a href="#">login</a></li>
+			</ul>
+		</div>
+		<div id="content">
+			<div id="p1">
+				<div class="slider">
+					<div><img src="imgs/main1.jpg"/></div>
+					<div><img src="imgs/main2.jpg"/></div>
+					<div><img src="imgs/main3.jpg"/></div>
+					<div><img src="imgs/main4.jpg"/></div>
+					<div><img src="imgs/main5.jpg"/></div>
+					<div><img src="imgs/main6.jpg"/></div>
+				</div>
+			</div>
+			<div id="p2"></div>
+			<div id="p3"></div>
+			<div id="p4"></div>
+		</div>
+		<div id="footer">
+			<p>김해캠퍼스 (50834) 경남 김해시 인제로 197</p>
+			<p>Copyright &copy; 2024 INJE University. All rights reserved.</p>
+		</div>
+	</div>
+</body>
+</html>
