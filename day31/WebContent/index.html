@@ -190,7 +190,7 @@
 <script type="text/javascript">
 	var readOnly;
 	var bbsNumParsing=function(num){
-		$('#popup').fadeIn(1000);
+		$('#popup').fadeIn(500);
 		$.get('bbs.xml','num='+num,function(data){
 			console.log(data,$(data).find('sub'));
 			$('#popup form div').eq(0).find('input').val($(data).find('sub').html());
@@ -199,22 +199,32 @@
 			$('#popup form div').eq(3).find('textarea').val($(data).find('content').html());
 			$('#popup form input:hidden').val(num);
 		});
-		$('#popup button').eq(0).click(function(e){
-			if($('#popup h2').html()=='상세 페이지'){
-				$('#popup h2').html('수정 페이지');
-				readOnly.prop('readonly',false);
-			}else if($('#popup h2').html()=='수정 페이지'){
-				editXml();
-				$('#popup h2').html('상세 페이지');
-				readOnly.prop('readonly',true);
+		
+	};
+	var addXml=function(){
+		$.ajax({
+			url:'add.xml',
+			type:'post',
+			contentType:'application/x-www-form-urlencoded',
+			data:$('#popup form').serialize(),
+			success:function(){
+				$('#popup').click();
+				xmlParsing();
 			}
-			
 		});
+	};
+	var delXml=function(){
+		$.post('delete.xml',$('#popup form').serialize(),function(e){
+			$('#popup').click();
+			xmlParsing();
+		});
+		
 	};
 	var editXml=function(){
 		$.ajax({
 			url:'bbsEdit.xml',
-			type:'get',
+			type:'post',
+			contentType:'application/x-www-form-urlencoded',
 			data:$('#popup form').serialize(),
 			success:function(){
 				$('#popup').click();
@@ -298,7 +308,11 @@
 		readOnly=$('#popup').find('[readonly]');
 		$('#popup').click(function(e){
 			e.stopPropagation();
-			$('#popup').fadeOut(1000);
+			$('#popup').fadeOut(500);
+			$('#popup').find('h2').text('상세 페이지');
+			$('#popup').find('[disabled]').parent().show();
+			readOnly.prop('readonly',true);
+			$('#popup').find('button').eq(0).html('수정').next().show();
 		});
 		$('#popup>div').click(function(e){e.stopPropagation();});
 		$('#popup').fadeOut();
@@ -313,6 +327,30 @@
 			e.preventDefault();
 			var num=$(e.target).attr('href').replace('#','');
 			bbsNumParsing(num);
+		});
+		
+		$('#popup button').eq(0).click(function(e){
+			if($('#popup h2').html()=='상세 페이지'){
+				$('#popup h2').html('수정 페이지');
+				readOnly.prop('readonly',false);
+			}else if($('#popup h2').html()=='수정 페이지'){
+				editXml();
+				$('#popup h2').html('상세 페이지');
+				readOnly.prop('readonly',true);
+			}else if($('#popup h2').html()=='입력 페이지'){
+				addXml();
+			}
+		});
+		$('#popup button').eq(1).click(function(e){
+			delXml();
+		});
+		$('#p3 table+p>a').click(function(e){
+			$('#popup').fadeIn(500);
+			$('#popup').find('h2').text('입력 페이지');
+			$('#popup').find('[disabled]').parent().hide();
+			readOnly.prop('readonly',false);
+			$('#popup').find('button').eq(0).html('입력').next().hide();
+			return false;
 		});
 	});
 </script>
@@ -385,6 +423,7 @@
 					</thead>
 					<tbody></tbody>
 				</table>
+				<p><a href="#">입력</a></p>
 			</div>
 			<div id="p4">
 				<h2>bbs page(json)</h2>

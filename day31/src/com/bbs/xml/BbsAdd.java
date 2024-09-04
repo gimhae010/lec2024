@@ -10,18 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bbs.util.OracleDB;
 
-public class BbsEdit extends HttpServlet{
-	//bbsEdit.xml
+public class BbsAdd extends HttpServlet {
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		int num=Integer.parseInt(req.getParameter("num"));
-		String id=req.getParameter("id");
 		String sub=req.getParameter("sub");
+		String id=req.getParameter("id");
 		String content=req.getParameter("content");
 		
-		String sql="update bbs02 set id='"+id+"', sub='"+sub
-					+"', content='"+content+"', nalja=sysdate where num="+num;
+		String sql="insert into bbs02 (num,sub,id,content,nalja) values (bbs02_seq.nextval,'"
+					+sub+"','"+id+"','"+content+"',sysdate)";
 		
 		try(
 			Connection conn=OracleDB.getConnection();
@@ -31,13 +30,9 @@ public class BbsEdit extends HttpServlet{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
+
 }
-
-
-
-
 
 
 
