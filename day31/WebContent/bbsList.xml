@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bbs>
+	<row>
+		<num>1</num>
+		<sub>test1</sub>
+		<id>tester</id>
+		<nalja>24/09/04</nalja>
+	</row>
+	<row>
+		<num>2</num>
+		<sub>test2</sub>
+		<id>tester</id>
+		<nalja>24/09/04</nalja>
+	</row>
+	<row>
+		<num>3</num>
+		<sub>test3</sub>
+		<id>tester</id>
+		<nalja>24/09/04</nalja>
+	</row>
+</bbs>
