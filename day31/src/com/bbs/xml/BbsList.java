@@ -19,6 +19,7 @@ public class BbsList extends HttpServlet {
 		
 		response.setContentType("application/xml; charset=utf-8");
 		PrintWriter out = response.getWriter();
+		out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		out.println("<bbs>");
 		String sql="select num,sub,id,nalja from ";
 		sql+="(select rownum as rn, num,sub,id,nalja from ";
