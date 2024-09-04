@@ -9,4 +9,21 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>jsonList</servlet-name>
+  	<servlet-class>com.bbs.json.BbsList</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>xmlList</servlet-name>
+  	<servlet-class>com.bbs.xml.BbsList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>xmlList</servlet-name>
+  	<url-pattern>/bbsList.xml</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>jsonList</servlet-name>
+  	<url-pattern>/bbsList.json</url-pattern>
+  </servlet-mapping>
 </web-app>

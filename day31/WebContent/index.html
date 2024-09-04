@@ -117,35 +117,79 @@
 		text-transform: capitalize;
 		margin: 20px 0px;
 	}
-	#p3 table{
+	#p3 table,#p4 table{
 		margin: 10px auto;
 		border-collapse: collapse;
 		width: 100%;
 	}
-	#p3 table,#p3 table th,#p3 table td{
+	#p3 table,#p3 table th,#p3 table td,
+	#p4 table,#p4 table th,#p4 table td{
 		border: 1px solid gray;
 	}
-	#p3 table>tbody>tr>td{
+	#p3 table>tbody>tr>td,
+	#p4 table>tbody>tr>td{
 		text-align: center;
 	}
-	#p3 table>tbody>tr>td>a{
+	#p3 table>tbody>tr>td>a,
+	#p4 table>tbody>tr>td>a{
 		display: block;
 		height: 30px;
 	}
-	#p3 table>tbody>tr>td:first-child {
+	#p3 table>tbody>tr>td:first-child,
+	#p4 table>tbody>tr>td:first-child {
 		width: 80px;
 	}
-	#p3 table>tbody>tr>td:first-child+td {
+	#p3 table>tbody>tr>td:first-child+td,
+	#p4 table>tbody>tr>td:first-child+td {
 		padding-left: 20px;
 	}
 	#p3 table>tbody>tr>td:first-child+td+td,
-	#p3 table>tbody>tr>td:first-child+td+td+td{
+	#p3 table>tbody>tr>td:first-child+td+td+td,
+	#p4 table>tbody>tr>td:first-child+td+td,
+	#p4 table>tbody>tr>td:first-child+td+td+td{
 		width: 100px;
 	}
 </style>
 <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="js/jquery.bxslider.js"></script>
 <script type="text/javascript">
+	// {bbs:[{num:0,sub:'test'}]}
+	var jsonParsing=function(){
+		$('#p4 table>tbody').empty();
+		/* 
+		$.ajax({
+			url:'bbsList.json',
+			type:'get',
+			dataType:'json',
+			success:function(data){
+				data.bbs.forEach(function(ele,idx){
+					$('<tr/>')
+						.append('<td><a href="#'+ele.num+'">'+ele.num+'</a></td>')
+						.append('<td><a href="#'+ele.num+'">'+ele.sub+'</a></td>')
+						.append('<td><a href="#'+ele.num+'">'+ele.id+'</a></td>')
+						.append('<td><a href="#'+ele.num+'">'+ele.nalja+'</a></td>')
+						.appendTo('#p4 table>tbody');
+				});
+			},
+			error:function(a,b,c){
+				alert("err");
+				console.log(a,b,c);
+			}
+		});
+		*/
+		
+		$.getJSON('bbsList.json',function(data){
+			data.bbs.forEach(function(ele,idx){
+				$('<tr/>')
+					.append('<td><a href="#'+ele.num+'">'+ele.num+'</a></td>')
+					.append('<td><a href="#'+ele.num+'">'+ele.sub+'</a></td>')
+					.append('<td><a href="#'+ele.num+'">'+ele.id+'</a></td>')
+					.append('<td><a href="#'+ele.num+'">'+ele.nalja+'</a></td>')
+					.appendTo('#p4 table>tbody');
+			});
+		}); 
+	};
+
 	var xmlParsing=function(){
 		$.get('bbsList.xml',function(data){
 			$('#p3 table>tbody').empty();
@@ -180,7 +224,7 @@
 	var loginCB=function(e){
 		e.preventDefault();
 		$('#p1').hide().next().hide().next().hide().next().show();
-		
+		jsonParsing();
 		};
 	$(function(){
 		$('#p1 .slider').bxSlider({auto:true,prevText:'<',nextText:'>'});
