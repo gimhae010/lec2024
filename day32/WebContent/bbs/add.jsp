@@ -28,7 +28,14 @@
   </div>
   <div class="form-group">
     <label for="id">글쓴이</label>
+<jsp:useBean id="login" class="com.user.model.UserBean" scope="session"></jsp:useBean>
+    <%
+    if(login==null||!login.isResult()){
+    %>
     <input type="text" class="form-control" name="id" id="id" placeholder="작성자">
+    <%}else{ %>
+    <input type="text" class="form-control" name="id" id="id" value="<%=login.getId()%>" readonly="readonly">
+    <%} %>
   </div>
   <div class="form-group">
     <textarea class="form-control" rows="5" name="content"></textarea>

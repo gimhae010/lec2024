@@ -3,7 +3,14 @@ package com.user.model;
 public class UserBean {
 	private int num;
 	private String id,pw,name;
+	private boolean result;
 	
+	public boolean isResult() {
+		return result;
+	}
+	public void setResult(boolean result) {
+		this.result = result;
+	}
 	public int getNum() {
 		return num;
 	}

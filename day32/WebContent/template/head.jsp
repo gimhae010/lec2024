@@ -10,6 +10,9 @@
 .carousel img{
 	width: 100%;
 }
+.header>p{
+	float: right;
+}
 </style>
 <script type="text/javascript" src="<%=request.getParameter("path")%>/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="<%=request.getParameter("path")%>/js/bootstrap.min.js"></script>
