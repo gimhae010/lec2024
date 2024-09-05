@@ -25,7 +25,8 @@
 <jsp:setProperty property="num" name="bean"/>
 <%@ page import="java.sql.*,com.bbs.util.*,java.util.*" %>
 <%
-String sql="select * from bbs02 where num="+bean.getNum();
+String sql="select * from bbs03 where num="+bean.getNum();
+
 try(
 	Connection conn=OracleDB.getConnection();
 	Statement stmt=conn.createStatement();
@@ -36,6 +37,9 @@ try(
 		bean.setId(rs.getString("id"));
 		bean.setContent(rs.getString("content"));
 		bean.setNalja(rs.getTimestamp("nalja"));
+		bean.setRef(rs.getInt("ref"));
+		bean.setSeq(rs.getInt("seq"));
+		bean.setLev(rs.getInt("lev"));
 	}
 }
 
@@ -60,7 +64,7 @@ try(
 	  </div>
 	  <button class="btn btn-default">수정</button>
 	  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">삭제</button>
-	  <a href="#" class="btn btn-default" role="button">답글</a>
+	  <a href="re.jsp?ref=<%=bean.getRef() %>&seq=<%=bean.getSeq() %>&lev=<%=bean.getLev() %>" class="btn btn-default" role="button">답글</a>
 	</form>	
 <jsp:include page="../template/footer.jsp"></jsp:include>
 <!-- Modal -->

@@ -40,8 +40,7 @@
 	<tbody>
 		<%@ page import="java.sql.*,com.bbs.util.OracleDB" %>
 		<%
-		String sql="select * from (select rownum as rn, num,sub,id,nalja from"
-			+" (select * from bbs02 order by num desc)) where rn between 1 and 10";
+		String sql="select * from bbs03 order by ref desc, seq asc";
 		try(
 				Connection conn=OracleDB.getConnection();
 				Statement stmt=conn.createStatement();
@@ -51,7 +50,13 @@
 		%>
 		<tr>
 			<td><a href="detail.jsp?num=<%=rs.getInt("num") %>"><%=rs.getInt("num") %></a></td>
-			<td><a href="detail.jsp?num=<%=rs.getInt("num") %>"><%=rs.getString("sub") %></a></td>
+			<td><a href="detail.jsp?num=<%=rs.getInt("num") %>"><%
+			for(int i=0; i<rs.getInt("lev");i++){
+				out.print("&nbsp;&nbsp;&nbsp;&nbsp;");
+			}
+			if(rs.getInt("lev")!=0) out.print("└ ");
+			out.print(rs.getString("sub")); 
+			%></a></td>
 			<td><a href="detail.jsp?num=<%=rs.getInt("num") %>"><%=rs.getString("id") %></a></td>
 			<td><a href="detail.jsp?num=<%=rs.getInt("num") %>"><%=rs.getTimestamp("nalja") %></a></td>
 		</tr>

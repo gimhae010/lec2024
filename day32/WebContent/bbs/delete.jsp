@@ -20,7 +20,7 @@ $(function(){
 <%@ page import="java.sql.*,com.bbs.util.*" %>
 <%
 if(request.getMethod().equals("POST")){
-	String sql="delete from bbs02 where num="+bean.getNum();
+	String sql="delete from bbs03 where num="+bean.getNum();
 	try(
 		Connection conn=OracleDB.getConnection();
 		Statement stmt=conn.createStatement();

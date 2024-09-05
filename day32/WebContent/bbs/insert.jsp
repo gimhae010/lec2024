@@ -13,16 +13,20 @@
 <jsp:setProperty property="content" name="bean"/>
 <%@ page import="java.sql.*,com.bbs.util.*" %>
 <%
-String sql="insert into bbs02 (num,sub,id,content,nalja) values (bbs02_seq.nextval,'"
-			+bean.getSub()+"','"+bean.getId()+"','"+bean.getContent()+"',sysdate)";
+
+//insert into bbs03 (num,id,sub,content,nalja,ref) values (bbs03_seq.nextval,'tester','test5','test',sysdate,bbs03_seq.currval);
+String sql="insert into bbs03 (num,sub,id,content,nalja,ref) values (bbs03_seq.nextval,'"
+			+bean.getSub()+"','"+bean.getId()+"','"+bean.getContent()+"',sysdate,bbs03_seq.currval)";
 try(
 	Connection conn=OracleDB.getConnection();
 	Statement stmt=conn.createStatement();	
 	){
 	stmt.executeUpdate(sql);
 }
+
+response.sendRedirect("list.jsp");
 %>
-<jsp:forward page="list.jsp"></jsp:forward>
+
 </body>
 </html>
 

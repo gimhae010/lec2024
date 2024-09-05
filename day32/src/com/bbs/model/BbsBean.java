@@ -4,10 +4,28 @@ import java.sql.Timestamp;
 
 // javaBean class
 public class BbsBean {
-	private int num;
+	private int num,ref,seq,lev;
 	private String sub,id,content;
 	private Timestamp nalja;
 	
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+	public int getSeq() {
+		return seq;
+	}
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+	public int getLev() {
+		return lev;
+	}
+	public void setLev(int lev) {
+		this.lev = lev;
+	}
 	public int getNum() {
 		return num;
 	}
