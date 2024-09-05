@@ -59,10 +59,35 @@ try(
 	    <textarea class="form-control" rows="5" name="content" readonly><jsp:getProperty property="content" name="bean"/></textarea>
 	  </div>
 	  <button class="btn btn-default">수정</button>
-	  <a href="#" class="btn btn-danger" role="button">삭제</a>
+	  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">삭제</button>
 	  <a href="#" class="btn btn-default" role="button">답글</a>
 	</form>	
 <jsp:include page="../template/footer.jsp"></jsp:include>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">확인</h4>
+      </div>
+      <div class="modal-body">
+      	<form action="delete.jsp" method="post">
+      		<div class="text-center">
+      			<jsp:getProperty property="num" name="bean"/>번 글을 삭제하시겠습니까?
+      		</div>
+      		<input type="hidden" name="num" value="<jsp:getProperty property="num" name="bean"/>">
+	        <div class="text-center">
+		        <button type="submit" class="btn btn-primary">삭제</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+	        </div>
+      	</form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
 
