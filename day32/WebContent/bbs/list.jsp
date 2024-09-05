@@ -16,6 +16,9 @@
 	table td:nth-child(4){
 		width: 100px;
 	}
+	table td>a{
+		display: block;
+	}
 </style>
 </head>
 <body>
@@ -47,10 +50,10 @@
 		while(rs.next()){ 
 		%>
 		<tr>
-			<td><%=rs.getInt("num") %></td>
-			<td><%=rs.getString("sub") %></td>
-			<td><%=rs.getString("id") %></td>
-			<td><%=rs.getTimestamp("nalja") %></td>
+			<td><a href="detail.jsp?num=<%=rs.getInt("num") %>"><%=rs.getInt("num") %></a></td>
+			<td><a href="detail.jsp?num=<%=rs.getInt("num") %>"><%=rs.getString("sub") %></a></td>
+			<td><a href="detail.jsp?num=<%=rs.getInt("num") %>"><%=rs.getString("id") %></a></td>
+			<td><a href="detail.jsp?num=<%=rs.getInt("num") %>"><%=rs.getTimestamp("nalja") %></a></td>
 		</tr>
 		<%}
 		} %>
