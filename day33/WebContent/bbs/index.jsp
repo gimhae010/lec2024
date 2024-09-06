@@ -48,6 +48,7 @@
 	%>
 	</tbody>
 </table>
+<p><a href="add.jsp" class="btn btn-primary btn-block" role="button">입력</a></p>
 <%@ include file="../template/footer.jspf" %>
 </body>
 </html>
