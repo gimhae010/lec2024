@@ -24,6 +24,19 @@
 </style>
 </head>
 <body>
+<%
+if(request.getParameter("msg")!=null){
+%>
+<script type="text/javascript">
+$(function(){
+	$('.alert strong').html(decodeURI('<%=request.getParameter("msg")%>'));
+});
+</script>
+<div class="alert alert-info alert-dismissible text-center" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>abcd</strong>!
+</div>
+<%} %>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -50,6 +63,7 @@
 							<th>부서번호</th>
 							<th>부서명</th>
 							<th>지역</th>
+							<th>삭제</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -62,6 +76,7 @@
 							<td><%=bean.getDeptno() %></td>
 							<td><%=bean.getDname() %></td>
 							<td><%=bean.getLoc() %></td>
+							<td><a href="delete.do?deptno=<%=bean.getDeptno() %>"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a></td>
 						</tr>
 					<%} %>
 					</tbody>

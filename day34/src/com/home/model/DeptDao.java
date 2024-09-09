@@ -31,4 +31,45 @@ public class DeptDao {
 		}
 		return list;
 	}
+	
+	public void addList(String dname,String loc) {
+		String sql="insert into dept (dname,loc) values ('"+dname+"','"+loc+"')";
+		try(
+				Connection conn=Mysql.getConection();
+				Statement stmt=conn.createStatement();
+				){
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int removeList(int deptno) {
+		String sql="delete from dept where deptno="+deptno;
+		try(
+				Connection conn=Mysql.getConection();
+				Statement stmt=conn.createStatement();
+				){
+			return stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
