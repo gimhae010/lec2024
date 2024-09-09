@@ -38,34 +38,24 @@
 		<div class="row">
 			<div id="content" class="col-md-12">
 				<!-- content begin -->
-				<h2 class="page-header">리스트 페이지<small>(emp table)</small></h2>
-				<table class="table  table-bordered">
-					<thead>
-						<tr>
-							<th>사번</th>
-							<th>이름</th>
-							<th>연봉</th>
-							<th>부서명</th>
-						</tr>
-					</thead>
-					<tbody>
-					<%@ page import="java.util.*,com.home.model.*" %>
-					<%
-					List<EmpDto> list=(List<EmpDto>)request.getAttribute("alist");
-					for(EmpDto bean : list){
-					%>
-						<tr>
-							<td><a href="detail.do?sabun=<%=bean.getEmpno() %>"><%=bean.getEmpno() %></a></td>
-							<td><a href="detail.do?sabun=<%=bean.getEmpno() %>"><%=bean.getEname() %></a></td>
-							<td><a href="detail.do?sabun=<%=bean.getEmpno() %>"><%=bean.getPay() %></a></td>
-							<td><a href="detail.do?sabun=<%=bean.getEmpno() %>"><%=bean.getDname()==null?"미지정":bean.getDname() %></a></td>
-						</tr>
-					<%} %>
-					</tbody>
-				</table>
-				<p>
-					<a href="add.do" class="btn btn-primary btn-block" role="button">입력</a>
-				</p>
+				<h2 class="page-header">부서배정</h2>
+				<form method="post">
+					<input type="hidden" name="sabun" value=""> 
+					<div class="form-group">
+						<select name="deptno"  class="form-control">
+							<%@ page import="java.util.*,com.home.model.*" %>
+							<%
+							List<DeptDto> list=null;
+							list=(List<DeptDto>)request.getAttribute("alist");
+							for(DeptDto bean : list){
+							%>
+							<option value="<%=bean.getDeptno()%>"><%=bean.getDname() %></option>
+							<%} %>
+						</select>
+					</div>
+					<button>지정</button>
+					<button type="button" onclick="history.back();">뒤로</button>
+				</form>
 				<!-- content end -->
 			</div>
 		</div>

@@ -45,6 +45,29 @@ public class EmpDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public EmpDto getOne(int sabun) {
+		EmpDto bean=new EmpDto();
+		String sql="select sabun,ename,mgr,pay,(select dname from dept where deptno="
+				+"(select deptno from emp where sabun="+sabun+")) name from emp where sabun="+sabun;
+		try(
+				Connection conn=Mysql.getConection();
+				Statement stmt=conn.createStatement();
+				ResultSet rs=stmt.executeQuery(sql);
+				){
+			if(rs.next()) {
+				bean.setEmpno(rs.getInt("sabun"));
+				bean.setEname(rs.getString("ename"));
+				bean.setMgr(rs.getInt("mgr"));
+				bean.setPay(rs.getInt("pay"));
+				bean.setDname(rs.getString("name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return bean;
+	}
+	
 }
 
 

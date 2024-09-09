@@ -33,39 +33,44 @@
 	  	<a class="navbar-text" href="/day34/login/form.do">login</a>
 	  </div>
   </div>
+  <%@ page import="com.home.model.*" %>
+  <%
+  EmpDto bean=null;
+  bean=(EmpDto)request.getAttribute("bean");
+  %>
 </nav>
 	<div class="container">
 		<div class="row">
 			<div id="content" class="col-md-12">
 				<!-- content begin -->
-				<h2 class="page-header">리스트 페이지<small>(emp table)</small></h2>
-				<table class="table  table-bordered">
-					<thead>
-						<tr>
-							<th>사번</th>
-							<th>이름</th>
-							<th>연봉</th>
-							<th>부서명</th>
-						</tr>
-					</thead>
-					<tbody>
-					<%@ page import="java.util.*,com.home.model.*" %>
-					<%
-					List<EmpDto> list=(List<EmpDto>)request.getAttribute("alist");
-					for(EmpDto bean : list){
-					%>
-						<tr>
-							<td><a href="detail.do?sabun=<%=bean.getEmpno() %>"><%=bean.getEmpno() %></a></td>
-							<td><a href="detail.do?sabun=<%=bean.getEmpno() %>"><%=bean.getEname() %></a></td>
-							<td><a href="detail.do?sabun=<%=bean.getEmpno() %>"><%=bean.getPay() %></a></td>
-							<td><a href="detail.do?sabun=<%=bean.getEmpno() %>"><%=bean.getDname()==null?"미지정":bean.getDname() %></a></td>
-						</tr>
-					<%} %>
-					</tbody>
-				</table>
-				<p>
-					<a href="add.do" class="btn btn-primary btn-block" role="button">입력</a>
-				</p>
+				<h2 class="page-header">상세 페이지</h2>
+				<form method="post">
+				  <div class="form-group">
+				    <label for="sabun">사번</label>
+				    <input name="sabun" class="form-control" id="sabun" value="<%=bean.getEmpno()%>">
+				  </div>
+				  <div class="form-group">
+				    <label for="ename">이름</label>
+				    <input name="ename" class="form-control" id="ename" value="<%=bean.getEname()%>">
+				  </div>
+				  <div class="form-group">
+				    <label for="mgr">사수</label>
+				    <input name="mgr" class="form-control" id="mgr" value="<%=bean.getMgr()==0?"미정":bean.getMgr()%>">
+				  </div>
+				  <div class="form-group">
+				    <label for="pay">연봉</label>
+				    <input name="pay" class="form-control" id="pay" value="<%=bean.getPay()%>">
+				  </div>
+				  <div class="form-group">
+				    <label for="dname">부서명</label>
+				    <input name="dname" class="form-control" id="dname" value="<%=bean.getDname()==null?"미배정":bean.getDname()%>">
+				  </div>
+				  <div class="form-group">
+				  	<a href="editDept.do?sabun=<%=bean.getEmpno()%>" class="btn btn-primary" role="button">부서배정</a>
+				  	<a href="editMgr.do?sabun=<%=bean.getEmpno()%>" class="btn btn-primary" role="button">사수배정</a>
+				    <button type="button" class="btn btn-default" onclick="history.back();">뒤로</button>
+				  </div>
+				</form>
 				<!-- content end -->
 			</div>
 		</div>

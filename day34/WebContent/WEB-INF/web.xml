@@ -63,4 +63,22 @@
   	<servlet-name>empAdd</servlet-name>
   	<url-pattern>/emp/add.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>empOne</servlet-name>
+  	<servlet-class>com.home.controller.EmpDetailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>empOne</servlet-name>
+  	<url-pattern>/emp/detail.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>empDeptno</servlet-name>
+  	<servlet-class>com.home.controller.EmpDeptnoController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>empDeptno</servlet-name>
+  	<url-pattern>/emp/editDept.do</url-pattern>
+  </servlet-mapping>
 </web-app>
