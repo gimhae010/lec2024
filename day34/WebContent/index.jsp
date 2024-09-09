@@ -32,6 +32,12 @@
 	  	<a class="navbar-text" href="/day34/emp/list.do">emp</a>
 	  	<a class="navbar-text" href="/day34/login/form.do">login</a>
 	  </div>
+	  <%
+	  if(session.getAttribute("result")!=null && ((Boolean)session.getAttribute("result"))){
+	  %>
+	  <a href="logout.do" class="navbar-text navbar-right">logout</a>
+	  <p class="navbar-text navbar-right"><%=session.getAttribute("login") %></p>
+	  <%} %>
   </div>
 </nav>
 	<div class="container">

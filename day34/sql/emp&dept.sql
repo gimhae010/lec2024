@@ -9,7 +9,7 @@ CREATE TABLE emp(
 	ename VARCHAR(10) NOT NULL,
 	mgr INT,
 	pay INT DEFAULT 0,
-	deptno INT REFERENCES dept(deptno)
+	deptno INT not null REFERENCES dept(deptno)
 );
 INSERT INTO dept (dname,loc) VALUES ('본사','서울');
 INSERT INTO dept (dname,loc) VALUES ('생산','대전');
@@ -28,7 +28,13 @@ SELECT * FROM emp;
 
 
 # SELECT empno,ename,pay,(select dname FROM dept WHERE dept.deptno=emp.deptno) FROM emp;
+INSERT INTO dept VALUES (2,'생산','대전');
 SELECT a.sabun,a.ename, a.pay,b.dname FROM emp a inner JOIN dept b ON a.deptno=b.deptno ;
 
 
-SELECT a.sabun,a.ename, a.pay,b.dname FROM emp a left outer JOIN dept b ON a.deptno=b.deptno 
+SELECT a.sabun,a.ename, a.pay,b.dname FROM emp a LEFT outer JOIN dept b ON a.deptno=b.deptno 
+
+
+SELECT sabun,ename,mgr FROM emp;
+
+SELECT a.sabun,a.ename,b.ename AS mgrname FROM emp a inner join emp b ON a.mgr=b.sabun;

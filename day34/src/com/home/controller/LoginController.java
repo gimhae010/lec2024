@@ -7,30 +7,38 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.home.model.DeptDao;
 import com.home.model.EmpDao;
 
-public class EmpDeptnoController extends HttpServlet{
+public class LoginController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int num=Integer.parseInt(req.getParameter("sabun"));
-		DeptDao dao=new DeptDao();
-		req.setAttribute("alist", dao.getList());
-		RequestDispatcher rd=req.getRequestDispatcher("editDept.jsp");
+		RequestDispatcher rd=req.getRequestDispatcher("login.jsp");
 		rd.forward(req, resp);
 	}
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int sabun=Integer.parseInt(req.getParameter("sabun"));
-		int deptno=Integer.parseInt(req.getParameter("deptno"));
+		req.setCharacterEncoding("utf-8");
+		String sabun=req.getParameter("sabun");
+		String ename=req.getParameter("ename");
 		EmpDao dao=new EmpDao();
-		dao.editDeptno(sabun,deptno);
-		resp.sendRedirect("list.do");
+		boolean result=dao.login(sabun,ename);
+		if(result) {
+			HttpSession session = req.getSession();
+			session.setAttribute("login", ename);
+			session.setAttribute("result", true);
+		}
+		resp.sendRedirect("/day34/index.do");
 	}
 }
+
+
+
+
+
+
 
 
 

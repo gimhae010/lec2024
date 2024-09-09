@@ -2,9 +2,17 @@ package com.home.model;
 
 public class EmpDto {
 	private int empno,pay,deptno,mgr;
-	private String ename,dname;
+	private String ename,dname,mname;
 	
 	public EmpDto() {
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
 
 	public int getEmpno() {

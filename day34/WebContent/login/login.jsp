@@ -33,44 +33,23 @@
 	  	<a class="navbar-text" href="/day34/login/form.do">login</a>
 	  </div>
   </div>
-  <%@ page import="com.home.model.*" %>
-  <%
-  EmpDto bean=null;
-  bean=(EmpDto)request.getAttribute("bean");
-  %>
 </nav>
 	<div class="container">
 		<div class="row">
 			<div id="content" class="col-md-12">
 				<!-- content begin -->
-				<h2 class="page-header">상세 페이지</h2>
+				<h2 class="page-header">로그인</h2>
 				<form method="post">
-				  <div class="form-group">
-				    <label for="sabun">사번</label>
-				    <input name="sabun" class="form-control" id="sabun" value="<%=bean.getEmpno()%>">
-				  </div>
-				  <div class="form-group">
-				    <label for="ename">이름</label>
-				    <input name="ename" class="form-control" id="ename" value="<%=bean.getEname()%>">
-				  </div>
-				  <div class="form-group">
-				    <label for="mgr">사수</label>
-				    <input name="mgr" class="form-control" id="mgr" value="<%=bean.getMgr()==0?"미정":bean.getMgr()%>">
-				  </div>
-				  <div class="form-group">
-				    <label for="pay">연봉</label>
-				    <input name="pay" class="form-control" id="pay" value="<%=bean.getPay()%>">
-				  </div>
-				  <div class="form-group">
-				    <label for="dname">부서명</label>
-				    <input name="dname" class="form-control" id="dname" value="<%=bean.getDname()==null?"미배정":bean.getDname()%>">
-				  </div>
-				  <div class="form-group">
-				  	<a href="editDept.do?sabun=<%=bean.getEmpno()%>" class="btn btn-primary" role="button">부서배정</a>
-				  	<a href="editMgr.do?sabun=<%=bean.getEmpno()%>" class="btn btn-primary" role="button">사수배정</a>
-				  	<a href="delete.do?sabun=<%=bean.getEmpno()%>" class="btn btn-danger" role="button">삭제</a>
-				    <button type="button" class="btn btn-default" onclick="history.back();">뒤로</button>
-				  </div>
+					<div class="form-group">
+					<label>sabun</label><input name="sabun" class="form-control">
+					</div>
+					<div class="form-group">
+					<label>ename</label><input name="ename" class="form-control">
+					</div>
+					<div class="form-group">
+					<button class="btn btn-primary btn-block">로그인</button>
+					<button type="button" class="btn btn-default btn-block">취소</button>
+					</div>					
 				</form>
 				<!-- content end -->
 			</div>

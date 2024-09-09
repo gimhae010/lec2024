@@ -48,6 +48,7 @@ public class EmpDao {
 	
 	public EmpDto getOne(int sabun) {
 		EmpDto bean=new EmpDto();
+		//SELECT a.sabun,a.ename,b.ename AS mgrname FROM emp a inner join emp b ON a.mgr=b.sabun
 		String sql="select sabun,ename,mgr,pay,(select dname from dept where deptno="
 				+"(select deptno from emp where sabun="+sabun+")) name from emp where sabun="+sabun;
 		try(
@@ -68,6 +69,81 @@ public class EmpDao {
 		return bean;
 	}
 	
+	public int editDeptno(int sabun,int deptno) {
+		String sql="update emp set deptno="+deptno+" where sabun="+sabun;
+		try(
+				Connection conn=Mysql.getConection();
+				Statement stmt=conn.createStatement();
+				){
+			return stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public List<EmpDto> getMgr(int sabun){
+		List<EmpDto> list=new ArrayList<>();
+		String sql="select sabun,ename from emp where deptno=(select deptno from emp "
+						+"where sabun="+sabun+") and sabun!="+sabun;
+		try(
+				Connection conn=Mysql.getConection();
+				Statement stmt=conn.createStatement();
+				ResultSet rs=stmt.executeQuery(sql);
+				){
+			while(rs.next()) {
+				EmpDto bean=new EmpDto();
+				bean.setEmpno(rs.getInt("sabun"));
+				bean.setEname(rs.getString("ename"));
+				list.add(bean);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public int editMgr(int sabun,int mgr) {
+		String sql="update emp set mgr="+mgr+" where sabun="+sabun;
+		try(
+				Connection conn=Mysql.getConection();
+				Statement stmt=conn.createStatement();
+				){
+			return stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public int removeList(int sabun) {
+		String sql="delete from emp where sabun="+sabun;
+		try(
+				Connection conn=Mysql.getConection();
+				Statement stmt=conn.createStatement();
+				){
+			return stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public boolean login(String sabun,String ename) {
+		String sql="select count(*) as cnt from emp where sabun='"+sabun+"' and ename='"+ename+"'";
+		System.out.println(sql);
+		try(
+				Connection conn=Mysql.getConection();
+				Statement stmt=conn.createStatement();
+				ResultSet rs=stmt.executeQuery(sql);
+				){
+			if(rs.next())
+				return rs.getInt("cnt")>0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
 
 
