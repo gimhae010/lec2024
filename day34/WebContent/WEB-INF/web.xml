@@ -45,4 +45,22 @@
   	<servlet-name>deptDel</servlet-name>
   	<url-pattern>/dept/delete.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>empList</servlet-name>
+  	<servlet-class>com.home.controller.EmpListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>empList</servlet-name>
+  	<url-pattern>/emp/list.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>empAdd</servlet-name>
+  	<servlet-class>com.home.controller.EmpAddController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>empAdd</servlet-name>
+  	<url-pattern>/emp/add.do</url-pattern>
+  </servlet-mapping>
 </web-app>
