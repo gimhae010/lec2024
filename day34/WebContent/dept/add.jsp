@@ -17,11 +17,6 @@
 <!-- bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
-<style type="text/css">
-	#content table tr>td:first-child{
-		width: 100px;
-	}
-</style>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -43,30 +38,22 @@
 		<div class="row">
 			<div id="content" class="col-md-12">
 				<!-- content begin -->
-				<h2 class="page-header">리스트 페이지 <small>(DEPT Table)</small></h2>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>부서번호</th>
-							<th>부서명</th>
-							<th>지역</th>
-						</tr>
-					</thead>
-					<tbody>
-					<%@ page import="java.util.*,com.home.model.*" %>
-					<%
-					List<DeptDto> list=(List<DeptDto>)request.getAttribute("alist");
-					for(DeptDto bean :list){
-					%>
-						<tr>
-							<td><%=bean.getDeptno() %></td>
-							<td><%=bean.getDname() %></td>
-							<td><%=bean.getLoc() %></td>
-						</tr>
-					<%} %>
-					</tbody>
-				</table>
-				<p><a href="add.do" class="btn btn-primary btn-block" role="button">입력</a></p>
+				<h2 class="page-header">입력페이지</h2>
+				<form method="post">
+				  <div class="form-group">
+				    <label for="dname">부서명</label>
+				    <input name="dname" class="form-control" id="dname" placeholder="부서명">
+				  </div>
+				  <div class="form-group">
+				    <label for="loc">지역명</label>
+				    <input name="loc" class="form-control" id="loc" placeholder="지역명">
+				  </div>
+				  <div class="form-group">
+				    <button class="btn btn-primary">입력</button>
+				    <button type="reset" class="btn btn-default">취소</button>
+				    <button type="button" class="btn btn-default" onclick="history.back();">뒤로</button>
+				  </div>
+				</form>
 				<!-- content end -->
 			</div>
 		</div>

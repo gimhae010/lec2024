@@ -27,4 +27,13 @@
   	<servlet-name>deptList</servlet-name>
   	<url-pattern>/dept/list.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>deptAdd</servlet-name>
+  	<servlet-class>com.home.controller.DeptAddController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>deptAdd</servlet-name>
+  	<url-pattern>/dept/add.do</url-pattern>
+  </servlet-mapping>
 </web-app>
