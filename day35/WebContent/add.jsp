@@ -29,36 +29,20 @@
 		<div id="content" class="row">
 			<div class="col-md-12">
 			<!-- content begin-->
-			<h2>emp list</h2>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>사번</th>
-						<th>이름</th>
-						<th>금액</th>
-						<th>날짜</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%@ page import="java.util.*,com.emp.model.*" %>
-					<%
-					for(EmpDto bean: (List<EmpDto>)request.getAttribute("alist")){ 
-					%>
-					<tr>
-						<td><a href="detail.do?empno=<%=bean.getEmpno() %>"><%=bean.getEmpno() %></a></td>
-						<td><a href="detail.do?empno=<%=bean.getEmpno() %>"><%=bean.getEname() %></a></td>
-						<td><a href="detail.do?empno=<%=bean.getEmpno() %>"><%=bean.getPay() %></a></td>
-						<td><a href="detail.do?empno=<%=bean.getEmpno() %>"><%=bean.getHiredate() %></a></td>
-					</tr>
-					<%} %>
-				</tbody>
-			</table>
-			<p><a href="add.do" class="btn btn-primary btn-block" role="button">입력</a></p>
-			<style>
-				table tr>td:first-child,table tr>td:last-child{
-					width:100px;
-				}
-			</style>
+			<h2 class="page-header">add list</h2>
+			<form method="post">
+				<div class="form-group">
+					<label>ename</label><input name="ename" class="form-control" value="<%=request.getParameter("ename")==null?"":request.getParameter("ename")%>"/>
+				</div>
+				<div class="form-group">
+					<label>pay</label><input name="pay" class="form-control" value="<%=request.getParameter("pay")==null?"":request.getParameter("pay")%>"/>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary btn-block">입력</button>
+					<button type="reset" class="btn btn-default btn-block">취소</button>
+					<button type="button" class="btn btn-default btn-block" onclick="history.back();">뒤로</button>
+				</div>
+			</form>
 			<!-- content end-->
 			</div>
 		</div>

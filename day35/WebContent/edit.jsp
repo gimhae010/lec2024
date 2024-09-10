@@ -1,3 +1,4 @@
+<%@page import="com.emp.model.EmpDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -25,40 +26,30 @@
     </ul>
   </div>
 </nav>
+<%
+EmpDto bean=(EmpDto)request.getAttribute("bean");
+%>
 	<div class="container">
 		<div id="content" class="row">
 			<div class="col-md-12">
 			<!-- content begin-->
-			<h2>emp list</h2>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>사번</th>
-						<th>이름</th>
-						<th>금액</th>
-						<th>날짜</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%@ page import="java.util.*,com.emp.model.*" %>
-					<%
-					for(EmpDto bean: (List<EmpDto>)request.getAttribute("alist")){ 
-					%>
-					<tr>
-						<td><a href="detail.do?empno=<%=bean.getEmpno() %>"><%=bean.getEmpno() %></a></td>
-						<td><a href="detail.do?empno=<%=bean.getEmpno() %>"><%=bean.getEname() %></a></td>
-						<td><a href="detail.do?empno=<%=bean.getEmpno() %>"><%=bean.getPay() %></a></td>
-						<td><a href="detail.do?empno=<%=bean.getEmpno() %>"><%=bean.getHiredate() %></a></td>
-					</tr>
-					<%} %>
-				</tbody>
-			</table>
-			<p><a href="add.do" class="btn btn-primary btn-block" role="button">입력</a></p>
-			<style>
-				table tr>td:first-child,table tr>td:last-child{
-					width:100px;
-				}
-			</style>
+			<h2 class="page-header">edit list</h2>
+			<form action="edit.do" method="post">
+				<div class="form-group">
+					<label>empno</label><input readonly name="empno" class="form-control" value="<%=bean.getEmpno()%>"/>
+				</div>
+				<div class="form-group">
+					<label>ename</label><input name="ename" class="form-control" value="<%=bean.getEname()%>"/>
+				</div>
+				<div class="form-group">
+					<label>pay</label><input name="pay" class="form-control" value="<%=bean.getPay()%>"/>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary btn-block">수정</button>
+					<button type="reset" class="btn btn-default btn-block">취소</button>
+					<button type="button" class="btn btn-default btn-block" onclick="history.back();">뒤로</button>
+				</div>
+			</form>
 			<!-- content end-->
 			</div>
 		</div>

@@ -51,6 +51,30 @@
   	<servlet-name>list</servlet-name>
   	<url-pattern>/emp/list.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>add</servlet-name>
+  	<servlet-class>com.emp.controller.AddController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>add</servlet-name>
+  	<url-pattern>/emp/add.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>detail</servlet-name>
+  	<servlet-class>com.emp.controller.DetailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>detail</servlet-name>
+  	<url-pattern>/emp/detail.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>edit</servlet-name>
+  	<servlet-class>com.emp.controller.EditController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>edit</servlet-name>
+  	<url-pattern>/emp/edit.do</url-pattern>
+  </servlet-mapping>
 </web-app>
 
 

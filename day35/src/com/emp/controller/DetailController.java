@@ -11,17 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.emp.model.EmpDao;
 
-public class ListController extends HttpServlet {
+public class DetailController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int empno=Integer.parseInt(req.getParameter("empno"));
 		EmpDao dao=new EmpDao();
 		try {
-			req.setAttribute("alist", dao.getList());
+			req.setAttribute("bean", dao.oneList(empno));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher rd=req.getRequestDispatcher("/list.jsp");
+		RequestDispatcher rd=req.getRequestDispatcher("/detail.jsp");
 		rd.forward(req, resp);
 	}
 }
