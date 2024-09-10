@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>day35</display-name>
+  
+  <servlet-mapping>
+  	<servlet-name>ex02</servlet-name>
+  	<url-pattern>/ex02</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ex04</servlet-name>
+  	<url-pattern>/ex04</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ex06</servlet-name>
+  	<url-pattern>/ex06</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ex02</servlet-name>
+  	<servlet-class>com.ex.step01.Ex02</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ex04</servlet-name>
+  	<servlet-class>com.ex.step02.Ex04</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ex06</servlet-name>
+  	<servlet-class>com.ex.step02.Ex06</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>index</servlet-name>
+  	<servlet-class>com.home.controller.HomeController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>intro</servlet-name>
+  	<servlet-class>com.home.controller.IntroController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>index</servlet-name>
+  	<url-pattern>/index.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>intro</servlet-name>
+  	<url-pattern>/intro.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>list</servlet-name>
+  	<servlet-class>com.emp.controller.ListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>list</servlet-name>
+  	<url-pattern>/emp/list.do</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
