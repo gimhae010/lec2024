@@ -11,20 +11,34 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.emp.model.EmpDao;
 
-public class ListController extends HttpServlet {
+public class DeleteController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int page=Integer.parseInt(req.getParameter("p")==null?"1":req.getParameter("p"));
+		int empno=Integer.parseInt(req.getParameter("empno"));
+		req.setAttribute("empno", empno);
+		RequestDispatcher rd=req.getRequestDispatcher("../delete.jsp");
+		rd.forward(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int empno=Integer.parseInt(req.getParameter("empno"));
 		EmpDao dao=new EmpDao();
 		try {
-			req.setAttribute("alist", dao.getList(page));
-			req.setAttribute("begin", 1);
-			req.setAttribute("limit", 4);
+			dao.removeList(empno);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher rd=req.getRequestDispatcher("/list.jsp");
-		rd.forward(req, resp);
+		resp.sendRedirect("list.do");
 	}
 }
+
+
+
+
+
+
+
+
+
+

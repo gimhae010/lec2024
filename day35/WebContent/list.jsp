@@ -53,6 +53,25 @@
 					<%} %>
 				</tbody>
 			</table>
+<nav aria-label="Page navigation" class="text-center">
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <%
+    for(int i=(int)request.getAttribute("begin");i<=(int)request.getAttribute("limit"); i++){
+    %>
+    <li><a href="?p=<%=i %>"><%=i %></a></li>
+    <%} %>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>			
 			<p><a href="add.do" class="btn btn-primary btn-block" role="button">입력</a></p>
 			<style>
 				table tr>td:first-child,table tr>td:last-child{

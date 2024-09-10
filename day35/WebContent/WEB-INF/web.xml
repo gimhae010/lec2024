@@ -75,6 +75,14 @@
   	<servlet-name>edit</servlet-name>
   	<url-pattern>/emp/edit.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>delete</servlet-name>
+  	<servlet-class>com.emp.controller.DeleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>delete</servlet-name>
+  	<url-pattern>/emp/delete.do</url-pattern>
+  </servlet-mapping>
 </web-app>
 
 

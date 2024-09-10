@@ -24,16 +24,17 @@ public class EmpDao {
 //		log.setLevel(Level.CONFIG);
 	}
 	
-	public List<EmpDto> getList() throws SQLException{
+	public List<EmpDto> getList(int page) throws SQLException{
 		List<EmpDto> list=new ArrayList<>();
-		String sql="select * from emp35 order by empno";
+		String sql="SELECT * FROM (SELECT * FROM emp35 ORDER BY empno DESC) a LIMIT 10 OFFSET ? ";
 		try(
 				Connection conn=Mysql.getConnection();
 //				Statement stmt=conn.createStatement();
 //				ResultSet rs=stmt.executeQuery(sql);
 				PreparedStatement pstmt=conn.prepareStatement(sql);
-				ResultSet rs=pstmt.executeQuery();
 				){
+			pstmt.setInt(1, (page-1)*10);
+			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()) {
 				EmpDto bean=new EmpDto();
 				bean.setEmpno(rs.getInt("empno"));
@@ -42,6 +43,7 @@ public class EmpDao {
 				bean.setPay(rs.getInt("pay"));
 				list.add(bean);
 			}
+			rs.close();
 		}
 		log.info(list.toString());
 		return list;
@@ -103,6 +105,17 @@ public class EmpDao {
 			pstmt.executeUpdate();
 		}
 		return 0;
+	}
+	
+	public int removeList(int empno) throws SQLException {
+		String sql="delete from emp35 where empno=?";
+		try(
+				Connection conn=Mysql.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(sql);
+				){
+			pstmt.setInt(1, empno);
+			return pstmt.executeUpdate();
+		}
 	}
 }
 
