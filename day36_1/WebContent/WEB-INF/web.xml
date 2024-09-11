@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>day36_1</display-name>
+  <context-param>
+  	<param-name>public01</param-name>
+  	<param-value>publicVal1</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>public02</param-name>
+  	<param-value>publicVal2</param-value>
+  </context-param>
+  <servlet>
+  	<servlet-name>ex06</servlet-name>
+  	<servlet-class>com.xml.controller.Ex06Controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ex06</servlet-name>
+  	<url-pattern>/ex06.do</url-pattern>
+  </servlet-mapping>
   <servlet>
   	<servlet-name>ex01</servlet-name>
   	<servlet-class>com.xml.controller.Ex01Controller</servlet-class>
