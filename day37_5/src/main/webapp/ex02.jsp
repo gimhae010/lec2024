@@ -9,21 +9,36 @@
 <body>
 <%
 String msg="문자열";
-pageContext.setAttribute("msg1", msg);
-request.setAttribute("msg2", msg);
-session.setAttribute("msg3", msg);
-application.setAttribute("msg4",msg);
+
+// scope
+// page > request > session >application
+session.setAttribute("msg", "session");
+application.setAttribute("msg","application");
+pageContext.setAttribute("msg", "page");
+request.setAttribute("msg", "req");
 
 pageContext.setAttribute("nalja", new java.util.Date());
 
 %>
 <ul>
-	<li>${msg1 }</li>
-	<li>${msg2 }</li>
-	<li>${msg3 }</li>
-	<li>${msg4 }</li>
+	<li>${msg }</li>
+	<li>${pageScope.msg }</li>
+	<li>${requestScope.msg }</li>
+	<li>${sessionScope.msg }</li>
+	<li>${applicationScope.msg }</li>
 	<li>${nalja }</li>
+	<li><%=request.getContextPath() %></li>
+	<li><%=pageContext.getRequest() %></li>
+	<li>${pageContext.request.contextPath }</li>
 </ul>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
