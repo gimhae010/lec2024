@@ -15,8 +15,7 @@
 </div>
 	<div class="container">
 		<div id="content">
-			<h2>list page</h2>
-			<p><a href="add.do">입력</a></p>
+			<h2>add page</h2>
 		</div>
 		<div id="footer">
 			<address>

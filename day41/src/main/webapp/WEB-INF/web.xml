@@ -6,6 +6,22 @@
   <servlet>
   	<servlet-name>framework</servlet-name>
   	<servlet-class>com.gimhae.framework.mvc.DispatcherServlet</servlet-class>
+  	<init-param>
+  		<param-name>/index.do</param-name>
+  		<param-value>com.gimhae.framework.controller.IndexController</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>/intro.do</param-name>
+  		<param-value>com.gimhae.framework.controller.IntroController</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>/emp.do</param-name>
+  		<param-value>com.gimhae.framework.controller.ListController</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>/add.do</param-name>
+  		<param-value>com.gimhae.framework.controller.AddController</param-value>
+  	</init-param>
   </servlet>
   
   <servlet-mapping>
