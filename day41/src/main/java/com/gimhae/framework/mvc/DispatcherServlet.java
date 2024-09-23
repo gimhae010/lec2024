@@ -1,7 +1,6 @@
 package com.gimhae.framework.mvc;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,10 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.gimhae.framework.controller.IndexController;
-import com.gimhae.framework.controller.IntroController;
-import com.gimhae.framework.controller.ListController;
 
 public class DispatcherServlet extends HttpServlet{
 
@@ -56,9 +51,15 @@ public class DispatcherServlet extends HttpServlet{
 			controller=(MyController) clz.getDeclaredConstructor().newInstance();
 			
 			//viewResolver
+			String prefix="/WEB-INF/views/";
+			String suffix=".jsp";
 			String viewName=controller.execute(req, resp);
-			RequestDispatcher rd=req.getRequestDispatcher("/WEB-INF/views/"+viewName+".jsp");
-			rd.forward(req, resp);
+			if(viewName.startsWith("redirect:")) {
+				resp.sendRedirect(viewName.substring("redirect:".length()));
+			}else {
+				RequestDispatcher rd=req.getRequestDispatcher(prefix+viewName+suffix);
+				rd.forward(req, resp);
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
