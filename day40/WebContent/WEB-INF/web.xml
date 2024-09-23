@@ -31,6 +31,10 @@
   		<param-name>/emp/detail.do</param-name>
   		<param-value>com.gimhae.controller.DetailController</param-value>
   	</init-param>
+  	<init-param>
+  		<param-name>/emp/delete.do</param-name>
+  		<param-value>com.gimhae.controller.DeleteController</param-value>
+  	</init-param>
   </servlet>
   <servlet-mapping>
   	<servlet-name>framework</servlet-name>

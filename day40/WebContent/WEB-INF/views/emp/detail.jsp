@@ -9,7 +9,7 @@
 <body>
 <%@ include file="../template/menu.jspf" %>
 <h2 class="page-header">detail page</h2>
-<form action="update.do" method="post">
+<form action="delete.do" method="post">
 	<div class="form-group">
 		<label>empno</label><input value="${bean.empno }" class="form-control" name="empno"/>
 	</div>
@@ -24,7 +24,7 @@
 	</div>
 	<div class="form-group">
 		<button type="submit">수정</button>
-		<button type="button">삭제</button>
+		<button type="submit">삭제</button>
 		<button type="button" onclick="history.back();">뒤로</button>
 	</div>
 </form>
