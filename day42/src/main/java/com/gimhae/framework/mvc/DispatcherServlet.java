@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -18,11 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DispatcherServlet extends HttpServlet {
-	Map<String,String> map;
+	Map<String,MyController> handler;
 	
 	@Override
 	public void init() throws ServletException {
-		map=new HashMap<String, String>();
+		handler=new HashMap<>();
 		Properties props=new Properties();
 		File f=new File("C:\\workspace\\day42\\src\\main\\resources\\framework.properties");
 		Reader reader;
@@ -36,7 +37,16 @@ public class DispatcherServlet extends HttpServlet {
 		}
 		Set<Entry<Object, Object>> entrys = props.entrySet();
 		for(Entry<Object, Object> entry:entrys) {
-			map.put(entry.getKey().toString(), entry.getValue().toString());
+			try {
+				Class clz=Class.forName(entry.getValue().toString());
+				handler.put(entry.getKey().toString(),(MyController) clz.newInstance() );
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -52,17 +62,10 @@ public class DispatcherServlet extends HttpServlet {
 	public void doDo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url=req.getRequestURI();
 		url=url.substring(req.getContextPath().length());
-		String info=map.get(url);
-		MyController controller=null;
-		try {
-			Class clz=Class.forName(info);
-			controller=(MyController) clz.newInstance();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+		MyController controller=handler.get(url);
+		if(controller==null) {
+			resp.sendError(HttpServletResponse.SC_NOT_FOUND,"NOT_FOUND");
+			return;
 		}
 		String viewName=controller.execute(req);
 		if(viewName.startsWith("redirect:")) {
