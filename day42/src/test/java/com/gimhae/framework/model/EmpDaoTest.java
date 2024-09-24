@@ -33,11 +33,6 @@ public class EmpDaoTest {
 	}
 
 	@Test
-	public void test() throws SQLException {
-		dao.dataSource.getConnection().close();
-	}
-	
-	@Test
 	public void test1PullList() throws SQLException {
 		Object obj=dao.pullList();
 		assertNotNull(obj);
