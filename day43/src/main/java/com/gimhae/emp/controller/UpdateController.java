@@ -7,9 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.gimhae.emp.model.EmpDao;
+import com.gimhae.emp.model.EmpDaoImpl;
 
 public class UpdateController implements Controller {
-	EmpDao dao=new EmpDao();
+	EmpDaoImpl dao=new EmpDaoImpl();
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
