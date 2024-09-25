@@ -7,7 +7,13 @@
 class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>
 
 <bean name="/index.do" class="com.gimhae.controller.IndexController"></bean>
+<bean name="/intro.do" class="com.gimhae.controller.IntroController"></bean>
 
+<bean name="/emp/list.do" class="com.gimhae.emp.controller.ListController"></bean>
+<bean name="/emp/add.do" class="com.gimhae.emp.controller.AddController"></bean>
+<bean name="/emp/insert.do" class="com.gimhae.emp.controller.InsertController"></bean>
+<bean name="/emp/detail.do" class="com.gimhae.emp.controller.DetailController"></bean>
+<bean name="/emp/edit.do" class="com.gimhae.emp.controller.EditController"></bean>
 <!-- view resolver -->
 <bean id="viewResolver"
 class="org.springframework.web.servlet.view.InternalResourceViewResolver">

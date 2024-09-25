@@ -9,16 +9,9 @@
 </head>
 <body>
 <%@ include file="template/menu.jspf" %>
-			<div class="jumbotron">
-				<h2>환영합니다</h2>
-			</div>
+<div class="text-center">
+<img alt="" src="https://www.inje.ac.kr/kor/assets/images/sub/gimhae-campus-1.jpg">
+</div>
 <%@ include file="template/footer.jspf" %>
 </body>
 </html>
-
-
-
-
-
-
-
