@@ -6,11 +6,34 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../template/head.jspf" %>
+<script type="text/javascript">
+// var f1=function(){return 100};
+// var f2=()=>{return 100;};
+// var f3=()=>100;
+
+// var f4=function(a,b){return a+b;};
+// var f5=(a,b)=>a+b;
+
+	$(function(){
+		$('form button')
+			.filter((idx,ele)=>$(ele).hasClass('btn-danger'))
+			.click(e=>$.post(
+				'delete.do',
+				'idx='+$('form input').eq(0).val(),
+				data=>{
+					if($(data).find('result').html()=='true')
+						location.href='list.do';
+					else alert($(data).find('empno').html()+'번이 존재하지 않습니다');
+					}
+				)
+		);
+	});
+</script>
 </head>
 <body>
 <%@ include file="../template/menu.jspf" %>
 <h2 class="page-header">${detail==null?"edit":"detail"} page</h2>
-<form action="edit.do" method="post">
+<form action="${detail==null?'update':'edit'}.do" method="post">
 	<div class="form-group">
 		<label>empno</label>
 		<input type="text" name="empno" class="form-control" value="${bean.empno }" readonly/>

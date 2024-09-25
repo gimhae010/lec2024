@@ -66,6 +66,28 @@ public class EmpDao {
 		}
 		return bean;
 	}
+	public int editList(String ename, int pay, int empno) throws SQLException {
+		String sql="update emp38 set ename=?,pay=? where empno=?";
+		try(
+				Connection conn=dataSource.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(sql);
+				){
+			pstmt.setString(1, ename);
+			pstmt.setInt(2, pay);
+			pstmt.setInt(3, empno);
+			return pstmt.executeUpdate();
+		}
+	}
+	public int rmList(int empno) throws SQLException {
+		String sql="delete from emp38 where empno=?";
+		try(
+				Connection conn=dataSource.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(sql);
+				){
+			pstmt.setInt(1, empno);
+			return pstmt.executeUpdate();
+		}
+	}
 }
 
 
