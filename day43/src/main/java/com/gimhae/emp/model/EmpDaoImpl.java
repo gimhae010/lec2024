@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
-public class EmpDaoImpl {
+public class EmpDaoImpl implements EmpDao {
 	JdbcTemplate jdbcTemplate;
 	RowMapper<EmpDto> rowMapper=new RowMapper<EmpDto>() {
 		
@@ -32,24 +32,29 @@ public class EmpDaoImpl {
 		jdbcTemplate.setDataSource(dataSource);
 	}
 	
+	@Override
 	public List<EmpDto> pullList(){
 		String sql="select * from emp38 order by empno desc";
 		return jdbcTemplate.query(sql, rowMapper);
 	}
 	
+	@Override
 	public EmpDto getList(int pk) {
 		String sql="select * from emp38 where empno=?";
 		return jdbcTemplate.queryForObject(sql, rowMapper,pk);
 	}
 	
+	@Override
 	public void addList(String ename,int pay) {
 		String sql="insert into emp38 (ename,pay,hiredate) values (?,?,now())";
 		jdbcTemplate.update(sql,ename,pay);
 	}
+	@Override
 	public int editList(String ename,int pay, int empno) {
 		String sql="update emp38 set ename=?,pay=? where empno=?";
 		return jdbcTemplate.update(sql,ename,pay,empno);
 	}
+	@Override
 	public int rmList(int pk) {
 		String sql="delete from emp38 where empno=?";
 		return jdbcTemplate.update(sql,pk);

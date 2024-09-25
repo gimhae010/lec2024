@@ -2,6 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="empDao" class="com.gimhae.emp.model.EmpDaoImpl"></bean>
+
 <!-- handler Mapping -->
 <bean id="handlerMapping" 
 class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>
@@ -9,13 +12,25 @@ class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean
 <bean name="/index.do" class="com.gimhae.controller.IndexController"></bean>
 <bean name="/intro.do" class="com.gimhae.controller.IntroController"></bean>
 
-<bean name="/emp/list.do" class="com.gimhae.emp.controller.ListController"></bean>
+<bean name="/emp/list.do" class="com.gimhae.emp.controller.ListController">
+	<property name="dao" ref="empDao"></property>
+</bean>
 <bean name="/emp/add.do" class="com.gimhae.emp.controller.AddController"></bean>
-<bean name="/emp/insert.do" class="com.gimhae.emp.controller.InsertController"></bean>
-<bean name="/emp/detail.do" class="com.gimhae.emp.controller.DetailController"></bean>
-<bean name="/emp/edit.do" class="com.gimhae.emp.controller.EditController"></bean>
-<bean name="/emp/update.do" class="com.gimhae.emp.controller.UpdateController"></bean>
-<bean name="/emp/delete.do" class="com.gimhae.emp.controller.DeleteController"></bean>
+<bean name="/emp/insert.do" class="com.gimhae.emp.controller.InsertController">
+	<property name="dao" ref="empDao"></property>
+</bean>
+<bean name="/emp/detail.do" class="com.gimhae.emp.controller.DetailController">
+	<property name="dao" ref="empDao"></property>
+</bean>
+<bean name="/emp/edit.do" class="com.gimhae.emp.controller.EditController">
+	<property name="dao" ref="empDao"></property>
+</bean>
+<bean name="/emp/update.do" class="com.gimhae.emp.controller.UpdateController">
+	<property name="dao" ref="empDao"></property>
+</bean>
+<bean name="/emp/delete.do" class="com.gimhae.emp.controller.DeleteController">
+	<property name="dao" ref="empDao"></property>
+</bean>
 <!-- view resolver -->
 <bean id="viewResolver"
 class="org.springframework.web.servlet.view.InternalResourceViewResolver">
