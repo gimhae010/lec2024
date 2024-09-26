@@ -12,11 +12,13 @@ public class Service02 {
 	}
 
 	public void svc() {
-//		module.func01();
-		module.func02("f2");
-//		module.func03("f",3);
-		String msg=module.func04();
-		System.out.println(msg);
-//		module.func05(4,0);
+		module.afunc01();
+		module.bfunc02("f2");
+		module.bfunc03("f",3);
+		String msg=module.afunc04();
+		try {
+		module.bfunc05(4,0);
+		}catch (Exception e) {
+		}
 	}
 }
