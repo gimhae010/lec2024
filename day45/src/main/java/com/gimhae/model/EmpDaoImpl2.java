@@ -66,9 +66,9 @@ public class EmpDaoImpl2 implements EmpDao {
 
 	@Override
 	public int addList(EmpVo bean) {
-		String sql="insert into emp38 (empno,ename,pay,hiredate) values (1,?,?,now())";
+		String sql="insert into emp38 (empno,ename,pay,hiredate) values (3,?,?,now())";
 //		String sql2="insert into emp38 (empno,ename,pay,hiredate) values ((select max(empno) from emp38),?,?,now())";
-		String sql2="insert into emp38 (empno,ename,pay,hiredate) values (2,?,?,now())";
+		String sql2="insert into emp38 (empno,ename,pay,hiredate) values (4,?,?,now())";
 		
 		TransactionDefinition definition=new DefaultTransactionDefinition();
 		TransactionStatus status=transactionManager.getTransaction(definition);

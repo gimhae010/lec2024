@@ -15,6 +15,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
 
 public class EmpDaoTest {
 	static ApplicationContext ac;
@@ -36,6 +38,9 @@ public class EmpDaoTest {
 					.pay(4444)
 					.ename("tester4")
 					.build();
+
+		PlatformTransactionManager manager=ac.getBean(PlatformTransactionManager.class);
+		manager.getTransaction(ac.getBean(TransactionDefinition.class)).setRollbackOnly();
 	}
 
 	@Test
@@ -52,8 +57,8 @@ public class EmpDaoTest {
 
 	@Test
 	public void testAddList() {
-		target.setEname("new3");
-		target.setPay(3333);
+		target.setEname("new4");
+		target.setPay(4444);
 		assertSame(1, empDao.addList(target));
 	}
 	@Test
@@ -70,7 +75,7 @@ public class EmpDaoTest {
 
 	@Test
 	public void testRmList() {
-		assertSame(1, empDao.rmList(49));
+		assertSame(1, empDao.rmList(2));
 	}
 
 }
