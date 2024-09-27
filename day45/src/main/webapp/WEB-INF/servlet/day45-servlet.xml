@@ -11,6 +11,7 @@ class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<props>
 			<prop key="/index.do">index</prop>
 			<prop key="/intro.do">intro</prop>
+			<prop key="/emp/list.do">list</prop>
 		</props>
 	</property>
 </bean>
@@ -22,9 +23,15 @@ p:viewName="main"
 class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 p:viewName="intro"
 />
+<bean id="list"
+class="com.gimhae.controller.ListController"
+/>
 <!-- view resolver  -->
 <bean 
 class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 p:prefix="/WEB-INF/views/" p:suffix=".jsp"
 />
+
+<bean id="autowiredAnnotationBeanPostProcessor"
+	class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 </beans>
