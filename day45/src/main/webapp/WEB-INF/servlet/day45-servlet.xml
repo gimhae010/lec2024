@@ -12,6 +12,8 @@ class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 			<prop key="/index.do">index</prop>
 			<prop key="/intro.do">intro</prop>
 			<prop key="/emp/list.do">list</prop>
+			<prop key="/emp/add.do">add</prop>
+			<prop key="/emp/insert.do">insert</prop>
 		</props>
 	</property>
 </bean>
@@ -23,8 +25,18 @@ p:viewName="main"
 class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 p:viewName="intro"
 />
+<bean id="add" 
+class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+p:viewName="emp/add"
+/>
 <bean id="list"
 class="com.gimhae.controller.ListController"
+/>
+<bean id="insert" class="com.gimhae.controller.InsertController"
+p:commandName="bean"
+p:commandClass="com.gimhae.model.EmpVo" 
+p:supportedMethods="POST"
+
 />
 <!-- view resolver  -->
 <bean 
