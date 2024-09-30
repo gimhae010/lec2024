@@ -11,7 +11,11 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.gimhae.emp">
+	<logger name="com.gimhae">
+		<level value="debug" />
+	</logger>
+	<!-- Application Loggers -->
+	<logger name="org.springframework.orm.ibatis">
 		<level value="debug" />
 	</logger>
 	

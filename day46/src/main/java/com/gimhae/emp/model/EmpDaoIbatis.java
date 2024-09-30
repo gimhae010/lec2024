@@ -13,8 +13,7 @@ public class EmpDaoIbatis extends SqlMapClientDaoSupport implements EmpDao {
 
 	@Override
 	public void addList(String ename, int pay) {
-		getSqlMapClientTemplate().insert("insertOne",new EmpVo(0,pay,ename,null));
-
+		Object obj=getSqlMapClientTemplate().update("insertOne",new EmpVo(0,pay,ename,null));
 	}
 
 	@Override
