@@ -15,7 +15,7 @@ public class EmpDaoImpl extends JdbcDaoSupport implements EmpDao {
 		public EmpVo mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return new EmpVo(
 					rs.getInt("empno"),rs.getInt("pay"),rs.getString("ename"),
-					LocalDate.from(rs.getDate("hiredate").toLocalDate())
+					rs.getDate("hiredate")
 					);
 		}
 	};

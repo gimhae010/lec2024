@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+	 "https://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<sqlMap resource="mapper/empMapper.xml"/>
+</sqlMapConfig>
+
+
+<!-- 
+plain java 연동
+https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte:psl:dataaccess:ibatis_configuration
+
+https://ibatis.apache.org/dtd/
+ -->

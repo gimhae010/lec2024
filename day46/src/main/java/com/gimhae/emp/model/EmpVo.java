@@ -1,16 +1,18 @@
 package com.gimhae.emp.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class EmpVo {
 	private int empno,pay;
 	private String ename;
-	private LocalDate hiredate;
+//	private LocalDate hiredate;
+	private Date hiredate;
 	
 	public EmpVo() {
 	}
 
-	public EmpVo(int empno, int pay, String ename, LocalDate hiredate) {
+	public EmpVo(int empno, int pay, String ename, Date hiredate) {
 		super();
 		this.empno = empno;
 		this.pay = pay;
@@ -42,11 +44,11 @@ public class EmpVo {
 		this.ename = ename;
 	}
 
-	public LocalDate getHiredate() {
+	public Date getHiredate() {
 		return hiredate;
 	}
 
-	public void setHiredate(LocalDate hiredate) {
+	public void setHiredate(Date hiredate) {
 		this.hiredate = hiredate;
 	}
 

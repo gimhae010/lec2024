@@ -16,9 +16,37 @@
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg ref="dataSource"/>
 	</bean>
-	
+	<!-- 
 	<bean id="empDao" class="com.gimhae.emp.model.EmpDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
-	
+	 -->
+
+	<bean id="sqlMapClientBean" 
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:/sqlMapConfig.xml"/>	
+	</bean>
+	 
+	<bean id="sqlMapClientTemplate" 
+	 	class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+	 	<property name="sqlMapClient" ref="sqlMapClientBean"/>	
+	</bean>
+	 
+	<bean id="empDao" class="com.gimhae.emp.model.EmpDaoIbatis">
+	 	<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate"></property>
+	</bean>
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
