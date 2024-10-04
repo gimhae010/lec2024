@@ -30,6 +30,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<p><a href="add">입력</a></p>
 </div>
 </body>
 </html>
