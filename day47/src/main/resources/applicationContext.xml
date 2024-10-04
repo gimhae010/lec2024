@@ -27,6 +27,16 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
+	<bean id="sqlMapClientFactoryBean" 
+	class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:/ibatisConfig.xml"/>
+	</bean>
+	<bean id="clientTemplate" 
+	class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClientFactoryBean"></property>
+	</bean>
+	
 	<bean id="transactionManager" 
 	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>

@@ -14,6 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gimhae.emp.model.EmpVo;
 import com.gimhae.emp.service.EmpService;
 
+/*
+ * restful 
+/			- index
+/students/ - (get) list
+/students/ - (post)list 입력
+/students/1 -(get) 1학번에 정보전달
+/students/1 -(post) 1학번에 정보입력
+/students/1 -(patch) 1학번에 정보 일부수정
+/students/1 -(put) 1학번에 정보 전체수정
+/students/1 -(delete) 1학번에 정보삭제
+*/
 @Controller
 @RequestMapping("/emp/")
 public class EmpController {
@@ -39,14 +50,14 @@ public class EmpController {
 		return "emp/one";
 	}
 	
-	@RequestMapping(value = "{empno}",method = RequestMethod.POST)
+	@RequestMapping(value = "{empno}",method = RequestMethod.PUT)
 	public String edit(@PathVariable int empno,@ModelAttribute EmpVo bean) {
 		empService.editList(bean);
 		return "redirect:./";
 	}
 	
-	@RequestMapping(value = "del",method=RequestMethod.POST)
-	public ModelAndView delete(int empno,HttpServletResponse resp) {
+	@RequestMapping(value = "{empno}",method = RequestMethod.DELETE)
+	public ModelAndView delete(@PathVariable int empno,HttpServletResponse resp) {
 		empService.removeList(empno);
 		resp.setStatus(HttpServletResponse.SC_OK);
 		return null;

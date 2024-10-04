@@ -10,6 +10,7 @@
 <%@ include file="../template/menu.jspf" %>
 <h2>상세 & 수정 페이지</h2>
 <form action="./${bean.empno}" method="post">
+	<input type="hidden" name="_method" value="put">
 	<div class="form-group">
 		<input class="form-control" name="empno" value="${bean.empno}" readonly="readonly">
 	</div>
@@ -29,8 +30,15 @@
 </form>
 <script type="text/javascript">
 function del(empno){
+	/* 
 	$.post('${root}/emp/del','empno='+empno,function(data){
 		location.href='./';
+	}); 
+	*/
+	$.ajax('${bean.empno}',{
+		type :'delete',
+		success:function(data){location.href='./';},
+		error:function(xhr,msg){alert(msg);}
 	});
 }
 </script>

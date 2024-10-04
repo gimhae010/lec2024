@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 //@Component(value = "empDao")
 //@Component
-@Repository
+//@Repository
 public class EmpDaoImpl1 implements EmpDao<EmpVo> {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
