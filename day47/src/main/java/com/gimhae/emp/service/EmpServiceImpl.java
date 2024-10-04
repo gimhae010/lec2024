@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.gimhae.emp.model.EmpDao;
@@ -13,6 +14,7 @@ import com.gimhae.emp.model.EmpVo;
 
 //@Component
 @Service
+//@Transactional
 public class EmpServiceImpl implements EmpService {
 	@Autowired
 	EmpDao<EmpVo> empDao;
@@ -25,6 +27,7 @@ public class EmpServiceImpl implements EmpService {
 		model.addAttribute("leng", size);
 	}
 	
+	@Transactional
 	@Override
 	public int add(EmpVo bean) {
 		empDao.addList(bean);
@@ -39,6 +42,7 @@ public class EmpServiceImpl implements EmpService {
 		return list.get(0).getEmpno();
 	}
 	
+	@Transactional
 	@Override
 	public void oneList(Model model,int empno) {
 		EmpVo target=empDao.getList(empno);

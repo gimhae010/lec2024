@@ -35,15 +35,19 @@
 		<!-- 
 		<aop:advisor advice-ref="beforeAdvice" pointcut-ref="beforeCut"/>
 		 -->
-		<aop:pointcut expression="execution(* com.gimhae.emp..*.*(..))" id="pointCut"/>
+		<aop:pointcut expression="execution(* com.gimhae..*.*(..))" id="pointCut"/>
+		<aop:pointcut expression="execution(* com.gimhae.emp.model.*.*(..))" id="pointCut2"/>
 		<aop:aspect ref="advice">
-			<aop:around method="around" pointcut-ref="pointCut"/>
-			<!-- 
 			<aop:before method="before" pointcut-ref="pointCut"/>
+			<!-- 
+			<aop:around method="around" pointcut-ref="pointCut"/>
 			<aop:after method="after" pointcut-ref="pointCut"/>
 			<aop:after-returning returning="val" method="afterSuccess" pointcut-ref="pointCut"/>
 			<aop:after-throwing throwing="ex" method="afterErr" pointcut-ref="pointCut"/>
 			 -->
+		</aop:aspect>
+		<aop:aspect ref="advice">
+			<aop:after method="after" pointcut-ref="pointCut2"/>
 		</aop:aspect>
 	</aop:config>
 	

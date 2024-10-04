@@ -10,16 +10,23 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.internal.runners.JUnit4ClassRunner;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.support.BindingAwareModelMap;
 
 import com.gimhae.emp.model.EmpVo;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(JUnit4ClassRunner.class)
+@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=true)
 public class EmpServiceTest {
 	static EmpService service;
 	Model model;
@@ -51,15 +58,19 @@ public class EmpServiceTest {
 		}
 	}
 
+	@Transactional
+	@Rollback(true)
 	@Test
 	public void test3One() {
-		service.oneList(model,6);
+		service.oneList(model,129);
 		System.out.println(model.asMap().get("bean"));
 	}
 	
 	@Test
+	@Transactional
+	@Rollback(true)
 	public void test4Add() {
-		EmpVo target=new EmpVo(0,0,"test",null);
+		EmpVo target=new EmpVo(130,0,"test",null);
 		System.out.println(service.add(target));
 	}
 	

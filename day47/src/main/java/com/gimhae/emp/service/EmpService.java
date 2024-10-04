@@ -1,9 +1,11 @@
 package com.gimhae.emp.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.gimhae.emp.model.EmpVo;
 
+//@Transactional
 public interface EmpService {
 
 	void list(Model model);
