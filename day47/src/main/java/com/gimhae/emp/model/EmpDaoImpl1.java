@@ -12,10 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 //@Component(value = "empDao")
-@Component
-//@Repository
+//@Component
+@Repository
 public class EmpDaoImpl1 implements EmpDao<EmpVo> {
-	Logger log=Logger.getLogger(getClass());
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	RowMapper<EmpVo> mapper=new RowMapper<EmpVo>() {
@@ -34,7 +33,6 @@ public class EmpDaoImpl1 implements EmpDao<EmpVo> {
 	public List<EmpVo> pullList() {
 		String sql="select * from emp38 order by empno asc";
 		List<EmpVo> list = jdbcTemplate.query(sql, mapper);
-		log.debug(list.toString());
 		return list;
 	}
 

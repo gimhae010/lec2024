@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import com.gimhae.emp.model.EmpDao;
 import com.gimhae.emp.model.EmpVo;
 
-@Component
-//@Service
+//@Component
+@Service
 public class EmpServiceImpl implements EmpService {
 	@Autowired
 	EmpDao<EmpVo> empDao;
@@ -40,11 +40,11 @@ public class EmpServiceImpl implements EmpService {
 	}
 	
 	@Override
-	public EmpVo oneList(int empno) {
+	public void oneList(Model model,int empno) {
 		EmpVo target=empDao.getList(empno);
 		target.setPay(target.getPay()+1);
 		empDao.setList(target);
-		return empDao.getList(empno);
+		model.addAttribute("bean", empDao.getList(empno));
 	}
 	
 	@Override

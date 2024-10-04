@@ -10,7 +10,7 @@ public interface EmpService {
 
 	int add(EmpVo bean);
 
-	EmpVo oneList(int empno);
+	void oneList(Model model,int empno);
 
 	boolean editList(EmpVo bean);
 
