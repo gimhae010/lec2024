@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emp">
+  <select id="pullList" resultType="com.gimhae.day48.emp.model.EmpVo">
+    select * from emp order by empno
+  </select>
+  <insert id="addList" parameterType="com.gimhae.day48.emp.model.EmpVo">
+  	insert into emp (ename,pay,hiredate) values (#{ename},#{pay},now())
+  </insert>
+  <select id="getList" parameterType="int" resultType="com.gimhae.day48.emp.model.EmpVo">
+  	select * from emp where empno=#{val}
+  </select>
+  <update id="setList" parameterType="com.gimhae.day48.emp.model.EmpVo">
+  	update emp set ename=#{ename}, pay=#{pay} where empno=#{empno}
+  </update>
+  <delete id="rmList" parameterType="int">
+  	delete from emp where empno=#{val}
+  </delete>
+</mapper>

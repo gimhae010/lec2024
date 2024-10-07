@@ -16,7 +16,7 @@
 	  <li class="active">Add</li>
 	</ol>
 	<h2 class="page-header">Add page<small>(dept)</small></h2>
-	<form action="./" method="post">
+	<form action="./" method="post" >
 		<div class="form-group">
 			<input type="text" name="deptno" placeholder="부서번호" class="form-control"/>
 		</div>
