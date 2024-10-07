@@ -4,9 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,10 +20,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.gimhae.day48.dept.model.DeptService;
 import com.gimhae.day48.dept.model.DeptVo;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -76,19 +79,33 @@ public class DeptController {
 				if(param.startsWith("loc=")) 
 					bean.setLoc(param.split("=")[1]); 
 			}
-			return "{\"result\":\""+deptService.update(bean)+"\"}";
+			boolean result=deptService.update(bean);
+			Gson gson=new Gson();
+			Map<String ,String> json=new LinkedHashMap<>();
+			json.put("result", result+"");
+			return gson.toJson(json);
 		}
 	}
 	
 	@DeleteMapping(value = "{deptno}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String delete(@PathVariable int deptno) {
 		boolean result=deptService.delete(deptno);
-		return "{\"result\":\""+result+"\"}";
+		JsonObject json=new JsonObject();
+		json.addProperty("result", result+"");
+		return new Gson().toJson(json);
 	}
 	
 	@GetMapping(value = "test",produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String hello() {
-		return "{\"key\":\"val\"}";
+		//https://google.github.io/gson/UserGuide.html
+		JsonObject json=new JsonObject();
+		json.addProperty("key1", "val1");
+		
+		Gson gson = new Gson();
+		
+//		return gson.toJson(json);
+		DeptVo bean=new DeptVo(1,"test","test");
+		return gson.toJson(bean);
 	}
 }
 
