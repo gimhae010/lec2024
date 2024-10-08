@@ -6,4 +6,16 @@
   	<select id="pullList" resultType="com.gimhae.day49.emp.model.EmpVo">
   		select * from emp order by empno desc
   	</select>
+  	<select id="getList" parameterType="int" resultType="com.gimhae.day49.emp.model.EmpVo">
+  		select * from emp where empno=#{val}
+  	</select>
+  	<insert id="addList" parameterType="com.gimhae.day49.emp.model.EmpVo">
+  		insert into emp (ename,pay,hiredate,deptno) values (#{ename},#{pay},now(),#{deptno})
+  	</insert>
+  	<update id="setList" parameterType="com.gimhae.day49.emp.model.EmpVo">
+  		update emp set ename=#{ename},pay=#{pay},deptno=#{deptno} where empno=#{empno}
+  	</update>
+  	<delete id="rmList" parameterType="int">
+  		delete from emp where empno=#{val}
+  	</delete>
   </mapper>
