@@ -8,4 +8,5 @@ public interface EmpDao {
 	void addList(EmpVo bean);
 	int setList(EmpVo bean);
 	int rmList(int idx);
+	EmpVo getLastList();
 }

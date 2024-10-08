@@ -2,6 +2,7 @@ package com.gimhae.day49.api;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,21 +27,29 @@ public class EmpController {
 	private final EmpService service;	
 
 	@GetMapping("")
-	@ResponseBody
-	public List<?> list(){
-		return service.list();
+	public ResponseEntity<?> list(){
+		return ResponseEntity.ok(service.list());
 	}
 	
-	@ResponseBody
 	@GetMapping("{empno}")
-	public EmpVo detail(@PathVariable int empno) {
-		return service.one(empno);
+	public ResponseEntity<?> detail(@PathVariable int empno) {
+		return ResponseEntity.ok(service.one(empno));
 	}
 	
+//	@PostMapping("")
+//	public ResponseEntity<?> add(@ModelAttribute EmpVo bean){
+//		if(service.add(bean))
+//			return ResponseEntity.status(HttpStatus.CREATED).build();
+//		return ResponseEntity.badRequest().build();
+//	}
 	@PostMapping("")
 	public ResponseEntity<?> add(@ModelAttribute EmpVo bean){
-		service.add(bean);
-		return ResponseEntity.ok().build();
+		EmpVo body=service.addAndGet(bean);
+		if(bean!=null)
+			return ResponseEntity
+					.status(HttpStatus.CREATED)
+					.body(body);
+		return ResponseEntity.badRequest().build();
 	}
 	
 	@PutMapping("{empno}")

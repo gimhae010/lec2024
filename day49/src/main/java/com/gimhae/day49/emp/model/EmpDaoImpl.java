@@ -41,4 +41,9 @@ public class EmpDaoImpl implements EmpDao{
 		return sqlSession.delete("emp.rmList",idx);
 	}
 
+	@Override
+	public EmpVo getLastList() {
+		return sqlSession.selectOne("emp.getLastList");
+	}
+
 }
