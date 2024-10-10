@@ -33,7 +33,7 @@ $(function(){
 });
 function deptList(){
 	$.getJSON(root+'/api/dept/',data=>{	
-		$('#dept table tbody')
+		$('#dept table tbody').empty()
 			.append(
 					data.map(ele=>
 								$('<tr/>')
@@ -48,16 +48,47 @@ function deptList(){
 }
 function deptDetail(deptno){
 	$.getJSON(root+'/api/dept/'+deptno,data=>{
-		$('#deptPopup form').find('input').eq(0).val(data.deptno)
-			.end().eq(1).val(data.dname).end().eq(2).val(data.loc);
+		$('#deptPopup form')
+			.attr('action','#'+data.deptno)
+				.find('input').eq(0).val(data.deptno)
+				.end().eq(1).val(data.dname).end().eq(2).val(data.loc);
 		$('#deptPopup').modal('show');			
 	});
 }
+function deptDefaultPopup(){
+	deptPopupReadonly(true);
+	$('#deptPopup')
+		.find('h4').html('detail page')
+		.end().find('input').val(()=>'')
+		;
+	$('#deptPopup').modal('hide');
+}
+function deptPopupReadonly(boo){
+	$('#deptPopup form').find('input:gt(0)').prop('readonly',boo);
+}
 function deptEditForm(){
-	if($('#deptPopup form').find('input:gt(0)').prop('readonly'))
-		$('#deptPopup form').find('input:gt(0)').removeProp('readonly');
-	else
-		console.log('수정');
+	if($('#deptPopup form').find('input:gt(0)').prop('readonly')){
+		deptPopupReadonly(false);
+		$('#deptPopup').find('h4').html('edit page');	
+	}else{
+		var deptno=$('#deptPopup form').attr('action').replace('#','');
+		//var deptno=$('#deptPopup form').find('input').eq(0).val();
+		var dname=$('#deptPopup form').find('input').eq(1).val();
+		var loc=$('#deptPopup form').find('input').eq(2).val();
+		$.ajax({
+			url:root+'/api/dept/'+deptno,
+			type:'put',
+			contentType:'application/json; charset=utf-8',
+			data:JSON.stringify({deptno,dname,loc}),
+			success:data=>{
+								if(data){
+									deptDefaultPopup();
+									deptList();
+								}
+							},
+			error:(err,errMsg)=>console.log(errMsg)
+		});
+	}
 }
 </script>
 </head>
@@ -192,7 +223,7 @@ function deptEditForm(){
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" onclick="deptDefaultPopup();">Close</button>
         <button type="button" class="btn btn-primary" onclick="deptEditForm();">수정</button>
         <button type="button" class="btn btn-danger"  onclick="deptDeleteForm();">삭제</button>
       </div>

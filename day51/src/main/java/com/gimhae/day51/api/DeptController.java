@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +28,11 @@ public class DeptController {
 	@GetMapping("dept/{deptno}")
 	public DeptVo detail(@PathVariable int deptno) {
 		return sqlSession.getMapper(DeptDao.class).getList(deptno);
+	}
+	
+	@PutMapping("dept/{deptno}")
+	public boolean update(@RequestBody DeptVo bean) {
+		return sqlSession.getMapper(DeptDao.class).setList(bean)>0;
 	}
 }
 

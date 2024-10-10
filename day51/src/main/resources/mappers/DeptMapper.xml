@@ -9,4 +9,7 @@
     <select id="getList" parameterType="int" resultType="com.gimhae.day51.dept.model.DeptVo">
     	SELECT * FROM DEPT WHERE DEPTNO=#{int}
     </select>
+    <update id="setList" parameterType="com.gimhae.day51.dept.model.DeptVo">
+    	UPDATE DEPT SET DNAME=#{dname}, LOC=#{loc} WHERE DEPTNO=#{deptno}
+    </update>
   </mapper>
