@@ -25,15 +25,18 @@ import lombok.extern.slf4j.Slf4j;
 		})
 public class TestContext {
 	@Autowired
-	SqlSession sqlSession;
+	SqlSessionFactory sqlSessionFactory;
+//	SqlSession sqlSession;
 
 	@Test
 	public void test() {
 //		assertNotNull(sqlSession.getMapper(DeptDao.class).pullList());
-		System.out.println(sqlSession.getMapper(DeptDao.class).pullList());
-//		for(DeptVo bean:sqlSessionFactory.openSession().getMapper(DeptDao.class).pullList()) {
-//			log.info(bean.toString());
-//		}
+//		System.out.println(sqlSession.getMapper(DeptDao.class).pullList());
+		try(SqlSession session=sqlSessionFactory.openSession()) {
+			for(DeptVo bean:session.getMapper(DeptDao.class).pullList()) {
+				log.info(bean.toString());
+			}
+		}
 	}
 
 }

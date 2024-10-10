@@ -22,10 +22,22 @@ $(function(){
 		$('nav+.container>.row').hide();
 		$('nav+.container>.row').filter(showId).show();
 		$('nav+.container>.row').filter('#footer').show();
+		if(showId=='#dept')deptList();
 	});	
 	$('nav').find('a:eq(0)').click();
 });
-
+function deptList(){
+	$.getJSON('http://localhost:8080/day51/api/dept/',data=>{	
+		$('#dept table tbody')
+			.append(
+					data.map(ele=>
+								$('<tr/>')
+								.append('<td>'+ele.deptno+'</td>')
+								.append('<td>'+ele.dname+'</td>')
+								.append('<td>'+ele.loc+'</td>')
+			));
+	});
+}
 </script>
 </head>
 <body>
@@ -104,7 +116,16 @@ $(function(){
 	<div class="row" id="dept">
 		<div class="col-md-12">
 			<h2 class="page-header">dept list page</h2>
-			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>deptno</th>
+						<th>dname</th>
+						<th>loc</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
 		</div>
 	</div>
 	<div class="row" id="emp">
