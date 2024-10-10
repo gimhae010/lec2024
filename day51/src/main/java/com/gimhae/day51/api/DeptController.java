@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +36,17 @@ public class DeptController {
 	@PutMapping("dept/{deptno}")
 	public boolean update(@RequestBody DeptVo bean) {
 		return sqlSession.getMapper(DeptDao.class).setList(bean)>0;
+	}
+	
+	@DeleteMapping("dept/{deptno}")
+	public boolean delete(@PathVariable int deptno) {
+		return sqlSession.getMapper(DeptDao.class).rmList(deptno)>0;
+	}
+	
+	@PostMapping("dept/")
+	public boolean add(@ModelAttribute DeptVo bean) {
+		sqlSession.getMapper(DeptDao.class).addList(bean);
+		return true;
 	}
 }
 

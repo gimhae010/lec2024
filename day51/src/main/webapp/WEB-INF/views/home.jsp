@@ -52,7 +52,8 @@ function deptDetail(deptno){
 			.attr('action','#'+data.deptno)
 				.find('input').eq(0).val(data.deptno)
 				.end().eq(1).val(data.dname).end().eq(2).val(data.loc);
-		$('#deptPopup').modal('show');			
+		$('#deptPopup').modal('show');	
+		$('#deptPopup').find('button').eq(2).hide();		
 	});
 }
 function deptDefaultPopup(){
@@ -62,6 +63,9 @@ function deptDefaultPopup(){
 		.end().find('input').val(()=>'')
 		;
 	$('#deptPopup').modal('hide');
+	$('#cpPopup').modal('hide');
+	$('#deptPopup form').find('.form-group:eq(0)').show();
+	$('#deptPopup').find('button').show();
 }
 function deptPopupReadonly(boo){
 	$('#deptPopup form').find('input:gt(0)').prop('readonly',boo);
@@ -89,6 +93,38 @@ function deptEditForm(){
 			error:(err,errMsg)=>console.log(errMsg)
 		});
 	}
+}
+function deptDeleteForm(){
+	var deptno=$('#deptPopup form').attr('action').replace('#','');
+	$('#deptPopup').modal('hide');
+	$('#cpPopup').attr('deptno',deptno);
+	$('#cpPopup').modal('show');
+}
+function deptDelete(){
+	var deptno=$('#cpPopup').attr('deptno');
+	$.ajax({
+		url:root+'/api/dept/'+deptno,
+		type:'delete',
+		success:data=>{
+			deptDefaultPopup();
+			deptList();			
+		},
+		error:(xhr,errMsg,err)=>console.log(xhr.status,errMsg)
+	});
+}
+function deptAddForm(){
+	$('#deptPopup').modal('show');
+	$('#deptPopup form').find('.form-group:eq(0)').hide();
+	$('#deptPopup').find('h4').html('Add page');
+	$('#deptPopup').find('input:gt(0)').prop('readonly',false);
+	$('#deptPopup').find('button:gt(2)').hide();
+}
+function deptAddList(){
+	var params=$('#deptPopup form').serialize();
+	$.post(root+'/api/dept/',params,data=>{
+		deptDefaultPopup();
+		deptList();
+	});
 }
 </script>
 </head>
@@ -178,6 +214,7 @@ function deptEditForm(){
 				</thead>
 				<tbody></tbody>
 			</table>
+			<button class="btn btn-primary btn-block" onclick="deptAddForm();">입력</button>
 		</div>
 	</div>
 	<div class="row" id="emp">
@@ -201,7 +238,21 @@ function deptEditForm(){
 		</div>
 	</div>
 </div>
-
+<div class="modal fade" tabindex="-1" role="dialog" id="cpPopup">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">삭제하시겠습니까?</h4>
+      </div>
+      <!-- <div class="modal-body"></div> -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger"  onclick="deptDelete();">삭제</button>
+      </div>
+    </div>
+  </div>
+</div>  
 <div class="modal fade" tabindex="-1" role="dialog" id="deptPopup">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -212,7 +263,7 @@ function deptEditForm(){
       <div class="modal-body">
         <form action="#" method="post">
         	<div class="form-group">
-        		<input type="text" name="deptno" placeholder="deptno" class="form-control" readonly/>
+        		<input type="text" value="0" name="deptno" placeholder="deptno" class="form-control" readonly/>
         	</div>
         	<div class="form-group">
         		<input type="text" name="dname" placeholder="dname" class="form-control" readonly/>
@@ -224,6 +275,7 @@ function deptEditForm(){
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" onclick="deptDefaultPopup();">Close</button>
+        <button type="button" class="btn btn-primary" onclick="deptAddList();">입력</button>
         <button type="button" class="btn btn-primary" onclick="deptEditForm();">수정</button>
         <button type="button" class="btn btn-danger"  onclick="deptDeleteForm();">삭제</button>
       </div>

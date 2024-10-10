@@ -12,4 +12,10 @@
     <update id="setList" parameterType="com.gimhae.day51.dept.model.DeptVo">
     	UPDATE DEPT SET DNAME=#{dname}, LOC=#{loc} WHERE DEPTNO=#{deptno}
     </update>
+    <delete id="rmList" parameterType="int">
+    	DELETE FROM DEPT WHERE DEPTNO=#{int}
+    </delete>
+    <insert id="addList" parameterType="com.gimhae.day51.dept.model.DeptVo">
+    	insert into dept (dname,loc) values (#{dname},#{loc})
+    </insert>
   </mapper>
