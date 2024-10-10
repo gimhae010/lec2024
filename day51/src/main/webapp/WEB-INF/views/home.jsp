@@ -14,6 +14,11 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<style type="text/css">
+tbody>*{
+	cursor: pointer;
+}
+</style>
 <script type="text/javascript">
 var root='${root}';
 $(function(){
@@ -27,7 +32,7 @@ $(function(){
 	$('nav').find('a:eq(0)').click();
 });
 function deptList(){
-	$.getJSON('http://localhost:8080/day51/api/dept/',data=>{	
+	$.getJSON(root+'/api/dept/',data=>{	
 		$('#dept table tbody')
 			.append(
 					data.map(ele=>
@@ -35,8 +40,24 @@ function deptList(){
 								.append('<td>'+ele.deptno+'</td>')
 								.append('<td>'+ele.dname+'</td>')
 								.append('<td>'+ele.loc+'</td>')
+								.click(e=>{
+									deptDetail(ele.deptno);
+								})
 			));
 	});
+}
+function deptDetail(deptno){
+	$.getJSON(root+'/api/dept/'+deptno,data=>{
+		$('#deptPopup form').find('input').eq(0).val(data.deptno)
+			.end().eq(1).val(data.dname).end().eq(2).val(data.loc);
+		$('#deptPopup').modal('show');			
+	});
+}
+function deptEditForm(){
+	if($('#deptPopup form').find('input:gt(0)').prop('readonly'))
+		$('#deptPopup form').find('input:gt(0)').removeProp('readonly');
+	else
+		console.log('수정');
 }
 </script>
 </head>
@@ -149,6 +170,36 @@ function deptList(){
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deptPopup">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">detail page</h4>
+      </div>
+      <div class="modal-body">
+        <form action="#" method="post">
+        	<div class="form-group">
+        		<input type="text" name="deptno" placeholder="deptno" class="form-control" readonly/>
+        	</div>
+        	<div class="form-group">
+        		<input type="text" name="dname" placeholder="dname" class="form-control" readonly/>
+        	</div>
+        	<div class="form-group">
+        		<input type="text" name="loc" placeholder="loc" class="form-control" readonly/>
+        	</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="deptEditForm();">수정</button>
+        <button type="button" class="btn btn-danger"  onclick="deptDeleteForm();">삭제</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 </body>
 </html>
 

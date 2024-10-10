@@ -6,5 +6,7 @@
   	<select id="pullList" resultType="com.gimhae.day51.dept.model.DeptVo">
   		SELECT * FROM DEPT ORDER BY DEPTNO
   	</select>
-  
+    <select id="getList" parameterType="int" resultType="com.gimhae.day51.dept.model.DeptVo">
+    	SELECT * FROM DEPT WHERE DEPTNO=#{int}
+    </select>
   </mapper>
