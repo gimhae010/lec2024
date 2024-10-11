@@ -1,38 +1,42 @@
 package com.gimhae.day54;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Handles requests for the application home page.
- */
-@Controller
+import com.gimhae.day54.model.DeptDao;
+import com.gimhae.day54.model.DeptVo;
+
+@RestController
 public class HomeController {
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	@Autowired
+	DeptDao deptDao;
+//	SqlSession sqlSession;
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+	public ResponseEntity<?> home() {
+//		DeptDao deptDao=sqlSession.getMapper(DeptDao.class);
+		return ResponseEntity.ok(deptDao.pullList());
 	}
 	
+	@PostMapping("/")
+	public ResponseEntity<?> add(@ModelAttribute DeptVo bean){
+//		DeptDao deptDao=sqlSession.getMapper(DeptDao.class);
+		deptDao.addList(bean);
+		return ResponseEntity.ok().build();
+	}
 }
+
+
+
+
+
+
+
+
+

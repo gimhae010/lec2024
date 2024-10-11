@@ -1,14 +1,19 @@
 package com.gimhae.day54.config;
 
+import javax.servlet.Filter;
+
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebConfig 
 	extends AbstractAnnotationConfigDispatcherServletInitializer{
 
+//<listener>
+//	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+//</listener>
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Class[] {RootConfig.class};
 	}
 
 //<servlet>
@@ -27,16 +32,25 @@ public class WebConfig
 		return new String[] {"/"};
 	}
 
+	@Override
+	protected Filter[] getServletFilters() {
+		CharacterEncodingFilter filter=null;
+		filter=new CharacterEncodingFilter();
+		filter.setEncoding("utf-8");
+		filter.setForceEncoding(true);
+		return new Filter[] {filter};
+	}
 }
-//<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
-//<context-param>
-//	<param-name>contextConfigLocation</param-name>
-//	<param-value>/WEB-INF/spring/root-context.xml</param-value>
-//</context-param>
-//
-//<!-- Creates the Spring Container shared by all Servlets and Filters -->
-//<listener>
-//	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-//</listener>
-//
-//<!-- Processes application requests -->
+
+
+
+
+
+
+
+
+
+
+
+
+
