@@ -42,7 +42,7 @@
 					</td>
 					<td>
 						<c:if test="${bean.file ne null }">
-							<a href="${bean.file}">download</a>
+							<a href="${bean.file}/${bean.path}">download</a>
 						</c:if>
 					</td>
 				</tr>

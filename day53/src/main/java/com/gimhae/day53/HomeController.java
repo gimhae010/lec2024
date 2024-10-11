@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,7 +37,7 @@ public class HomeController {
 		return "index";
 	}
 	
-	@GetMapping("/add")
+	@GetMapping("/add.do")
 	public void add() {}
 	
 	@PostMapping("/")
@@ -94,6 +95,44 @@ public class HomeController {
 					e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	@GetMapping("/{origin}/{newName:.+}")
+	public void download3(HttpSession session,HttpServletRequest req,HttpServletResponse resp
+			,@PathVariable String origin, @PathVariable String newName) {
+		if(session.getAttribute("user")==null || !session.getAttribute("user").equals("root")) {
+			try {
+				resp.sendRedirect("../");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return;
+		}
+		resp.setContentType("application/octet-stream");
+		resp.setHeader("Content-Disposition","attachment; filename=\""+origin+"\"");
+		File upload=new File(req.getRealPath("./resources")+"/"+newName);
+		try(
+				InputStream is=new FileInputStream(upload);
+				OutputStream os=resp.getOutputStream();
+				){
+			int cnt=-1;
+			while((cnt=is.read())!=-1) {
+				os.write(cnt);
+			}
+		} catch (FileNotFoundException e) {
+					e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@GetMapping("/add2")
+	public void add2() {}
+	@PostMapping("/add2")
+	public void add2(MultipartFile[] files) {
+		for(MultipartFile file : files) {
+			System.out.println(file.getOriginalFilename());
 		}
 	}
 }
