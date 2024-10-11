@@ -9,9 +9,12 @@
 </head>
 <body>
 <nav>
-	<a href="/">list</a>
-	<a href="/add">add</a>
+	<a href="./">list</a>
+	<a href="./add">add</a>
+	<a href="./login">login</a>
+	<a href="./logout">logout(${sessionScope.user })</a>
 </nav>
+
 	<table>
 		<thead>
 			<tr>
@@ -19,6 +22,7 @@
 				<th>이름</th>
 				<th>download</th>
 				<th>download2</th>
+				<th>download3</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,12 +32,17 @@
 					<td>${bean.name }</td>
 					<td>
 						<c:if test="${bean.file ne null }">
-							<a href="download?f=${bean.file}">download</a>
+							<a href="resources/${bean.path}">${bean.file }</a>
 						</c:if>
 					</td>
 					<td>
 						<c:if test="${bean.file ne null }">
-							<a href="resources/${bean.path}">${bean.file }</a>
+							<a href="download?o=${bean.file}&f=${bean.path}">download</a>
+						</c:if>
+					</td>
+					<td>
+						<c:if test="${bean.file ne null }">
+							<a href="${bean.file}">download</a>
 						</c:if>
 					</td>
 				</tr>
