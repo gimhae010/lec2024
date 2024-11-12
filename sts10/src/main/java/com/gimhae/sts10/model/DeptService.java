@@ -74,6 +74,12 @@ public class DeptService {
 		entity.setLoc(bean.getLoc());
 		deptRepo.save(entity);
 	}
+
+	public void deleteOne(int deptno) {
+		Dept02 entity=deptRepo.findById(deptno).get();
+		deptRepo.delete(entity);
+//		deptRepo.deleteById(deptno);
+	}
 }
 
 

@@ -59,9 +59,12 @@ public class DeptController {
 		deptService.editOne(bean);
 		return "{\"result\":\"success\"}";
 	}
+	@ResponseBody
 	@DeleteMapping("/{deptno}")
 	public String delete(@PathVariable int deptno) {
-		return "redirect:./";
+		log.debug("delete:"+deptno);
+		deptService.deleteOne(deptno);
+		return "{\"result\":\"success\"}";
 	}
 	
 }

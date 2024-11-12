@@ -46,6 +46,18 @@
     <script type="text/JavaScript">
       let boo=true;
       $(function(){
+      	$('form button').click(function(e){
+      	if($(this).hasClass('btn-danger')){
+      		$.ajax({
+        		url:location.href,
+        		type:'delete',
+        		dataType: 'json',
+			    contentType: 'application/json',
+        		success:e=>e.result=='success'?location.href='./':null
+        	});
+      	}
+      	});
+      
         $('form').on('submit',function(e){
           e.preventDefault();
         if(boo){
