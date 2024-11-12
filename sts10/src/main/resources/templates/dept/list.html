@@ -41,27 +41,27 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><a href="detail.html" th:href="@{/dept/}+1111">1111</a></td>
-              <td><a href="detail.html" th:href="@{/dept/}+1111">test1</a></td>
-              <td><a href="detail.html" th:href="@{/dept/}+1111">test</a></td>
+            <tr th:each="bean:${list}">
+              <td><a href="detail.html" th:text="${bean.deptno}" th:href="@{/dept/}+${bean.deptno}">1111</a></td>
+              <td><a href="detail.html" th:text="${bean.dname}" th:href="@{/dept/}+${bean.deptno}">test1</a></td>
+              <td><a href="detail.html" th:text="${bean.loc}" th:href="@{/dept/}+${bean.deptno}">test</a></td>
             </tr>
-            <tr>
+            <tr th:if="null">
               <td><a href="detail.html">2222</a></td>
               <td><a href="detail.html">test2</a></td>
               <td><a href="detail.html">test</a></td>
             </tr>
-            <tr>
+            <tr th:if="null">
               <td><a href="detail.html">3333</a></td>
               <td><a href="detail.html">test3</a></td>
               <td><a href="detail.html">test</a></td>
             </tr>
-            <tr>
+            <tr th:if="null">
               <td><a href="detail.html">4444</a></td>
               <td><a href="detail.html">test4</a></td>
               <td><a href="detail.html">test</a></td>
             </tr>
-            <tr>
+            <tr th:if="null">
               <td><a href="detail.html">5555</a></td>
               <td><a href="detail.html">test5</a></td>
               <td><a href="detail.html">test</a></td>
