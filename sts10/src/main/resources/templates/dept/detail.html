@@ -33,9 +33,9 @@
     <div class="container">
       <h2 class="page-header">상세 페이지</h2>
       <form method="get" action="list.html" th:action="@{/dept/}">
-        <div class="form-group"><input name="deptno" value="1111" class="form-control" readonly></div>
-        <div class="form-group"><input name="dname" value="dname" class="form-control" readonly></div>
-        <div class="form-group"><input name="loc" value="location" class="form-control" readonly></div>
+        <div class="form-group"><input name="deptno" value="1111" th:value="${bean.deptno}" class="form-control" readonly></div>
+        <div class="form-group"><input name="dname" value="dname" th:value="${bean.dname}" class="form-control" readonly></div>
+        <div class="form-group"><input name="loc" value="location" th:value="${bean.loc}" class="form-control" readonly></div>
         <div class="form-group">
           <button type="submit" class="btn btn-block btn-primary">수정</button>
           <button type="button" class="btn btn-block btn-danger">삭제</button>
@@ -44,13 +44,28 @@
       </form>
     </div>
     <script type="text/JavaScript">
+      let boo=true;
       $(function(){
-        $('form').one('submit',function(e){
+        $('form').on('submit',function(e){
           e.preventDefault();
-          $('.page-header').text('수정 페이지');
-          $('form input').eq(1).removeProp('readonly');
-          $('form input').eq(2).removeProp('readonly');
-          $('form button').eq(1).removeClass('btn-danger').addClass('btn-default').attr('type','reset').text('취소');
+        if(boo){
+	        $('.page-header').text('수정 페이지');
+	        $('form input').eq(1).removeProp('readonly');
+	        $('form input').eq(2).removeProp('readonly');
+	        $('form button').eq(1).removeClass('btn-danger').addClass('btn-default').attr('type','reset').text('취소');
+        	boo=!boo;
+        }else{
+        	const data=JSON.stringify({'deptno':$('form input').eq(0).val()
+        	,'dname':$('form input').eq(1).val(),'loc':$('form input').eq(2).val()});
+        	$.ajax({
+        		url:location.href,
+        		type:'put',
+        		dataType: 'json',
+			    contentType: 'application/json',
+        		data: data,
+        		success:e=>e.result=='success'?location.href='./':null
+        	});
+        }
         });
       });
     </script>
