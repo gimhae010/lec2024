@@ -76,15 +76,15 @@ public class Sts12Application implements CommandLineRunner{
 //		System.out.println(result3);
 		
 		List<Dept> list1=List.of(
-				Dept.builder().dname("부서1").loc("test").build()
-				,Dept.builder().dname("부서2").loc("test").build()
+				Dept.builder().dname("부서1").location("test").build()
+				,Dept.builder().dname("부서2").location("test").build()
 				);
 		deptRepo.saveAll(() -> list1.iterator());
 		List<Emp> list2=List.of(
-				Emp.builder().ename("user1").job("tester").dept(list1.get(0)).build()
-				,Emp.builder().ename("user2").job("tester").dept(list1.get(1)).build()
-				,Emp.builder().ename("user3").job("tester").dept(list1.get(1)).build()
-				,Emp.builder().ename("user4").job("tester").dept(list1.get(0)).build()
+				Emp.builder().ename("user1").job("tester").deptno(list1.get(0)).build()
+				,Emp.builder().ename("user2").job("tester").deptno(list1.get(1)).build()
+				,Emp.builder().ename("user3").job("tester").deptno(list1.get(1)).build()
+				,Emp.builder().ename("user4").job("tester").deptno(list1.get(0)).build()
 				);
 		empRepo.saveAll(() -> list2.iterator());
 		
