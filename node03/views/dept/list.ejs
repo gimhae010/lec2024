@@ -35,13 +35,14 @@
             <tbody>
                 <% depts.forEach(function(bean){ %>
                 <tr>
-                    <td><a href="#"><%=bean.DEPTNO %></a></td>
-                    <td><a href="#"><%=bean.DNAME %></a></td>
-                    <td><a href="#"><%=bean.LOC %></a></td>
+                    <td><a href="detail?deptno=<%=bean.DEPTNO %>"><%=bean.DEPTNO %></a></td>
+                    <td><a href="detail?deptno=<%=bean.DEPTNO %>"><%=bean.DNAME %></a></td>
+                    <td><a href="detail?deptno=<%=bean.DEPTNO %>"><%=bean.LOC %></a></td>
                 </tr>
                 <% }); %>
             </tbody>
         </table>
+        <p><a href="add" class="btn btn-primary btn-block" role="button">입력</a></p>
     </div>
 </body>
 </html>
