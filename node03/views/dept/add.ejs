@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+              인제대학교
+            </a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="/">home</a></li>
+            <li><a href="/intro">intro</a></li>
+            <li><a href="/dept/">dept</a></li>
+            <li><a href="/login/">login</a></li>
+          </ul>
+        </div>
+    </nav>
+    <div class="container">
+      <h1 class="page-header">insert page</h1>
+        <form method="post" action="./">
+          <div class="form-group">
+            <input type="text" name="deptno" placeholder="deptno" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <input type="text" name="dname" placeholder="dname" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <input type="text" name="loc" placeholder="location" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">입력</button>
+            <button type="reset" class="btn btn-default btn-block">취소</button>
+            <button type="button" class="btn btn-default btn-block" onclick="history.back();">뒤로</button>
+          </div>
+        </form>
+    </div>
+</body>
+</html>
