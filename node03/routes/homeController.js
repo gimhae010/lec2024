@@ -3,6 +3,7 @@ const router=express.Router();
 const fs=require('fs');
 
 router.get('/', (req, res) => {
+    console.log(req.session.login);
     res.render('index');
 })
 router.get('/intro', (req, res) => {

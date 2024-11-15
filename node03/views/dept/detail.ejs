@@ -46,29 +46,73 @@
           </div>
         </form>
     </div>
-    <script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript">
-      $(function(){
-        $('form').submit(e=>{
+      var form=document.querySelector('form');
+      var inputs=form.querySelectorAll('input');
+      var delBtn=form.querySelector('a.btn-danger');
+
+      delBtn.onclick=e=>{
+        e.preventDefault();
+        if(confirm('삭제하시겠습니까?')){
+          var del=fetch({
+            url:'./',
+            method:'delete',
+            headers: {
+                  "Content-Type": "application/json",// 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            body: JSON.stringify({deptno:inputs[0].value})
+          });
+        
+          del.then(e=>{
+            console.log(e);
+            if(e.status==200)
+              return e.json();
+          }).then(data=>{
+            location.href='./';
+          }).catch(err=>console.log(err));
+        }
+      };
+
+      form.onsubmit=e=>{
           e.preventDefault();
-          const params=$(e.target).serialize();
-          console.log(params);
-          $.ajax({
-            url:$('form').attr('action'),
-            type:'put',
-            data:params,
-            dataType:'json',
-            success:data=>{
+          fetch('./edit',{
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",// 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify({deptno:inputs[0].value,dname:inputs[1].value,loc:inputs[2].value})
+          }).then(e=>e.json())
+          .then(data=>{
               if(data.err) throw err;
               if(data.result>0) location.href='./';
               else alert('바뀐거 없음');
-            },
-            error:err=>{
-              alert('서버가 응답하지 않습니다');
-            }
+          }).catch(err=>{
+              throw err;
           });
-        });
-      });
+      }
+
+
+      // $(function(){
+      //   $('form').submit(e=>{
+      //     e.preventDefault();
+      //     const params=$(e.target).serialize();
+      //     console.log(params);
+      //     $.ajax({
+      //       url:$('form').attr('action'),
+      //       type:'put',
+      //       data:params,
+      //       dataType:'json',
+      //       success:data=>{
+      //         if(data.err) throw err;
+      //         if(data.result>0) location.href='./';
+      //         else alert('바뀐거 없음');
+      //       },
+      //       error:err=>{
+      //         alert('서버가 응답하지 않습니다');
+      //       }
+      //     });
+      //   });
+      // });
 
     </script>
 </body>

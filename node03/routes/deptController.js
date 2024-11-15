@@ -75,5 +75,12 @@ router.put("/edit",(req,res)=>{
     }));
 });
 
+router.delete('/',(req,res)=>{
+    const {deptno}=req.body;
+    const sql=`delete from dept where deptno=${deptno}`;
+    const conn=mysql.createConnection(info);
+    conn.connect(err=>err?console.log(err):conn.query(sql,err2=>res.json({result:'success'})));
+});
+
 
 module.exports=router;
