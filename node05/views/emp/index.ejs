@@ -28,12 +28,19 @@
           <tr>
             <th>empno</th>
             <th>ename</th>
-            <th>job</th>
+            <th>sal</th>
             <th>hiredate</th>
           </tr>
         </thead>
         <tbody>
-
+          <%result.forEach(bean=>{%>
+            <tr>
+              <td><a href="<%=bean.EMPNO %>"><%=bean.EMPNO %></a></td>
+              <td><a href="<%=bean.EMPNO %>"><%=bean.ENAME %></a></td>
+              <td><a href="<%=bean.EMPNO %>"><%=bean.SAL %></a></td>
+              <td><a href="<%=bean.EMPNO %>"><%=bean.HIREDATE.toLocaleDateString() %></a></td>
+            </tr>
+          <%}) %>
         </tbody>
       </table>
     </div>

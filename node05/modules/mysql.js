@@ -8,3 +8,5 @@ const pool = mysql.createPool({
   password: 'tiger',
   connectionLimit: 5
 });
+
+module.exports=pool;
