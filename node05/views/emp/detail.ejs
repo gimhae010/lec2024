@@ -22,17 +22,24 @@
       </div>
     </nav>
     <div class="container">
-      <h2 class="page-header">로그인</h2>
-      <form action="/login/" method="post">
+      <h2 class="page-header">상세내용</h2>
+      <form action="./" method="post">
         <div class="form-group">
-          <input type="text" name="deptno" placeholder="deptno" class="form-control"/>
+          <input name="empno" value="<%=EMPNO%>" class="form-control" readonly/>
         </div>
         <div class="form-group">
-          <input type="text" name="dname" placeholder="dname" class="form-control"/>
+          <input name="ename" value="<%=ENAME%>" class="form-control" readonly/>
         </div>
-        <div>
-          <button class="btn btn-primary btn-block">로그인</button>
+        <div class="form-group">
+          <input name="sal" value="<%=SAL%>" class="form-control" readonly/>
+        </div>
+        <div class="form-group">
+          <input name="hiredate" value="<%=HIREDATE.toLocaleDateString() %>" class="form-control" disabled/>
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-primary btn-block">수정</button>
           <button type="reset" class="btn btn-default btn-block">취소</button>
+          <button type="button" class="btn btn-default btn-block">뒤로</button>
         </div>
       </form>
     </div>
