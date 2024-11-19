@@ -5,7 +5,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gimhae.sts14.model.DeptVo;
@@ -32,9 +35,21 @@ public class Sts14Application implements CommandLineRunner{
 		
 	}
 	
+	@CrossOrigin
 	@GetMapping("/dept/")
 	public ResponseEntity<?> getMethodName() {
 		return ResponseEntity.ok(deptService.getList());
+	}
+	
+	@CrossOrigin
+	@PostMapping("/dept/")
+	public ResponseEntity<?> add(@RequestBody DeptVo bean){
+		try {
+			deptService.pushList(bean);
+		return ResponseEntity.ok().build();
+		}catch (Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 	
