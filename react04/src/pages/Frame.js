@@ -27,5 +27,5 @@ function Frame() {
     </>
   )
 }
-
+export const styleTitle={borderBottom:'2px solid gray',width:200,textAlign:'center',margin:'auto'};
 export default Frame

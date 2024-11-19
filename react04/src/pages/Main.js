@@ -1,8 +1,9 @@
 import React from 'react'
+import { styleTitle } from './Frame'
 
 function Main() {
   return (
-    <div>index page</div>
+    <h2 style={styleTitle}>index page</h2>
   )
 }
 

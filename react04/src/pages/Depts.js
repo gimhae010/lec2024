@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+import { styleTitle } from './Frame';
 
 function Main() {
   const [list,setList]=useState([]);
@@ -20,7 +22,7 @@ function Main() {
 
   return (
     <>
-    <div>List page</div>
+    <h2 style={styleTitle}>List page</h2>
     <table>
       <thead>
         <tr>
@@ -31,6 +33,7 @@ function Main() {
       </thead>
       <tbody>{list}</tbody>
     </table>
+    <p><Link to={'/dept/add'}>입력</Link></p>
     </>
   )
 }
