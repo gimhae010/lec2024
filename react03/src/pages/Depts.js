@@ -28,6 +28,7 @@ function Dept() {
             </ul>
         </nav>
         <div>List page</div>
+        <p><Link to={'/dept/add'}>입력</Link></p>
         <table style={{width:'100%'}}>
             <thead>
                 <tr>

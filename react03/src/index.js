@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Intro from './pages/Intro';
 import Depts from './pages/Depts';
 import Dept from './pages/Dept';
+import AddDept from './pages/AddDept';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +20,7 @@ root.render(
         <Route path='/intro' element={<Intro/>}/>  
         <Route path='/dept/:id' element={<Dept/>}/>  
         <Route path='/dept/' element={<Depts/>}/>  
+        <Route path='/dept/add' element={<AddDept/>}/>  
       </Route>
     </Routes>
   </BrowserRouter>
