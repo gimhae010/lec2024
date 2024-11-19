@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Ex02 from './Ex02';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Intro from './pages/Intro';
+import Depts from './pages/Depts';
 import Dept from './pages/Dept';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,7 +17,8 @@ root.render(
       <Route>
         <Route path='/' element={<Home/>}/>  
         <Route path='/intro' element={<Intro/>}/>  
-        <Route path='/dept/' element={<Dept/>}/>  
+        <Route path='/dept/:id' element={<Dept/>}/>  
+        <Route path='/dept/' element={<Depts/>}/>  
       </Route>
     </Routes>
   </BrowserRouter>

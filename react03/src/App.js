@@ -3,7 +3,7 @@ import logo from './logo.svg';
 // import './App.css';
 import Home from './pages/Home';
 import Intro from './pages/Intro';
-import Dept from './pages/Dept';
+import Dept from './pages/Depts';
 
 function App() {
   const[url,setUrl]=useState();

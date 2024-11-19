@@ -1,9 +1,15 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 
 function Dept() {
+    const {id}=useParams();
+    const [obj,setObj]=useState();
     useEffect(()=>{
-        console.log('dept');
+        fetch('https://dummyjson.com/products/'+id)
+        .then(e=>e.json())
+        .then(data=>{
+            setObj(data);
+        })
     },[]);
     const styleLi={float:'left',width:98,marginLeft:1,marginRight:1};
     const styleLink={
@@ -20,9 +26,14 @@ function Dept() {
                 <li style={styleLi}><Link to={'/dept/'} style={styleLink}>dept</Link></li>
             </ul>
         </nav>
-        <div>List page</div>
+    <div>Detail page</div>
+    <form>
+        <div><input name='id' value={obj?obj.id:null} readOnly/></div>
+        <div><input name='category' value={obj?obj.category:null} readOnly/></div>
+        <div><input name='title' value={obj?obj.title:null} readOnly/></div>
+        <div><input name='price' value={obj?obj.price:null} readOnly/></div>
+    </form>
     </>
   )
 }
-
 export default Dept
