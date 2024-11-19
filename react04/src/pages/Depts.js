@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { styleTitle } from './Frame';
+import logo from '../logo.svg';
 
 function Main() {
-  const [list,setList]=useState([]);
+  const [list,setList]=useState(null);
 
   useEffect(()=>{
-    fetch('http://localhost:8080/dept/')
+    
+    fetch('http://192.168.0.5:8080/dept/')
     .then(e=>e.json())
     .then(json=>{
       const arr=json.map(ele=>{
         return (<tr>
-          <td>{ele.deptno}</td>
-          <td>{ele.dname}</td>
-          <td>{ele.loc}</td>
+          <td><Link to={'/dept/detail?deptno='+ele.deptno}>{ele.deptno}</Link></td>
+          <td><Link to={'/dept/detail?deptno='+ele.deptno}>{ele.dname}</Link></td>
+          <td><Link to={'/dept/detail?deptno='+ele.deptno}>{ele.loc}</Link></td>
         </tr>);
       });
       setList(arr);
@@ -31,7 +33,7 @@ function Main() {
           <th>loc</th>
         </tr>
       </thead>
-      <tbody>{list}</tbody>
+      <tbody>{list?list:<img src={logo}/>}</tbody>
     </table>
     <p><Link to={'/dept/add'}>입력</Link></p>
     </>
