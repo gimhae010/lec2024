@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 
 function Frame() {
-    const [menu1,setMenu1]=useState(false);
-    const [menu2,setMenu2]=useState(false);
-    const [menu3,setMenu3]=useState(false);
+    const [menu,setMenu]=useState('Home');
 
   return (
     <>
@@ -17,14 +15,14 @@ function Frame() {
             </Link>
         </div>
         <ul class="nav navbar-nav">
-            <li className={menu1?'active':''}><NavLink className={
-                ({ isActive, isPending }) =>{if(isActive){setMenu1(true);setMenu2(false);setMenu3(false);}}
+            <li className={menu=='Home'?'active':''}><NavLink className={
+                    ({ isActive, isPending }) =>{if(isActive){setMenu('Home');}}
                 } to="/">Home</NavLink></li>
-            <li className={menu2?'active':''}><NavLink className={
-                ({ isActive, isPending }) =>{if(isActive){setMenu1(false);setMenu2(true);setMenu3(false);}}
+            <li className={menu=='Intro'?'active':''}><NavLink className={
+                    ({ isActive, isPending }) =>{if(isActive){setMenu("Intro");}}
                 } to="/intro">Intro</NavLink></li>
-            <li className={menu3?'active':''}><NavLink className={
-                ({ isActive, isPending }) =>{if(isActive){setMenu1(false);setMenu2(false);setMenu3(true);}}
+            <li className={menu=='Dept'?'active':''}><NavLink className={
+                    ({ isActive, isPending }) =>{if(isActive){setMenu("Dept");}}
                 } to="/dept/">Dept</NavLink></li>
         </ul>
     </div>
