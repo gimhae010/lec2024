@@ -30,6 +30,17 @@ router.post('/',(req,res)=>{
     connection.end();
 });
 
+router.get('/:deptno',(req,res)=>{
+    const {deptno}=(req.params);
+    const connection = mysql.createConnection(info);
+    connection.connect();
+    connection.query(`select * from dept where deptno=${deptno}`, (err, rows, fields) => {
+          if (err) throw err
+          res.json({...rows[0]});      
+    });
+    connection.end();
+});
+
 
 
 module.exports=router;
