@@ -18,6 +18,18 @@ router.get('/',(req,res)=>{
     connection.end();
 });
 
+router.post('/',(req,res)=>{
+    const {deptno,dname,loc}=(req.body);
+    const connection = mysql.createConnection(info);
+    connection.connect();
+    connection.query(`insert into dept values (${deptno},'${dname}','${loc}')`, (err, rows) => {
+          if (err) throw err      
+          res.status(201);
+          res.end();
+    });
+    connection.end();
+});
+
 
 
 module.exports=router;
