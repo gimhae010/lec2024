@@ -9,6 +9,7 @@ import Main from './pages/Main';
 import Intro from './pages/Intro';
 import Depts from './pages/Depts';
 import DeptAdd from './pages/DeptAdd';
+import Dept from './pages/Dept';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +22,7 @@ root.render(
           <Route path='/intro' element={<Intro/>}/>
           <Route path='/dept/' element={<Depts/>}/>
           <Route path='/dept/add' element={<DeptAdd/>}/>
+          <Route path='/dept/:deptno' element={<Dept/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
