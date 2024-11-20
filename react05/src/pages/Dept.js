@@ -19,14 +19,23 @@ function Dept() {
         alert(err);
     });
   },[]);
+  
+  const editVal=e=>{
+    if(e.target.name=='deptno')
+        setBean({...bean,DEPTNO:e.target.value});
+    if(e.target.name=='dname')
+        setBean({...bean,DNAME:e.target.value});
+    if(e.target.name=='loc')
+        setBean({...bean,LOC:e.target.value});
+  };
 
   return (
     <>
     <h2>Dept detail{deptno}</h2>
     <form>
-        <FormInput ref={null} name={'deptno'} value={bean?bean.DEPTNO:''}/>
-        <FormInput ref={null} name={'dname'} value={bean?bean.DNAME:''}/>
-        <FormInput ref={null} name={'loc'} value={bean?bean.LOC:''}/>
+        <FormInput ref={null} name={'deptno'} value={bean?bean.DEPTNO:''} editVal={editVal}/>
+        <FormInput ref={null} name={'dname'} value={bean?bean.DNAME:''} editVal={editVal}/>
+        <FormInput ref={null} name={'loc'} value={bean?bean.LOC:''} editVal={editVal}/>
     </form>
     </>
   )
