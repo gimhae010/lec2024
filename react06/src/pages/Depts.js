@@ -1,12 +1,13 @@
 import { AgGridReact } from 'ag-grid-react';
 import React, { useEffect, useState } from 'react'
-import { Button, Stack } from 'react-bootstrap'
+import { Button, Card, CardGroup, Row, Stack } from 'react-bootstrap'
 // book p187 변경
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import 'ag-grid-community/styles/ag-theme-balham.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
+import { Link } from 'react-router-dom';
 
 function Depts() {
     const [arr,setArr]=useState([]);
@@ -35,16 +36,29 @@ function Depts() {
   return (
     <>
     <h2>list page</h2>
-    <Stack gap={2} className="col-md-10 mx-auto">
+    <Stack gap={10} className="col-md-10 mx-auto">
+    <Row xs={1} md={2} className="g-1">
+    {arr.map(ele=>(
+        <Card style={{ width: '20%' }}>
+        <Card.Body>
+            <Card.Title>{ele.DNAME}</Card.Title>
+            <Card.Text>{ele.LOC}</Card.Text>
+            <Link to={'/dept/'+ele.DEPTNO}>Detail({ele.DEPTNO}) Link</Link>
+        </Card.Body>
+        </Card>
+    ))}
+    </Row>
+    </Stack>
+    <Stack gap={10} className="col-md-10 mx-auto">
+        <Link as="a" to={'/dept/add'} className='btn btn-primary btn-block' role='button'>입력</Link>
+    </Stack>
+    <Stack gap={10} className="col-md-6 mx-auto">
         <div className='ag-theme-balham' style={{height:500,width:'100%'}}>
             <AgGridReact
                 rowData={arr}
                 columnDefs={columes}
             />
         </div>
-    </Stack>
-    <Stack gap={2} className="col-md-10 mx-auto">
-        <Button as="a" variant="primary">입력</Button>
     </Stack>
     </>
   )
