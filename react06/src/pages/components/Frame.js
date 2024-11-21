@@ -13,12 +13,12 @@ function Frame() {
         <Navbar.Brand href="#home">인제대학교</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href={'/'}>Home</Nav.Link>
-            <Nav.Link href={'/intro'}>Intro</Nav.Link>
-            <Nav.Link href={'/dept/'}>Dept</Nav.Link>
+          <Nav as="div" className="me-auto">
+          <Link to={'/'}><Nav.Link as="div">Home</Nav.Link></Link>
+          <Link to={'/intro'}><Nav.Link as="div">Intro</Nav.Link></Link>
+          <Link to={'/dept/'}><Nav.Link as="div">Dept</Nav.Link></Link>
             {user.id}
-            <Nav.Link href={'/login/'}>Login</Nav.Link>
+            <Link to={'/login/'}><Nav.Link as="div">Login</Nav.Link></Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

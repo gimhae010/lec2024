@@ -5,7 +5,7 @@ import LoginContext from './components/LoginContext';
 
 function Login() {
     const navigate=useNavigate();
-    const {setUser}=useContext(LoginContext);
+    const obj=useContext(LoginContext);
     const loginAction=(e)=>{
         e.preventDefault();
         const [id,pw]=([e.target.id.value,e.target.pw.value]);
@@ -24,7 +24,7 @@ function Login() {
                 'Content-Type':'application/x-www-form-urlencoded'
             }
         }).then(res=>res.json()).then(()=>{
-            setUser({id});
+            obj.setUser({...obj,id});
             navigate('/');
         }).catch(alert);
     };
