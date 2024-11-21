@@ -41,6 +41,22 @@ router.get('/:deptno',(req,res)=>{
     connection.end();
 });
 
+router.put('/:deptno',(req,res)=>{
+    const {deptno}=(req.params);
+    const {DNAME,LOC}=req.body;
+    const connection = mysql.createConnection(info);
+    connection.connect();
+    connection.query(`update dept set dname='${DNAME}', loc='${LOC}' where deptno=${deptno}`, (err, rows, fields) => {
+          if (err) throw err
+          if(rows.affectedRows>0)
+            res.status(200).end();      
+        else{
+              res.status(400).end();      
+          }
+    });
+    connection.end();
+});
+
 
 
 module.exports=router;

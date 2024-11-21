@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Test from './test';
 import Main from './pages/Main';
 import Intro from './pages/Intro';
 import Depts from './pages/Depts';
@@ -20,6 +21,7 @@ function App() {
           <Route path='/dept/add' element={<DeptAdd/>}/>
           <Route path='/dept/edit' element={<DeptEdit/>}/>
           <Route path='/dept/:deptno' element={<Dept/>}/>
+          <Route path='/test' element={<Test/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
