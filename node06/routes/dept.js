@@ -58,5 +58,19 @@ router.put('/:deptno',(req,res)=>{
 });
 
 
+router.delete('/:deptno',(req,res)=>{
+    const {deptno}=(req.params);
+    const connection = mysql.createConnection(info);
+    connection.connect();
+    connection.query(`delete from dept where deptno=${deptno}`, (err, rows, fields) => {
+          if (err) throw err
+          if(rows.affectedRows>0)
+            res.status(200).end();      
+        else{
+              res.status(400).end();      
+          }
+    });
+    connection.end();
+});
 
 module.exports=router;
