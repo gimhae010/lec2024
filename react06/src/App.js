@@ -5,6 +5,7 @@ import Depts from './pages/Depts';
 import Frame from './pages/components/Frame';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 function App() {
   return (
     <BrowserRouter>
