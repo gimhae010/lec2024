@@ -7,13 +7,17 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import 'ag-grid-community/styles/ag-theme-balham.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Depts() {
+    const navigate=useNavigate();
     const [arr,setArr]=useState([]);
 
     useEffect(()=>{
-        fetch('http://localhost:3030/dept/')
+        fetch('http://localhost:3030/dept/',{
+            method:'GET',
+            credentials:'include'
+          })
         .then(res=>res.json())
         .then(json=>{
             // const result2= json.result.map(ele=>{
@@ -25,7 +29,11 @@ function Depts() {
             //     return obj;
             // })
             // console.log(result2);
+            if(json.result==''){
+                navigate('/login/');
+            }else{
             setArr(json.result);
+            }
         });
     },[]);
     const columes=[

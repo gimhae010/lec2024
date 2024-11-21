@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var session = require('express-session');
+// var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -19,15 +20,16 @@ var corsOptions = {
   origin: 'http://localhost:3000',
   optionsSuccessStatus: 200
 }
-
-app.use(cors(corsOptions));
-app.use(logger('dev'));
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors(corsOptions));
+app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: 'key32425564763sdfafasdf76876584587556',// 특수문자x
+  secret: 'key',// 특수문자x
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false,maxAge:60000 } // https- secure=true

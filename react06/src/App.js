@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import DeptAdd from './pages/DeptAdd';
 import DeptEdit from './pages/DeptEdit';
 import Dept from './pages/Dept';
+import Login from './pages/Login';
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
           <Route path='/dept/add' element={<DeptAdd/>}/>
           <Route path='/dept/edit' element={<DeptEdit/>}/>
           <Route path='/dept/:deptno' element={<Dept/>}/>
-          <Route path='/test' element={<Test/>}/>
+          <Route path='/login/' element={<Login/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

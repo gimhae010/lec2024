@@ -9,13 +9,20 @@ const info={
   };
 
 router.get('/',(req,res)=>{
-    const connection = mysql.createConnection(info);
-    connection.connect();
-    connection.query('select * from dept', (err, rows, fields) => {
-          if (err) throw err
-          res.json({'result':rows});      
-    });
-    connection.end();
+    console.log('list',req.session);
+    if(req.session.user=='admin'){
+        const connection = mysql.createConnection(info);
+        connection.connect();
+        connection.query('select * from dept', (err, rows, fields) => {
+            if (err) throw err
+            res.header('Access-Control-Allow-Credentials','true');
+            res.json({'result':rows});      
+        });
+        connection.end();
+    }else{
+        res.header('Access-Control-Allow-Credentials','true');
+        res.json({result:''});
+    }
 });
 
 router.post('/',(req,res)=>{
