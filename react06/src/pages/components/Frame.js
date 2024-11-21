@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { Link, Outlet } from 'react-router-dom'
+import LoginContext from './LoginContext';
 
 function Frame() {
+  const {user}=useContext(LoginContext);
+  useEffect(()=>{console.log(user)},[]);
   return (
     <>
     <Navbar  bg="primary" data-bs-theme="dark">
@@ -14,6 +17,7 @@ function Frame() {
             <Nav.Link href={'/'}>Home</Nav.Link>
             <Nav.Link href={'/intro'}>Intro</Nav.Link>
             <Nav.Link href={'/dept/'}>Dept</Nav.Link>
+            {user.id}
             <Nav.Link href={'/login/'}>Login</Nav.Link>
           </Nav>
         </Navbar.Collapse>

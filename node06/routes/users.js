@@ -2,17 +2,24 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
+router.all('/',(req,res,next)=>{
+  res.header('Access-Control-Allow-Credentials','true');
+  next();
+});
+router.all('/*',(req,res,next)=>{
+  res.header('Access-Control-Allow-Credentials','true');
+  next();
+});
+
 router.post('/',(req,res)=>{
-  // const {id,pw}=req.body;
-  // console.log(req.session,req.body);
-  // if(id=='admin' && pw=='1234'){
+  const {id,pw}=req.body;
+  console.log(req.session,req.body);
+  if(id=='admin' && pw=='1234'){
     req.session.user='admin';
-    res.header('Access-Control-Allow-Credentials','true');
     res.json({id:'admin'});
-  // }else{
-  //   res.header('Access-Control-Allow-Credentials','true');
-  //   res.status(400).end();
-  // }
+  }else{
+    res.status(400).end();
+  }
 });
 
 router.get('/', function(req, res, next) {

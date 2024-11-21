@@ -20,10 +20,10 @@ var corsOptions = {
   origin: 'http://localhost:3000',
   optionsSuccessStatus: 200
 }
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(cookieParser());

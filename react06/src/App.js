@@ -9,10 +9,14 @@ import DeptAdd from './pages/DeptAdd';
 import DeptEdit from './pages/DeptEdit';
 import Dept from './pages/Dept';
 import Login from './pages/Login';
+import LoginContext, { init } from './pages/components/LoginContext';
+import { useState } from 'react';
 
 
 function App() {
+  const[user,setUser]=useState(init);
   return (
+    <LoginContext.Provider value={{user,setUser}}>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Frame/>}>
@@ -26,6 +30,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </LoginContext.Provider>
   );
 }
 

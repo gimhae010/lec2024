@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import FormGroup from './components/FormGroup'
+import { useNavigate } from 'react-router-dom';
+import LoginContext from './components/LoginContext';
 
 function Login() {
+    const navigate=useNavigate();
+    const {setUser}=useContext(LoginContext);
     const loginAction=(e)=>{
         e.preventDefault();
         const [id,pw]=([e.target.id.value,e.target.pw.value]);
@@ -9,14 +13,20 @@ function Login() {
         console.log(bean);
         fetch('http://localhost:3030/login/',{
             method:'POST',
+            cache: "no-cache",
+            body:`id=${id}&pw=${pw}`,
             // body:JSON.stringify(bean),
-            mode:'no-cors',
+            mode:'cors',
             credentials:'include',
             referrerPolicy:'origin-when-cross-origin',
             headers:{
-                'Content-Type':'application/json'
+                // 'Content-Type':'application/json'
+                'Content-Type':'application/x-www-form-urlencoded'
             }
-        }).then(res=>res.json()).then(console.log).catch(alert);
+        }).then(res=>res.json()).then(()=>{
+            setUser({id});
+            navigate('/');
+        }).catch(alert);
     };
   return (
     <>
