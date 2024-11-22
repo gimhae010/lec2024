@@ -35,12 +35,12 @@ public class DeptController {
 
 	@GetMapping("")
 	public ResponseEntity<?> list(HttpSession session) {
-		log.debug(session.getAttribute("result").toString());
+		
 		if(session.getAttribute("result")==null) return resp;
 		log.debug("login ok");
 		List<Object> list = new ArrayList<>();
 		deptRepo.findAll().forEach(entity->list.add(entity.toVo()));
-		return ResponseEntity.ok().header("Access-Control-Allow-Credentials", "true").body(list);
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@PostMapping("")
@@ -54,7 +54,7 @@ public class DeptController {
 	public ResponseEntity<?> detail(@PathVariable int deptno,HttpSession session) {
 		if(session.getAttribute("result")==null) return resp;
 		deptRepo.findById(deptno).ifPresentOrElse(t -> {
-			resp=ResponseEntity.ok().header("Access-Control-Allow-Credentials", "true").body(t.toVo());
+			resp=ResponseEntity.ok().body(t.toVo());
 		}, ()->{
 			resp=ResponseEntity.badRequest().build();
 		});

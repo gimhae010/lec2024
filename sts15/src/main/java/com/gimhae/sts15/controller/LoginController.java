@@ -34,12 +34,12 @@ public class LoginController {
 		usersRepo.findByEmailAndPw(id, pw).ifPresentOrElse(entity -> {
 			UsersVo bean = entity.toVo();
 //			resp=ResponseEntity.ok(bean);
-			resp=ResponseEntity.ok().header("Access-Control-Allow-Credentials", "true").body(bean);
+			resp=ResponseEntity.ok().body(bean);
 			session.setAttribute("result", true);
 			session.setAttribute("num", bean.getNum());
 			log.debug("로그인됨");
 		}, () -> {
-			resp=ResponseEntity.badRequest().header("Access-Control-Allow-Credentials", "true").build();
+			resp=ResponseEntity.badRequest().build();
 		});
 		return resp;
 	}
