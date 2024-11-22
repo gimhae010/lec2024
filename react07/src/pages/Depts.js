@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Depts() {
+    const navigate=useNavigate();
     const [arr,setArr]=useState([]);
     useEffect(()=>{
         fetch('http://localhost:8080/dept/',{
@@ -10,7 +11,10 @@ function Depts() {
         })
         .then(res=>res.json())
         .then(json=>setArr(json))
-        .catch(alert)
+        .catch(err=>{
+            console.log(err);
+            navigate('/login/');
+        })
     },[]);
   return (
     <>

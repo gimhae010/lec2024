@@ -5,7 +5,15 @@ import { LoginContext } from '../App';
 function Logout() {
     const [login,setLogin]=useContext(LoginContext);
     useEffect(()=>{
-        setLogin(false);
+        fetch('http://localhost:8080/login/logout',{
+            method:'GET',
+            credentials:'include'
+        })
+        .then(res=>res.ok)
+        .catch(alert)
+        .finally(()=>{
+            setLogin(false);
+        });
     },[]);
   return (
     <>
