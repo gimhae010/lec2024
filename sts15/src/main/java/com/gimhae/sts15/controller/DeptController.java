@@ -36,7 +36,6 @@ public class DeptController {
 	@GetMapping("")
 	public ResponseEntity<?> list(HttpSession session) {
 		
-		if(session.getAttribute("result")==null) return resp;
 		log.debug("login ok");
 		List<Object> list = new ArrayList<>();
 		deptRepo.findAll().forEach(entity->list.add(entity.toVo()));
