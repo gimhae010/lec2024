@@ -28,15 +28,20 @@ public class TokenFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(
 			HttpServletRequest req, HttpServletResponse resp, FilterChain chain)
 			throws ServletException, IOException {
-		if(req.getRequestURI().startsWith("/token"))
-			chain.doFilter(req, resp);
-		if(req.getRequestURI().startsWith("/login"))
-			chain.doFilter(req, resp);
-		if(req.getMethod().equals("OPTIONS"))
-			chain.doFilter(req, resp);
+		if(req.getRequestURI().startsWith("/token")) {
+			chain.doFilter(req, resp);return ;}
+		if(req.getRequestURI().startsWith("/login")) {
+			chain.doFilter(req, resp);return ;}
+		if(req.getMethod().equals("OPTIONS")) {
+			chain.doFilter(req, resp);return ;}
 		
 		String auth=req.getHeader("Authorization");
+		if(auth==null||auth.isEmpty()||!auth.startsWith("Bearer ")) {
+			resp.sendError(403);
+			return;
+		}
 		auth=auth.replace("Bearer ", "");
+		System.out.println("->"+auth);
 		String username = jwtService.getAuthEmail(auth);
 		// username 유효하면
 		if("user01".equals(username)) {
