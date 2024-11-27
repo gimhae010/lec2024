@@ -33,15 +33,16 @@ public class TokenFilter extends OncePerRequestFilter{
 		if(req.getRequestURI().startsWith("/login")) {
 			chain.doFilter(req, resp);return ;}
 		if(req.getMethod().equals("OPTIONS")) {
-			chain.doFilter(req, resp);return ;}
+			chain.doFilter(req, resp);
+			return ;}
 		
 		String auth=req.getHeader("Authorization");
 		if(auth==null||auth.isEmpty()||!auth.startsWith("Bearer ")) {
-			resp.sendError(403);
+			resp.sendError(405);
 			return;
 		}
 		auth=auth.replace("Bearer ", "");
-		System.out.println("->"+auth);
+		System.out.println("->            "+auth);
 		String username = jwtService.getAuthEmail(auth);
 		// username 유효하면
 		if("user01".equals(username)) {

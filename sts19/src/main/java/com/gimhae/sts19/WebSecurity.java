@@ -34,6 +34,7 @@ public class WebSecurity {
 	SecurityFilterChain config(HttpSecurity http) throws Exception {
 		http.csrf(token->token.disable());
 		http.cors(cors->{cors.configurationSource(getConfigSource());});
+		// http.cors(cors->cors.disable());
 		http
 			.httpBasic().disable()
 			.sessionManagement(manager->{
@@ -54,18 +55,13 @@ public class WebSecurity {
 	}
 
 	private CorsConfigurationSource getConfigSource() {
-//		res.setHeader("Access-Control-Allow-Credentials", "true");
-//		res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-//		res.setHeader("Access-Controll-Allow-Headers", "Authorization, origin, x-requested-with");
-//		res.setHeader("Access-Control-Allow-Methods", "OPTIONS, PATCH, PUT, GET, POST");
-//		res.setHeader("Access-Control-Max-Age", "5000");
 		CorsConfiguration config=null;
 		config=new CorsConfiguration();
 		config.setAllowedOrigins(List.of("http://localhost:3000"));
-		config.setAllowedHeaders(List.of("Authorization, origin, x-requested-with"));
+		config.setAllowedHeaders(List.of("Authorization","origin","X-Requested-With","Content-Type"));
 		config.setAllowedMethods(List.of("OPTIONS","GET", "POST", "PUT", "DELETE"));
-		config.setMaxAge(50000000L);
-		config.setAllowCredentials(true);
+		config.setMaxAge(85600L);
+		config.setAllowCredentials(false);
 		UrlBasedCorsConfigurationSource source=null;
 		source=new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);
