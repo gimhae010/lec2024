@@ -1,0 +1,21 @@
+import com.ex13
+from ex08 import obj1,obj2 
+# print(com.ex12.msg1)
+# print(com.ex12.msg2)
+# print(com.ex13.msg1)
+# print(com.ex13.msg2)
+msg3='aaa'
+print(dir(com.ex13))
+print(dir(list))
+print(dir(obj1))
+print(abs(111))
+print(abs(-111))
+print('문자열 {msg3}')
+print(f'문자열 {msg3}')
+print(b'abcde')
+msg4=bytes(b'\xed\x95\x9c')
+# msg5=open('data.txt','rb').read()
+print(msg4.decode('utf-8'))
+print(list(bytearray(b'\xed\x95\x9c')))
+print(divmod(5,2))
+print(help(help))
