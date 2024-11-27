@@ -10,20 +10,28 @@ function Depts() {
     
     useEffect(()=>{
         console.log(login);
-        axios.get('http://localhost:8080/dept/',{
-            withCredentials: true,
-            // Authorization:'Bearer '+login,
-                headers: {
-                    // "Cache-Control": "no-cache",
-                    "Content-Type": "application/json",
-                    // "Access-Control-Allow-Origin": "*",
-                  'Authorization': 'Bearer '+login
+        fetch('http://localhost:8080/dept/',{
+            method:'GET',referrerPolicy:'origin-when-cross-origin',
+            headers:{
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer '+login
             }
-        }).then(json=>setArr(json.data))
-        .catch(err=>{
-            console.log(err);
-            navigate('/login/');
         })
+        .then(e=>e.json()).then(json=>setArr(json)).catch(alert)
+        // axios.get('http://localhost:8080/dept/',{
+        //     withCredentials: true,
+        //     //Authorization:'Bearer '+login,
+        //         headers: {
+        //             // "Cache-Control": "no-cache",
+        //             "Content-Type": "application/json",
+        //             // "Access-Control-Allow-Origin": "*",
+        //           'Authorization': 'Bearer '+login
+        //     }
+        // }).then(json=>setArr(json.data))
+        // .catch(err=>{
+        //     console.log(err);
+        //     navigate('/login/');
+        // })
 
     },[]);
   return (

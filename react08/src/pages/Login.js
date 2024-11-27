@@ -13,7 +13,7 @@ function Login() {
         fetch('http://localhost:8080/login/',{
             method:'POST',
             body:`id=${refId.current.value}&pw=${refPw.current.value}`,
-            credentials:'include',
+            // credentials:'include',
             headers:{
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
