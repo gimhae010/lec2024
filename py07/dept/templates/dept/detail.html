@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-  <h1>상세 페이지 </h1>
-</body>
-</html>
+{% extends 'base/base.html '%}
+
+{% block contents %}
+  <h1>{{title}} 페이지 </h1>
+  <form>
+        {% csrf_token %}
+        <div>
+            <input name="deptno" value="{{data.deptno}}" readonly>
+        </div>
+        <div>
+            <input name="dname" value="{{data.dname}}">
+        </div>
+        <div>
+            <input name="loc" value="{{data.loc}}">
+        </div>
+        <div>
+            <button>수정</button>
+        </div>
+  </form>
+{% endblock %}

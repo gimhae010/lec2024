@@ -26,6 +26,12 @@ def add(req):
              'loc':req.POST['loc']}
         )
         return redirect('depts')
-def detail(req,deptno):
-    print('detail param',deptno)
-    return render(req,"dept/detail.html")
+
+def detail(req,deptno,**kwargs):
+    context={'data':None,'title':kwargs['title']}
+    for data in dummyData:
+        if data['deptno']==deptno :
+            context['data']=data
+            break
+    print(context)
+    return render(req,"dept/detail.html",context)

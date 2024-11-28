@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.list,name='depts'),
     path('add', views.add,name='add'),
     # path('insert', views.insert),
-    path('<int:deptno>', views.detail,name='detail'),
+    path('<int:deptno>', views.detail,{'title':'상세'},name='detail'),
 ]
