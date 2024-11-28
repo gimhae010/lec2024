@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>list page</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>deptno</th>
+                <th>dname</th>
+                <th>loc</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data in datas %}
+            <tr>
+                <td><a href="#">{{data.deptno}}</a></td>
+                <td><a href="#">{{data.dname}}</a></td>
+                <td><a href="#">{{data.loc}}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="add">입력페이지</a>
+</body>
+</html>
