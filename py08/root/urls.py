@@ -25,6 +25,7 @@ urlpatterns = [
     path('intro',home.views.intro),
     path('dept/',dept.views.list, name='deptList'),
     path('dept/add',dept.views.add),
+    path('dept/<int:deptno>',dept.views.detail, name='deptDetail'),
     path('emp/',emp.views.list),
     path('admin/', admin.site.urls),
 ]

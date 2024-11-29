@@ -1,0 +1,44 @@
+{% extends 'base/template.html'  %}
+    {% block content %}
+    <h2>Detail page(DEPT)</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input name="deptno" placeholder="deptno" class="form-control" value="{{dept.deptno}}" readonly/>
+        </div>
+        <div class="form-group">
+            <input name="dname" placeholder="dname" class="form-control" value="{{dept.dname}}"/>
+        </div>
+        <div class="form-group">
+            <input name="loc" placeholder="loc" class="form-control" value="{{dept.loc}}"/>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block">수정</button>
+            <button type="button" class="btn btn-danger btn-block">삭제</button>
+            <button type="button" class="btn btn-default btn-block" onclick="history.back();">뒤로</button>
+        </div>
+    </form>
+<script>
+    const form=document.querySelector('form');
+    form.querySelectorAll('button')[1].onclick=e=>{
+        fetch('/dept/{{dept.deptno}}',{
+            method:'DELETE'
+        }).then(e=>e.ok).finally(()=>location.href='/dept/')
+    };
+    form.onsubmit=e=>{
+        const dname=form.querySelectorAll('input')[2].value;
+        const loc=form.querySelectorAll('input')[3].value;
+        e.preventDefault();
+        fetch('/dept/{{dept.deptno}}',{
+            method:'PUT',
+            body:'{"dname":"'+dname+'","loc":"'+loc+'"}'
+        })
+        .then(e=>e.json())
+        .then(e=>location.href='/dept/')
+        .catch(err=>{
+            alert(err);
+            location.href='/dept/';
+        })
+    }
+</script>
+    {% endblock %}

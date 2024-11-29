@@ -13,8 +13,8 @@
         {% for row in result %}
             <tr>
                 <td><a href="{{row.deptno}}">{{row.deptno}}</a></td>
-                <td><a href="{{row.deptno}}">{{row.dname}}</a></td>
-                <td><a href="{{row.deptno}}">{{row.loc}}</a></td>
+                <td><a href="{% url 'deptDetail' row.deptno %}">{{row.dname}}</a></td>
+                <td><a href="{% url 'deptDetail' row.deptno %}">{{row.loc}}</a></td>
             </tr>
         {% endfor %}
         </tbody>
