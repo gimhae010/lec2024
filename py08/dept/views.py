@@ -19,7 +19,8 @@ def add(req):
     if req.method=='GET':
         return render(req,'dept/add.html')
     elif req.method=='POST':
-        dname,loc=req.POST['dname'],req.POST['loc']
+        # dname,loc=req.POST['dname'],req.POST['loc']
+        dname,loc=req.POST.get('dname'),req.POST.get('loc')
         dept=Dept(dname=dname,loc=loc)
         dept.save()
         return redirect('deptList')

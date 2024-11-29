@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home',
     'dept',
     'emp',
+    'accounts',
 ]
 
 MIDDLEWARE = [
