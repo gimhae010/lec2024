@@ -1,4 +1,23 @@
 {% extends 'base/template.html'  %}
     {% block content %}
     <h2>List page(DEPT)</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>deptno</th>
+                <th>dname</th>
+                <th>loc</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in result %}
+            <tr>
+                <td><a href="{{row.deptno}}">{{row.deptno}}</a></td>
+                <td><a href="{{row.deptno}}">{{row.dname}}</a></td>
+                <td><a href="{{row.deptno}}">{{row.loc}}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-primary btn-block" role="button">입력</a>
     {% endblock %}

@@ -23,7 +23,8 @@ import home.views
 urlpatterns = [
     path('',home.views.index),
     path('intro',home.views.intro),
-    path('dept/',dept.views.list),
+    path('dept/',dept.views.list, name='deptList'),
+    path('dept/add',dept.views.add),
     path('emp/',emp.views.list),
     path('admin/', admin.site.urls),
 ]

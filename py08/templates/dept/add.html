@@ -1,0 +1,18 @@
+{% extends 'base/template.html'  %}
+    {% block content %}
+    <h2>Add page(DEPT)</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input name="dname" placeholder="dname" class="form-control" value=""/>
+        </div>
+        <div class="form-group">
+            <input name="loc" placeholder="loc" class="form-control" value=""/>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block">입력</button>
+            <button type="reset" class="btn btn-default btn-block">취소</button>
+            <button type="button" class="btn btn-default btn-block" onclick="history.back();">뒤로</button>
+        </div>
+    </form>
+    {% endblock %}
