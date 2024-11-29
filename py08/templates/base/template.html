@@ -1,24 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.css' %}">
 </head>
 <body>
-    <nav>
-      <a href="/">home</a>
-      <a href="/intro">intro</a>
-      <a href="/dept/">dept</a>
-      <a href="/emp/">emp</a>
-      <a href="/login/">login</a>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">
+            인제대학교
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/">home</a></li>
+                <li><a href="/intro">intro</a></li>
+                <li><a href="/dept/">dept</a></li>
+                <li><a href="/emp/">emp</a></li>
+                <li><a href="/login/">login</a></li>
+            </ul>
+        </div>
+      </div>
     </nav>
-    {% block content %}
-    {% endblock %}
-    <footer>
-      <address>
-        김해캠퍼스 (50834) 경남 김해시 인제로 197TEL. 055-334-7111<br/>
-        Copyright(c) 1996-2022 INJE University. All rights reserved.
-      </address>
-    </footer>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+        <footer>
+          <address>
+            김해캠퍼스 (50834) 경남 김해시 인제로 197TEL. 055-334-7111<br/>
+            Copyright(c) 1996-2022 INJE University. All rights reserved.
+          </address>
+        </footer>
+    </div>
 </body>
 </html>
