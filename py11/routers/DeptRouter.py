@@ -12,8 +12,19 @@ class Dept(BaseModel):
     dname:str
     loc:str
 
+    def __str__(self):
+        return str(self.deptno)+","+self.dname+','+self.loc
 
-def getList():
+
+def Outter(cb):
+    print('outer')
+    def Inner(sql):
+        print('inner')
+        return cb(sql)
+    return Inner
+
+@Outter
+def getList(sql):
     try:
         arr = []
         conn = mysql.connector.connect(
@@ -25,7 +36,7 @@ def getList():
 
         mycursor = conn.cursor()
 
-        mycursor.execute("SELECT * FROM dept")
+        mycursor.execute(sql)
 
         for row in mycursor.fetchall():
             arr.append(Dept(deptno=row[0], dname=row[1], loc=row[2]))
@@ -35,5 +46,24 @@ def getList():
 
 @router.get("/")
 def list(req:Request):
-    arr=getList()
+    arr=getList("SELECT * FROM dept")
     return template.TemplateResponse('dept/list.html',{'request':req,'list':arr})
+
+@router.get('/add')
+def add(req:Request):
+    return template.TemplateResponse('dept/add.html',{'request':req})
+
+@router.post('/')
+def add(dept:Dept):
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="scott",
+        password="tiger",
+        database="xe"
+    )
+    mycursor = conn.cursor()
+    mycursor.execute("insert into dept values ({},'{}','{}')".format(dept.deptno,dept.dname,dept.loc))
+    print("insert into dept values ({},'{}','{}')".format(dept.deptno,dept.dname,dept.loc))
+    conn.commit()
+    conn.close()
+    return {"result":"success"}
