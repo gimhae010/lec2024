@@ -68,3 +68,16 @@ def add(dept:DeptVo,db:Session=Depends(get_db)):
     db.add(bean)
     db.commit()
     return {"result":"success"}
+
+@router.get('/{deptno}')
+def add(req:Request,deptno:int,db:Session=Depends(get_db)):
+    bean=db.query(Dept).filter(Dept.deptno == deptno).first()
+    ## 수정
+    # bean.loc='edit'
+    # db.commit()
+    # print(bean)
+    ## 삭제
+    # db.delete(bean)
+    # db.commit()
+    return template.TemplateResponse('dept/detail.html',{'request':req,'bean':bean})
+    # return {}
