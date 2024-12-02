@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+<nav>
+  <a href="/">home</a>
+  <a href="/intro">intro</a>
+  <a href="/dept/">dept</a>
+  <a href="/login/">login</a>
+</nav>
+<hr/>
+<div class="container">
+  <h2>page</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>deptno</th>
+                <th>dname</th>
+                <th>loc</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bean in list %}
+            <tr>
+                <td><a href="#">{{bean.deptno}}</a></td>
+                <td><a href="#">{{bean.dname}}</a></td>
+                <td><a href="#">{{bean.loc}}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
