@@ -13,6 +13,7 @@ app = FastAPI()
 async def create_file(file: Annotated[bytes, File()]):
     #print(file)
     img = Image.open(io.BytesIO(file))
+    img = Image.eval(img, lambda x: 255 - x)
     img = img.resize((28,28))
     img = img.convert("L")
     x = np.array(img)
