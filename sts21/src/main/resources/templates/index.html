@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        fetch(
+            'http://localhost:8000/info',{
+                method:"GET",
+                //credentials: "include",
+                headers:{
+                    //"Content-Type": "application/json",
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization':'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMDEiLCJhdXRoIjoidXNlciIsImV4cCI6MTczNDE2MzE3OX0.3XJ7JcrFc1Gth5pFHLHTPsMq_83u2Np3AJ6sBRlvHSY',
+                }
+            }
+        ).then(e=>e.json()).then(console.log).catch(alert)
+    </script>
+</body>
+</html>
